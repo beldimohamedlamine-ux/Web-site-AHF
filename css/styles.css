@@ -1194,7 +1194,7 @@ table.data tbody tr:hover {
   color: var(--color-text);
 }
 
-/* Espace formulaire client (à compléter plus tard) */
+/* Espace formulaire client (offre ISO 9001 — fiche de renseignements) */
 .form-client-slot {
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
@@ -1235,4 +1235,175 @@ table.data tbody tr:hover {
   color: var(--color-text-muted);
   max-width: 52ch;
   margin: 0.75rem 0 0;
+}
+
+/* Fiche de renseignements (offre ISO 9001) */
+.fiche-form {
+  margin-top: 1.25rem;
+  padding: 1.5rem 1.25rem 1.75rem;
+  background: var(--color-white);
+  border: 1px solid rgba(15, 39, 68, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.fiche-form-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 3px solid var(--color-navy);
+}
+
+.fiche-form-head-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fiche-form-head-brand .logo-mark {
+  width: 52px;
+  height: 52px;
+  font-size: 0.8rem;
+}
+
+.fiche-form-title {
+  margin: 0;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  text-align: center;
+  flex: 1 1 200px;
+}
+
+.fiche-form-section {
+  margin-top: 1.35rem;
+}
+
+.fiche-form-section > .fiche-form-section-title {
+  margin: 0 0 0.85rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  background: rgba(15, 39, 68, 0.08);
+  border-radius: 6px;
+}
+
+.fiche-form-subtitle {
+  margin: 1rem 0 0.65rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  background: rgba(15, 39, 68, 0.05);
+  border-radius: 4px;
+}
+
+.fiche-form-grid-entreprise {
+  display: grid;
+  gap: 1rem 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .fiche-form-grid-entreprise {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fiche-form-col--domaine .form-group textarea {
+  min-height: 280px;
+}
+
+.fiche-form-grid-2 {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 540px) {
+  .fiche-form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fiche-form-check-legend {
+  margin: 1rem 0 0.35rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-navy);
+}
+
+.fiche-check-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1.25rem;
+  margin-top: 0.35rem;
+}
+
+.fiche-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  cursor: pointer;
+}
+
+.fiche-check input {
+  width: auto;
+  margin: 0;
+  accent-color: var(--color-navy);
+}
+
+.fiche-check-other {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.fiche-check-other input[type="text"] {
+  flex: 1 1 180px;
+  min-width: 140px;
+  padding: 0.5rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  border: 1px solid rgba(15, 39, 68, 0.2);
+  border-radius: 8px;
+}
+
+.fiche-form-footer-block {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15, 39, 68, 0.1);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.fiche-form-footer-block strong {
+  display: block;
+  color: var(--color-navy);
+  margin-bottom: 0.35rem;
+}
+
+.fiche-form .btn[type="submit"] {
+  margin-top: 1.25rem;
 }
