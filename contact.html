@@ -90,21 +90,209 @@
 
           <div class="contact-card">
             <h2>Envoyer un message</h2>
-            <form action="mailto:ahf.consulting.dz@gmail.com" method="get" enctype="text/plain">
+            <div class="contact-compose">
               <div class="form-group">
-                <label for="subject">Objet</label>
-                <input id="subject" name="subject" type="text" required placeholder="Ex. Accompagnement ISO 9001" autocomplete="off" />
+                <label for="contact-subject">Objet</label>
+                <input
+                  id="contact-subject"
+                  name="subject"
+                  type="text"
+                  required
+                  placeholder="Ex. Accompagnement ISO 9001"
+                  autocomplete="off"
+                />
               </div>
+
+              <details id="fiche-accompagnement-iso" class="contact-fiche-details">
+                <summary class="contact-fiche-summary">Besoin d’un accompagnement ISO ? Déplier la fiche</summary>
+                <div class="contact-fiche-details-inner">
+                  <p class="form-hint">
+                    Fiche de renseignements (comme sur la plaquette) : remplissez les champs puis utilisez « Envoyer par e-mail » pour ouvrir
+                    votre messagerie avec le texte structuré.
+                  </p>
+                  <form class="fiche-form" data-fiche-lang="fr" action="#" method="post" novalidate>
+                    <div class="fiche-form-head">
+                      <div class="fiche-form-head-brand">
+                        <span class="logo-mark" aria-hidden="true">AHF</span>
+                        <span class="logo-text" style="font-size: 0.95rem"
+                          >CONSULTING
+                          <small style="font-size: 0.65rem">QHSE • Algérie</small>
+                        </span>
+                      </div>
+                      <h3 class="fiche-form-title">Fiche de renseignements</h3>
+                    </div>
+
+                    <div class="fiche-form-section">
+                      <h4 class="fiche-form-section-title">Informations sur l’entreprise</h4>
+                      <div class="fiche-form-grid-entreprise">
+                        <div class="fiche-form-col">
+                          <div class="form-group">
+                            <label for="fr-legal_name">Appellation légale</label>
+                            <input id="fr-legal_name" name="legal_name" type="text" autocomplete="organization" />
+                          </div>
+                          <div class="form-group">
+                            <label for="fr-legal_form">Forme juridique</label>
+                            <input id="fr-legal_form" name="legal_form" type="text" autocomplete="off" />
+                          </div>
+                          <div class="form-group">
+                            <label for="fr-address">Adresse</label>
+                            <textarea id="fr-address" name="address" rows="3"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="fr-phone_fax">Téléphone / Fax</label>
+                            <input id="fr-phone_fax" name="phone_fax" type="text" autocomplete="tel" />
+                          </div>
+                          <div class="form-group">
+                            <label for="fr-web_email">Site web / e-mail</label>
+                            <input id="fr-web_email" name="web_email" type="text" autocomplete="email" />
+                          </div>
+                        </div>
+                        <div class="fiche-form-col fiche-form-col--domaine">
+                          <div class="form-group">
+                            <label for="fr-activity_domain">Domaine d’activité</label>
+                            <textarea id="fr-activity_domain" name="activity_domain" rows="14"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p class="fiche-form-subtitle">Représenté(e) par</p>
+                      <div class="fiche-form-grid-2">
+                        <div class="form-group">
+                          <label for="fr-rep_lastname">Nom</label>
+                          <input id="fr-rep_lastname" name="rep_lastname" type="text" autocomplete="family-name" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-rep_firstname">Prénom</label>
+                          <input id="fr-rep_firstname" name="rep_firstname" type="text" autocomplete="given-name" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-rep_title">Fonction</label>
+                          <input id="fr-rep_title" name="rep_title" type="text" autocomplete="organization-title" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-rep_phone">Tél. / Mob.</label>
+                          <input id="fr-rep_phone" name="rep_phone" type="tel" autocomplete="tel" />
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1">
+                          <label for="fr-rep_email">E-mail</label>
+                          <input id="fr-rep_email" name="rep_email" type="email" autocomplete="email" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="fiche-form-section">
+                      <h4 class="fiche-form-section-title">Informations complémentaires</h4>
+                      <div class="fiche-form-grid-2">
+                        <div class="form-group">
+                          <label for="fr-date_founded">Date de création</label>
+                          <input id="fr-date_founded" name="date_founded" type="date" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-years_experience">Nombre d’années d’expérience</label>
+                          <input id="fr-years_experience" name="years_experience" type="number" min="0" step="1" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-employees_total">Nombre total d’employés</label>
+                          <input id="fr-employees_total" name="employees_total" type="number" min="0" step="1" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-employees_managers">Nombre d’employés cadres</label>
+                          <input id="fr-employees_managers" name="employees_managers" type="number" min="0" step="1" />
+                        </div>
+                      </div>
+
+                      <div class="form-group" style="margin-top: 1rem">
+                        <p class="fiche-form-check-legend">Certifications souhaitées</p>
+                        <div class="fiche-check-row" role="group" aria-label="Certifications souhaitées">
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso9001" value="1" /> ISO 9001:2015</label
+                          >
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso14001" value="1" /> ISO 14001:2015</label
+                          >
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso45001" value="1" /> ISO 45001:2018</label
+                          >
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso22000" value="1" /> ISO 22000:2018</label
+                          >
+                        </div>
+                        <div class="fiche-check-other">
+                          <label class="fiche-check"><input type="checkbox" name="cert_other" value="1" /> Autre (préciser)</label>
+                          <input type="text" name="cert_other_detail" placeholder="Précisez…" aria-label="Autre certification" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="fr-training_desired">Formations souhaitées</label>
+                        <input id="fr-training_desired" name="training_desired" type="text" autocomplete="off" />
+                      </div>
+                      <div class="form-group">
+                        <label for="fr-certification_sites_count">Nombre de sites concernés par la certification</label>
+                        <input id="fr-certification_sites_count" name="certification_sites_count" type="number" min="0" step="1" />
+                      </div>
+                      <div class="form-group">
+                        <label for="fr-structures_activities">Structures / activités</label>
+                        <textarea
+                          id="fr-structures_activities"
+                          name="structures_activities"
+                          rows="5"
+                          placeholder="Merci d’indiquer les différentes structures ou activités de l’entreprise"
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="fr-other_information">Autres informations</label>
+                        <textarea
+                          id="fr-other_information"
+                          name="other_information"
+                          rows="4"
+                          placeholder="Autres informations que vous jugez nécessaires"
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="fiche-form-section">
+                      <h4 class="fiche-form-section-title">Vos références</h4>
+                      <div class="form-group">
+                        <label for="fr-client_references">Références (clients, projets, contacts…)</label>
+                        <textarea id="fr-client_references" name="client_references" rows="6"></textarea>
+                      </div>
+                      <div class="fiche-form-grid-2">
+                        <div class="form-group">
+                          <label for="fr-signed_by">Fait par (nom et prénom)</label>
+                          <input id="fr-signed_by" name="signed_by" type="text" autocomplete="name" />
+                        </div>
+                        <div class="form-group">
+                          <label for="fr-signed_date">Date</label>
+                          <input id="fr-signed_date" name="signed_date" type="date" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="fiche-form-footer-block">
+                      <strong>AHF CONSULTING</strong>
+                      Adresse siège social : Cité 620 logts LPP, Bloc 19, Local n° 94 — El Khroub — Constantine — Algérie<br />
+                      Tél. : +213 (0) 661 46 70 03 — E-mail : <a href="mailto:ahf.consulting.dz@gmail.com">ahf.consulting.dz@gmail.com</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Envoyer la fiche par e-mail</button>
+                    <p class="form-hint">
+                      Ouvre votre messagerie avec le texte de la fiche. Vous pouvez joindre un PDF si vous le souhaitez.
+                    </p>
+                  </form>
+                </div>
+              </details>
+
               <div class="form-group">
-                <label for="body">Message</label>
-                <textarea id="body" name="body" required placeholder="Votre message, secteur, délai souhaité…"></textarea>
+                <label for="contact-body">Message</label>
+                <textarea id="contact-body" name="body" required placeholder="Votre message, secteur, délai souhaité…"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Ouvrir l’email</button>
+              <button type="button" class="btn btn-primary" id="contact-mailto-btn">Ouvrir l’email</button>
               <p class="form-hint">
-                Ce formulaire ouvre votre messagerie avec un message prérempli. Pour un formulaire envoyé directement depuis le site, une
-                solution d’hébergement avec envoi serveur (ou service tiers) pourra être ajoutée plus tard.
+                Le bouton ouvre votre messagerie avec l’objet et le message ci-dessus. Pour un envoi direct depuis le site sans messagerie,
+                une solution serveur pourra être ajoutée plus tard.
               </p>
-            </form>
+            </div>
           </div>
         </div>
       </section>

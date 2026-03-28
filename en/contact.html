@@ -84,21 +84,207 @@
 
           <div class="contact-card">
             <h2>Send a message</h2>
-            <form action="mailto:ahf.consulting.dz@gmail.com" method="get" enctype="text/plain">
+            <div class="contact-compose">
               <div class="form-group">
-                <label for="subject">Subject</label>
-                <input id="subject" name="subject" type="text" required placeholder="e.g. ISO 9001 support" autocomplete="off" />
+                <label for="contact-subject">Subject</label>
+                <input
+                  id="contact-subject"
+                  name="subject"
+                  type="text"
+                  required
+                  placeholder="e.g. ISO 9001 support"
+                  autocomplete="off"
+                />
               </div>
+
+              <details id="fiche-accompagnement-iso" class="contact-fiche-details">
+                <summary class="contact-fiche-summary">Need ISO support? Expand the form</summary>
+                <div class="contact-fiche-details-inner">
+                  <p class="form-hint">
+                    Client information sheet (as in our brochure): fill in the fields, then use “Send sheet by email” to open your mail app
+                    with structured text.
+                  </p>
+                  <form class="fiche-form" data-fiche-lang="en" action="#" method="post" novalidate>
+                    <div class="fiche-form-head">
+                      <div class="fiche-form-head-brand">
+                        <span class="logo-mark" aria-hidden="true">AHF</span>
+                        <span class="logo-text" style="font-size: 0.95rem"
+                          >CONSULTING
+                          <small style="font-size: 0.65rem">QHSE • Algeria</small>
+                        </span>
+                      </div>
+                      <h3 class="fiche-form-title">Information sheet</h3>
+                    </div>
+
+                    <div class="fiche-form-section">
+                      <h4 class="fiche-form-section-title">Company information</h4>
+                      <div class="fiche-form-grid-entreprise">
+                        <div class="fiche-form-col">
+                          <div class="form-group">
+                            <label for="en-legal_name">Legal name</label>
+                            <input id="en-legal_name" name="legal_name" type="text" autocomplete="organization" />
+                          </div>
+                          <div class="form-group">
+                            <label for="en-legal_form">Legal form</label>
+                            <input id="en-legal_form" name="legal_form" type="text" autocomplete="off" />
+                          </div>
+                          <div class="form-group">
+                            <label for="en-address">Address</label>
+                            <textarea id="en-address" name="address" rows="3"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="en-phone_fax">Phone / Fax</label>
+                            <input id="en-phone_fax" name="phone_fax" type="text" autocomplete="tel" />
+                          </div>
+                          <div class="form-group">
+                            <label for="en-web_email">Website / email</label>
+                            <input id="en-web_email" name="web_email" type="text" />
+                          </div>
+                        </div>
+                        <div class="fiche-form-col fiche-form-col--domaine">
+                          <div class="form-group">
+                            <label for="en-activity_domain">Field of activity</label>
+                            <textarea id="en-activity_domain" name="activity_domain" rows="14"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p class="fiche-form-subtitle">Represented by</p>
+                      <div class="fiche-form-grid-2">
+                        <div class="form-group">
+                          <label for="en-rep_lastname">Last name</label>
+                          <input id="en-rep_lastname" name="rep_lastname" type="text" autocomplete="family-name" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-rep_firstname">First name</label>
+                          <input id="en-rep_firstname" name="rep_firstname" type="text" autocomplete="given-name" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-rep_title">Job title</label>
+                          <input id="en-rep_title" name="rep_title" type="text" autocomplete="organization-title" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-rep_phone">Phone / Mobile</label>
+                          <input id="en-rep_phone" name="rep_phone" type="tel" autocomplete="tel" />
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1">
+                          <label for="en-rep_email">Email</label>
+                          <input id="en-rep_email" name="rep_email" type="email" autocomplete="email" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="fiche-form-section">
+                      <h4 class="fiche-form-section-title">Additional information</h4>
+                      <div class="fiche-form-grid-2">
+                        <div class="form-group">
+                          <label for="en-date_founded">Date established</label>
+                          <input id="en-date_founded" name="date_founded" type="date" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-years_experience">Years of experience</label>
+                          <input id="en-years_experience" name="years_experience" type="number" min="0" step="1" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-employees_total">Total employees</label>
+                          <input id="en-employees_total" name="employees_total" type="number" min="0" step="1" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-employees_managers">Management staff</label>
+                          <input id="en-employees_managers" name="employees_managers" type="number" min="0" step="1" />
+                        </div>
+                      </div>
+
+                      <div class="form-group" style="margin-top: 1rem">
+                        <p class="fiche-form-check-legend">Desired certifications</p>
+                        <div class="fiche-check-row" role="group" aria-label="Desired certifications">
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso9001" value="1" /> ISO 9001:2015</label
+                          >
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso14001" value="1" /> ISO 14001:2015</label
+                          >
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso45001" value="1" /> ISO 45001:2018</label
+                          >
+                          <label class="fiche-check"
+                            ><input type="checkbox" name="cert_iso22000" value="1" /> ISO 22000:2018</label
+                          >
+                        </div>
+                        <div class="fiche-check-other">
+                          <label class="fiche-check"><input type="checkbox" name="cert_other" value="1" /> Other (specify)</label>
+                          <input type="text" name="cert_other_detail" placeholder="Specify…" aria-label="Other certification" />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="en-training_desired">Desired training</label>
+                        <input id="en-training_desired" name="training_desired" type="text" autocomplete="off" />
+                      </div>
+                      <div class="form-group">
+                        <label for="en-certification_sites_count">Number of sites in certification scope</label>
+                        <input id="en-certification_sites_count" name="certification_sites_count" type="number" min="0" step="1" />
+                      </div>
+                      <div class="form-group">
+                        <label for="en-structures_activities">Structures / activities</label>
+                        <textarea
+                          id="en-structures_activities"
+                          name="structures_activities"
+                          rows="5"
+                          placeholder="Please describe the company’s structures or activities"
+                        ></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="en-other_information">Other information</label>
+                        <textarea
+                          id="en-other_information"
+                          name="other_information"
+                          rows="4"
+                          placeholder="Any other information you consider useful"
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="fiche-form-section">
+                      <h4 class="fiche-form-section-title">Your references</h4>
+                      <div class="form-group">
+                        <label for="en-client_references">References (clients, projects, contacts…)</label>
+                        <textarea id="en-client_references" name="client_references" rows="6"></textarea>
+                      </div>
+                      <div class="fiche-form-grid-2">
+                        <div class="form-group">
+                          <label for="en-signed_by">Completed by (name)</label>
+                          <input id="en-signed_by" name="signed_by" type="text" autocomplete="name" />
+                        </div>
+                        <div class="form-group">
+                          <label for="en-signed_date">Date</label>
+                          <input id="en-signed_date" name="signed_date" type="date" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="fiche-form-footer-block">
+                      <strong>AHF CONSULTING</strong>
+                      Registered office: Cité 620 logts LPP, Bloc 19, Office n° 94 — El Khroub — Constantine — Algeria<br />
+                      Tel.: +213 (0) 661 46 70 03 — Email: <a href="mailto:ahf.consulting.dz@gmail.com">ahf.consulting.dz@gmail.com</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send sheet by email</button>
+                    <p class="form-hint">Opens your email app with the sheet text. You may attach a PDF if you wish.</p>
+                  </form>
+                </div>
+              </details>
+
               <div class="form-group">
-                <label for="body">Message</label>
-                <textarea id="body" name="body" required placeholder="Your message, sector, desired timeline…"></textarea>
+                <label for="contact-body">Message</label>
+                <textarea id="contact-body" name="body" required placeholder="Your message, sector, desired timeline…"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Open email</button>
+              <button type="button" class="btn btn-primary" id="contact-mailto-btn">Open email</button>
               <p class="form-hint">
-                This form opens your email client with a pre-filled message. For direct submission from the site, a server-side or third-party
-                solution can be connected later.
+                Opens your email client with the subject and message above. For direct in-browser submission, a server-side solution can be
+                added later.
               </p>
-            </form>
+            </div>
           </div>
         </div>
       </section>

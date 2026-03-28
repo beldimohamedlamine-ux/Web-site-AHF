@@ -12,25 +12,70 @@
 
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".nav");
-  if (!toggle || !nav) return;
+  if (toggle && nav) {
+    function closeNav() {
+      nav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
 
-  function closeNav() {
-    nav.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", closeNav);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeNav();
+    });
   }
 
-  toggle.addEventListener("click", function () {
-    var open = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", open ? "true" : "false");
-  });
+  if (window.location.hash === "#fiche-accompagnement-iso") {
+    var ficheDetails = document.getElementById("fiche-accompagnement-iso");
+    if (ficheDetails && ficheDetails.tagName === "DETAILS") {
+      ficheDetails.open = true;
+    }
+  }
 
-  nav.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", closeNav);
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeNav();
-  });
+  var contactMailtoBtn = document.getElementById("contact-mailto-btn");
+  var contactSubject = document.getElementById("contact-subject");
+  var contactBody = document.getElementById("contact-body");
+  if (contactMailtoBtn && contactSubject && contactBody) {
+    contactMailtoBtn.addEventListener("click", function () {
+      var lang = document.documentElement.getAttribute("lang") || "fr";
+      var sub = contactSubject.value.trim();
+      var bod = contactBody.value.trim();
+      if (!sub) {
+        contactSubject.focus();
+        window.alert(
+          lang === "en"
+            ? "Please enter a subject."
+            : lang === "ar"
+              ? "يرجى إدخال الموضوع."
+              : "Veuillez renseigner l’objet."
+        );
+        return;
+      }
+      if (!bod) {
+        contactBody.focus();
+        window.alert(
+          lang === "en"
+            ? "Please enter a message."
+            : lang === "ar"
+              ? "يرجى إدخال الرسالة."
+              : "Veuillez saisir votre message."
+        );
+        return;
+      }
+      window.location.href =
+        "mailto:ahf.consulting.dz@gmail.com?subject=" +
+        encodeURIComponent(sub) +
+        "&body=" +
+        encodeURIComponent(bod);
+    });
+  }
 
   var ficheForm = document.querySelector("form.fiche-form[data-fiche-lang]");
   if (ficheForm) {
@@ -98,10 +143,10 @@
       var body = lines.join("\n");
       var subject =
         lang === "en"
-          ? "AHF CONSULTING — Client information sheet (ISO offer)"
+          ? "AHF CONSULTING — Client information sheet"
           : lang === "ar"
             ? "AHF CONSULTING — استمارة معلومات الزبون"
-            : "AHF CONSULTING — Fiche de renseignements (offre ISO)";
+            : "AHF CONSULTING — Fiche de renseignements";
 
       var mailto =
         "mailto:ahf.consulting.dz@gmail.com?subject=" +

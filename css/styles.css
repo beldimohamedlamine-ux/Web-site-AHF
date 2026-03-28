@@ -979,6 +979,81 @@ table.data tbody tr:hover {
   margin-top: 0.75rem;
 }
 
+/* Contact — fiche ISO repliable */
+.contact-compose {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contact-fiche-details {
+  margin: 0.75rem 0 1rem;
+  border: 1px solid rgba(15, 39, 68, 0.15);
+  border-radius: var(--radius);
+  background: rgba(15, 39, 68, 0.02);
+  overflow: hidden;
+}
+
+.contact-fiche-details[open] {
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-fiche-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--color-navy);
+  background: rgba(15, 39, 68, 0.06);
+  user-select: none;
+}
+
+.contact-fiche-summary::-webkit-details-marker {
+  display: none;
+}
+
+.contact-fiche-summary::after {
+  content: "";
+  float: right;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.35rem;
+  border-right: 2px solid var(--color-navy);
+  border-bottom: 2px solid var(--color-navy);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.contact-fiche-details[open] .contact-fiche-summary::after {
+  transform: rotate(-135deg);
+  margin-top: 0.55rem;
+}
+
+[dir="rtl"] .contact-fiche-summary::after {
+  float: left;
+}
+
+.contact-fiche-details-inner {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid rgba(15, 39, 68, 0.08);
+}
+
+.contact-fiche-details-inner > .form-hint:first-child {
+  margin-top: 0;
+}
+
+.contact-fiche-details .fiche-form {
+  margin-top: 0;
+  box-shadow: none;
+  border: 1px solid rgba(15, 39, 68, 0.1);
+}
+
+#fiche-accompagnement-iso {
+  scroll-margin-top: calc(var(--header-h, 72px) + 16px);
+}
+
 /* ISO list */
 .iso-list {
   list-style: none;
