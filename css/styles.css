@@ -844,48 +844,84 @@ a.btn.header-cta--desktop {
 }
 
 @media (max-width: 900px) {
+  /* Burger | logo centré | langues (grille — le bouton est le 1er enfant du DOM) */
   .header-inner {
     position: relative;
-    flex-wrap: nowrap;
-    column-gap: 0.5rem;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 0;
+    align-items: center;
+    column-gap: 0.35rem;
+    row-gap: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+    padding-block: 0.5rem;
   }
 
-  /* Logo + nom centrés ; langues et menu burger à droite */
+  .nav-toggle {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
   .header-slot-brand {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: min(52vw, 220px);
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+    max-width: min(68vw, 260px);
     z-index: 1;
     pointer-events: auto;
   }
 
   .header-slot-brand .logo {
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     text-align: center;
-    gap: 0.35rem;
   }
 
   .header-slot-brand .logo-img {
     object-position: center center;
-    max-width: min(200px, 48vw);
+    max-width: min(200px, 52vw);
   }
 
   .header-slot-lang {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
     position: relative;
     z-index: 2;
-    margin-left: auto;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.35rem 0.45rem;
   }
 
   .header-slot-nav {
-    width: 0;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
     min-width: 0;
+    height: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
     overflow: visible;
-    flex: 0 0 0;
   }
 
   .header-actions {
@@ -902,10 +938,6 @@ a.btn.header-cta--desktop {
 
   .header-actions {
     column-gap: 0.65rem;
-  }
-
-  .nav-toggle {
-    display: flex;
   }
 
   .nav {
@@ -2135,24 +2167,10 @@ table.data tbody tr:hover {
     min-height: 40px;
   }
 
-  .header-inner {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    padding-left: max(0.65rem, env(safe-area-inset-left, 0px));
-    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
-    padding-block: 0.5rem;
-  }
-
   .header-slot-lang {
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 0.35rem 0.45rem;
-  }
-
-  .header-slot-brand {
-    max-width: min(44vw, 195px);
   }
 
   .nav-toggle {
