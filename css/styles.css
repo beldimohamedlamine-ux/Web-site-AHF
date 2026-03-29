@@ -28,9 +28,11 @@
   --shadow-sm: 0 1px 2px rgba(20, 42, 69, 0.07);
   --shadow-md: 0 8px 24px rgba(20, 42, 69, 0.12);
   --radius: 12px;
-  --header-h: 72px;
+  --header-h: 82px;
   --header-offset: 100px;
-  --header-logo-h: 52px;
+  /* Logo PNG vertical (globe + CONSULTING), fond transparent — tailles d’affichage */
+  --header-logo-max-h: 56px;
+  --header-logo-max-w: 152px;
   --header-compact-ease: cubic-bezier(0.33, 1, 0.68, 1);
   --header-compact-duration: 0.4s;
   --max-w: 1120px;
@@ -249,11 +251,8 @@ a:hover {
 }
 
 .site-header.is-compact .logo-img {
-  height: 38px;
-}
-
-.site-header.is-compact .logo:has(.logo-img) .logo-text small {
-  font-size: 0.62rem;
+  max-height: 42px;
+  max-width: min(112px, 34vw);
 }
 
 .site-header.is-compact {
@@ -537,6 +536,8 @@ html[lang="ar"] .site-header a.btn.header-cta--desktop {
 
   .header-slot-brand .logo-img {
     object-position: center center;
+    max-height: var(--header-logo-max-h);
+    max-width: min(var(--header-logo-max-w), 36vw);
   }
 }
 
@@ -665,13 +666,17 @@ html[lang="ar"] .site-header a.btn.header-cta--desktop {
 }
 
 .logo-img {
-  height: var(--header-logo-h);
-  transition: height 0.25s ease;
+  display: block;
+  height: auto;
   width: auto;
-  max-width: min(200px, 48vw);
+  max-height: var(--header-logo-max-h);
+  max-width: min(var(--header-logo-max-w), 42vw);
   object-fit: contain;
-  object-position: left center;
+  object-position: center center;
   flex-shrink: 0;
+  transition:
+    max-height var(--header-compact-duration) var(--header-compact-ease),
+    max-width var(--header-compact-duration) var(--header-compact-ease);
 }
 
 .logo:has(.logo-img) .logo-text {
@@ -895,7 +900,8 @@ a.btn.header-cta--desktop {
 
   .header-slot-brand .logo-img {
     object-position: center center;
-    max-width: min(200px, 52vw);
+    max-height: min(52px, 15vh);
+    max-width: min(132px, 46vw);
   }
 
   .header-slot-lang {
@@ -1953,9 +1959,11 @@ table.data tbody tr:hover {
 }
 
 .fiche-form-logo {
-  height: 48px;
+  display: block;
+  height: auto;
   width: auto;
-  max-width: min(200px, 55vw);
+  max-height: 72px;
+  max-width: min(168px, 52vw);
   object-fit: contain;
   object-position: left center;
 }
@@ -2390,7 +2398,8 @@ table.data tbody tr:hover {
   }
 
   .header-slot-brand .logo-img {
-    max-width: min(160px, 38vw);
+    max-height: 48px;
+    max-width: min(120px, 40vw);
   }
 
   .lang-switch a {
