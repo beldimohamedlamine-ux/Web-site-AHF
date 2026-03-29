@@ -1,4 +1,97 @@
 (function () {
+  /** Envoi vers la boîte cabinet via FormSubmit (https://formsubmit.co). Au premier message, confirmer l’activation depuis l’e-mail reçu sur cette boîte. */
+  var AHF_INBOX_EMAIL = "beldimohamedlamine@gmail.com";
+  var AHF_FORM_SUBMIT_AJAX = "https://formsubmit.co/ajax/" + AHF_INBOX_EMAIL;
+
+  function formSubmitMessages(lang) {
+    var L = {
+      fr: {
+        ok: "Votre message a été envoyé. Nous vous répondrons dès que possible.",
+        err: "L’envoi a échoué. Réessayez plus tard ou contactez-nous par téléphone.",
+        net: "Problème de connexion. Vérifiez le réseau et réessayez.",
+        wait: "Envoi en cours…",
+      },
+      en: {
+        ok: "Your message was sent. We will get back to you as soon as we can.",
+        err: "Sending failed. Please try again later or call us.",
+        net: "Connection issue. Check your network and try again.",
+        wait: "Sending…",
+      },
+      ar: {
+        ok: "تم إرسال رسالتكم. سنجيب في أقرب وقت ممكن.",
+        err: "تعذّر الإرسال. أعيدوا المحاولة لاحقاً أو اتصلوا بنا.",
+        net: "مشكلة في الاتصال. تحققوا من الشبكة وأعيدوا المحاولة.",
+        wait: "جاري الإرسال…",
+      },
+    };
+    return L[lang] || L.fr;
+  }
+
+  function postToInbox(fields, submitBtn, lang) {
+    var m = formSubmitMessages(lang);
+    var prevText = submitBtn ? submitBtn.textContent : "";
+    var body = {
+      _captcha: false,
+      _template: "table",
+    };
+    var reply = (fields.email && String(fields.email).trim()) || "";
+    if (reply) body._replyto = reply;
+    Object.keys(fields).forEach(function (k) {
+      if (fields[k] !== undefined && fields[k] !== null) body[k] = fields[k];
+    });
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = m.wait;
+    }
+
+    /* FormSubmit attend le même format qu’un <form> classique (comme l’exemple jQuery), pas du JSON brut. */
+    var params = new URLSearchParams();
+    Object.keys(body).forEach(function (k) {
+      var v = body[k];
+      if (v !== undefined && v !== null) params.append(k, String(v));
+    });
+
+    return fetch(AHF_FORM_SUBMIT_AJAX, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: params.toString(),
+    })
+      .then(function (res) {
+        return res.text().then(function (text) {
+          var data = null;
+          try {
+            data = text ? JSON.parse(text) : null;
+          } catch (ignore) {}
+          var success = data && (data.success === true || data.success === "true");
+          return { ok: res.ok && success, data: data };
+        });
+      })
+      .catch(function () {
+        return { ok: false, data: null };
+      })
+      .then(function (result) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = prevText;
+        }
+        if (result.ok) {
+          window.alert(m.ok);
+          return true;
+        }
+        if (result.data === null) {
+          window.alert(m.net);
+        } else {
+          var apiMsg = result.data && result.data.message ? String(result.data.message).trim() : "";
+          window.alert(apiMsg ? m.err + "\n\n" + apiMsg : m.err);
+        }
+        return false;
+      });
+  }
+
   function syncHeaderOffset() {
     var header = document.querySelector(".site-header");
     if (header) {
@@ -6,9 +99,79 @@
     }
   }
 
+  function closeAllNavDropdowns() {
+    document.querySelectorAll(".has-dropdown.is-open").forEach(function (li) {
+      li.classList.remove("is-open");
+      var b = li.querySelector(".nav-dropdown-btn");
+      if (b) b.setAttribute("aria-expanded", "false");
+    });
+  }
+
   syncHeaderOffset();
   window.addEventListener("resize", syncHeaderOffset);
   window.addEventListener("load", syncHeaderOffset);
+
+  var siteHeader = document.getElementById("site-header");
+  /* Hystérésis : évite le « tremblement » quand scrollY oscille autour du seuil ou quand la hauteur du header modifie la position. */
+  var HEADER_SCROLL_COMPACT = 96;
+  var HEADER_SCROLL_EXPAND = 24;
+  var headerIsCompact = false;
+  function applyHeaderCompact() {
+    if (!siteHeader) return;
+    siteHeader.classList.toggle("is-compact", headerIsCompact);
+    syncHeaderOffset();
+  }
+  function updateHeaderCompact() {
+    if (!siteHeader) return;
+    var y = window.scrollY;
+    var next = headerIsCompact;
+    if (headerIsCompact) {
+      if (y < HEADER_SCROLL_EXPAND) next = false;
+    } else {
+      if (y > HEADER_SCROLL_COMPACT) next = true;
+    }
+    if (next === headerIsCompact) return;
+    headerIsCompact = next;
+    applyHeaderCompact();
+  }
+  if (siteHeader) {
+    headerIsCompact = window.scrollY > HEADER_SCROLL_COMPACT;
+    applyHeaderCompact();
+    window.addEventListener("scroll", updateHeaderCompact, { passive: true });
+    window.addEventListener("load", function () {
+      var y = window.scrollY;
+      headerIsCompact = y > HEADER_SCROLL_COMPACT;
+      applyHeaderCompact();
+    });
+  }
+
+  document.querySelectorAll(".nav-dropdown-btn").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var li = btn.closest(".has-dropdown");
+      if (!li) return;
+      var opening = !li.classList.contains("is-open");
+      document.querySelectorAll(".has-dropdown.is-open").forEach(function (other) {
+        if (other !== li) {
+          other.classList.remove("is-open");
+          var ob = other.querySelector(".nav-dropdown-btn");
+          if (ob) ob.setAttribute("aria-expanded", "false");
+        }
+      });
+      if (opening) {
+        li.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      } else {
+        li.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  document.addEventListener("click", function () {
+    closeAllNavDropdowns();
+  });
 
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".nav");
@@ -16,9 +179,11 @@
     function closeNav() {
       nav.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
+      closeAllNavDropdowns();
     }
 
-    toggle.addEventListener("click", function () {
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
       var open = nav.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
@@ -39,16 +204,36 @@
     }
   }
 
-  var contactMailtoBtn = document.getElementById("contact-mailto-btn");
-  var contactSubject = document.getElementById("contact-subject");
-  var contactBody = document.getElementById("contact-body");
-  if (contactMailtoBtn && contactSubject && contactBody) {
-    contactMailtoBtn.addEventListener("click", function () {
+  var contactQuickForm = document.getElementById("contact-quick-form");
+  if (contactQuickForm) {
+    contactQuickForm.addEventListener("submit", function (e) {
+      e.preventDefault();
       var lang = document.documentElement.getAttribute("lang") || "fr";
-      var sub = contactSubject.value.trim();
-      var bod = contactBody.value.trim();
+      var fd = new FormData(contactQuickForm);
+      var sub = (fd.get("subject") || "").toString().trim();
+      var msg = (fd.get("message") || "").toString().trim();
+      var name = (fd.get("name") || "").toString().trim();
+      var email = (fd.get("email") || "").toString().trim();
+      var phone = (fd.get("phone") || "").toString().trim();
+      if (!name) {
+        var nameEl = document.getElementById("contact-name");
+        if (nameEl) nameEl.focus();
+        window.alert(
+          lang === "en" ? "Please enter your name." : lang === "ar" ? "يرجى إدخال الاسم." : "Veuillez renseigner votre nom."
+        );
+        return;
+      }
+      if (!email) {
+        var emailEl = document.getElementById("contact-email");
+        if (emailEl) emailEl.focus();
+        window.alert(
+          lang === "en" ? "Please enter your email." : lang === "ar" ? "يرجى إدخال البريد." : "Veuillez renseigner votre e-mail."
+        );
+        return;
+      }
       if (!sub) {
-        contactSubject.focus();
+        var subEl = document.getElementById("contact-subject");
+        if (subEl) subEl.focus();
         window.alert(
           lang === "en"
             ? "Please enter a subject."
@@ -58,8 +243,9 @@
         );
         return;
       }
-      if (!bod) {
-        contactBody.focus();
+      if (!msg) {
+        var msgEl = document.getElementById("contact-body");
+        if (msgEl) msgEl.focus();
         window.alert(
           lang === "en"
             ? "Please enter a message."
@@ -69,11 +255,23 @@
         );
         return;
       }
-      window.location.href =
-        "mailto:ahf.consulting.dz@gmail.com?subject=" +
-        encodeURIComponent(sub) +
-        "&body=" +
-        encodeURIComponent(bod);
+      var btn =
+        document.querySelector('button[type="submit"][form="contact-quick-form"]') ||
+        contactQuickForm.querySelector('button[type="submit"]');
+      postToInbox(
+        {
+          _subject: "[Site AHF] " + sub,
+          name: name,
+          email: email,
+          phone: phone || "—",
+          subject: sub,
+          message: msg,
+        },
+        btn,
+        lang
+      ).then(function (sent) {
+        if (sent) contactQuickForm.reset();
+      });
     });
   }
 
@@ -143,29 +341,48 @@
       var body = lines.join("\n");
       var subject =
         lang === "en"
-          ? "AHF CONSULTING — Client information sheet"
+          ? "AHF CONSULTING — Client information sheet (website)"
           : lang === "ar"
-            ? "AHF CONSULTING — استمارة معلومات الزبون"
-            : "AHF CONSULTING — Fiche de renseignements";
+            ? "AHF CONSULTING — استمارة معلومات (موقع)"
+            : "AHF CONSULTING — Fiche de renseignements (site)";
 
-      var mailto =
-        "mailto:ahf.consulting.dz@gmail.com?subject=" +
-        encodeURIComponent(subject) +
-        "&body=" +
-        encodeURIComponent(body);
-
-      if (mailto.length > 7800) {
+      var repEmail = (fd.get("rep_email") || "").toString().trim();
+      if (!repEmail) {
+        var repMailInput = ficheForm.querySelector('[name="rep_email"]');
+        if (repMailInput) repMailInput.focus();
         window.alert(
           lang === "en"
-            ? "Message is too long for automatic email. Please copy your answers from the page or shorten the text."
+            ? "Please enter the representative’s email address so we can reply."
             : lang === "ar"
-              ? "الرسالة طويلة جداً. يرجى تقصير النص أو النسخ يدوياً."
-              : "Le message est trop long pour l’e-mail automatique. Raccourcissez certains champs ou contactez-nous par téléphone."
+              ? "يرجى إدخال بريد الممثل للردّ عليكم."
+              : "Veuillez renseigner l’e-mail du / de la représentant(e) pour que nous puissions répondre."
         );
         return;
       }
 
-      window.location.href = mailto;
+      var repName =
+        [fd.get("rep_firstname"), fd.get("rep_lastname")]
+          .map(function (x) {
+            return (x || "").toString().trim();
+          })
+          .filter(Boolean)
+          .join(" ") || (fd.get("signed_by") || "").toString().trim() || "—";
+
+      var btn = ficheForm.querySelector('button[type="submit"]');
+      postToInbox(
+        {
+          _subject: "[Site AHF] " + subject,
+          name: repName,
+          email: repEmail,
+          rep_phone: (fd.get("rep_phone") || "").toString().trim() || "—",
+          sheet: subject,
+          message: body,
+        },
+        btn,
+        lang
+      ).then(function (sent) {
+        if (sent) ficheForm.reset();
+      });
     });
   }
 })();

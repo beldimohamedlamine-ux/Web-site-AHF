@@ -29,7 +29,8 @@
   --shadow-md: 0 8px 24px rgba(20, 42, 69, 0.12);
   --radius: 12px;
   --header-h: 72px;
-  --header-offset: 72px;
+  --header-offset: 100px;
+  --header-logo-h: 52px;
   --max-w: 1120px;
 }
 
@@ -156,6 +157,268 @@ a:hover {
   pointer-events: none;
 }
 
+/* Barre supérieure (réseaux + accroche), inspirée des sites vitrine type CLCM */
+.header-topbar {
+  background: var(--color-logo-navy-deep);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.78rem;
+  transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.22s ease;
+  max-height: 80px;
+  overflow: hidden;
+}
+
+.header-topbar-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0.4rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  flex-wrap: wrap;
+}
+
+.header-tagline {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0.95;
+}
+
+.header-social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.header-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.header-social-link:hover {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.18);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.header-social-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* Bloc logo + nav : compresse au scroll */
+.header-main {
+  transition: box-shadow 0.2s ease;
+}
+
+.site-header.is-compact .header-topbar {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+.site-header.is-compact .header-topbar-inner {
+  padding-block: 0;
+}
+
+.site-header.is-compact .header-main .header-inner {
+  min-height: 56px;
+  padding-block: 0.35rem;
+}
+
+.site-header.is-compact .logo-img {
+  height: 38px;
+}
+
+.site-header.is-compact .logo:has(.logo-img) .logo-text small {
+  font-size: 0.62rem;
+}
+
+.site-header.is-compact {
+  box-shadow: 0 4px 16px rgba(15, 39, 68, 0.1);
+}
+
+/* Menus déroulants (desktop : survol / focus ; mobile : accordéon JS) */
+.has-dropdown {
+  position: relative;
+  z-index: 1;
+}
+
+.has-dropdown.is-open {
+  z-index: 140;
+}
+
+.nav-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--color-navy);
+  padding: 0.25rem 0.15rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.nav-dropdown-btn:hover,
+.has-dropdown.is-open > .nav-dropdown-btn {
+  color: var(--color-red);
+}
+
+.nav-dropdown-chevron {
+  width: 0.45em;
+  height: 0.45em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-0.08em);
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+.has-dropdown.is-open > .nav-dropdown-btn .nav-dropdown-chevron {
+  transform: rotate(225deg) translateY(-0.02em);
+}
+
+.nav-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 0;
+  min-width: 14rem;
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(15, 39, 68, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  z-index: 200;
+}
+
+@media (min-width: 901px) and (hover: hover) and (pointer: fine) {
+  .has-dropdown:hover > .nav-submenu,
+  .has-dropdown:focus-within > .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .has-dropdown:hover > .nav-dropdown-btn,
+  .has-dropdown:focus-within > .nav-dropdown-btn {
+    color: var(--color-red);
+  }
+}
+
+@media (min-width: 901px) {
+  .has-dropdown.is-open > .nav-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.nav-submenu a {
+  display: block;
+  padding: 0.45rem 1rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  text-decoration: none;
+}
+
+.nav-submenu a:hover,
+.nav-submenu a[aria-current="page"] {
+  color: var(--color-red);
+  background: rgba(15, 39, 68, 0.04);
+}
+
+/* Section partenaires / clients (logos à fournir) */
+.clients-section {
+  padding-block: 0.5rem 2.5rem;
+}
+
+.clients-intro {
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto 1.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem 1.25rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.client-card {
+  margin: 0;
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.1rem;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  border: 1px dashed rgba(15, 39, 68, 0.2);
+  box-shadow: var(--shadow-sm);
+}
+
+.client-card img {
+  max-height: 52px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: grayscale(35%);
+  opacity: 0.92;
+  transition: filter 0.2s, opacity 0.2s;
+}
+
+.client-card:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.client-placeholder {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.35;
+}
+
+[dir="rtl"] .nav-submenu {
+  left: auto;
+  right: 0;
+}
+
 /* Même barre que FR/EN : pas de miroir RTL (logo à gauche, langues, menu, CTA à droite) */
 [dir="rtl"] .site-header {
   direction: ltr;
@@ -183,6 +446,21 @@ a:hover {
   letter-spacing: 0;
 }
 
+html[lang="ar"] .site-header .header-cta--desktop {
+  font-family: var(--font-ar);
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .site-header .nav-dropdown-btn {
+  font-family: var(--font-ar);
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .site-header .header-tagline {
+  font-family: var(--font-ar);
+  letter-spacing: 0.02em;
+}
+
 .header-inner {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -195,6 +473,51 @@ a:hover {
   justify-content: space-between;
   gap: 0.65rem 1rem;
   flex-wrap: nowrap;
+}
+
+/* Desktop : menu à gauche, logo + nom au centre, langues (+ burger masqué) à droite */
+@media (min-width: 901px) {
+  .header-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 1rem;
+  }
+
+  .header-slot-nav {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: stretch;
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .header-slot-brand {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .header-slot-lang {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .header-slot-brand .logo {
+    justify-content: center;
+  }
+
+  .header-slot-brand .logo-img {
+    object-position: center center;
+  }
 }
 
 .header-actions {
@@ -322,7 +645,8 @@ a:hover {
 }
 
 .logo-img {
-  height: 52px;
+  height: var(--header-logo-h);
+  transition: height 0.25s ease;
   width: auto;
   max-width: min(200px, 48vw);
   object-fit: contain;
@@ -437,42 +761,58 @@ a:hover {
   white-space: nowrap;
 }
 
+/* CTA bureau : à droite avec les langues (évite le chevauchement sur le logo centré) */
+.header-cta--desktop {
+  display: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
 @media (min-width: 901px) {
-  /* Le menu ne doit pas déborder par-dessus les langues : scroll horizontal si trop étroit */
+  .header-cta--desktop {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.76rem;
+    padding-inline: 0.75rem;
+    padding-block: 0.45rem;
+  }
+
+  .nav-list > li.nav-cta--drawer-only {
+    display: none;
+  }
+}
+
+@media (min-width: 901px) {
+  /*
+   * overflow-y sur .nav masquait les sous-menus (position absolute sous la barre).
+   * Scroll horizontal éventuel sur la liste, pas sur le conteneur qui doit laisser dépasser les dropdowns.
+   */
   .nav {
-    flex: 1 1 0%;
+    flex: 1 1 auto;
     min-width: 0;
     max-width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-    overscroll-behavior-inline: contain;
-    scrollbar-width: thin;
-    padding-inline-start: 0.15rem;
+    overflow: visible;
+    padding-inline-start: 0;
     margin: 0;
     z-index: 1;
-  }
-
-  .nav::-webkit-scrollbar {
-    height: 4px;
-  }
-
-  .nav::-webkit-scrollbar-thumb {
-    background: rgba(15, 39, 68, 0.25);
-    border-radius: 4px;
   }
 
   .nav-list {
     flex-shrink: 0;
     width: max-content;
     max-width: none;
+    justify-content: flex-start;
     gap: 0.28rem 0.6rem;
   }
 
+  /* Même corps que .nav-dropdown-btn (0.88rem) pour Accueil, Contact, etc. */
   .nav-list > li:not(.nav-cta) a {
-    font-size: 0.78rem;
+    font-size: 0.88rem;
   }
 
   .nav-cta .btn-primary {
@@ -484,8 +824,47 @@ a:hover {
 
 @media (max-width: 900px) {
   .header-inner {
+    position: relative;
     flex-wrap: nowrap;
     column-gap: 0.5rem;
+    justify-content: flex-end;
+  }
+
+  /* Logo + nom centrés ; langues et menu burger à droite */
+  .header-slot-brand {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: min(52vw, 220px);
+    z-index: 1;
+    pointer-events: auto;
+  }
+
+  .header-slot-brand .logo {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+  }
+
+  .header-slot-brand .logo-img {
+    object-position: center center;
+    max-width: min(200px, 48vw);
+  }
+
+  .header-slot-lang {
+    position: relative;
+    z-index: 2;
+    margin-left: auto;
+  }
+
+  .header-slot-nav {
+    width: 0;
+    min-width: 0;
+    overflow: visible;
+    flex: 0 0 0;
   }
 
   .header-actions {
@@ -513,6 +892,7 @@ a:hover {
     top: var(--header-offset, var(--header-h));
     left: 0;
     right: 0;
+    z-index: 160;
     background: var(--color-white);
     border-bottom: 1px solid rgba(15, 39, 68, 0.08);
     padding: 1rem 1.25rem 1.25rem;
@@ -537,6 +917,7 @@ a:hover {
 
   .nav-list > li:not(.nav-cta) a {
     white-space: normal;
+    font-size: 0.95rem;
   }
 
   .nav-cta {
@@ -552,6 +933,40 @@ a:hover {
 
   .nav-cta .btn-primary {
     white-space: normal;
+  }
+
+  .has-dropdown {
+    width: 100%;
+  }
+
+  .nav-dropdown-btn {
+    width: 100%;
+    justify-content: space-between;
+    text-align: start;
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+  }
+
+  .nav-submenu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding: 0.15rem 0 0.5rem 0.85rem;
+    margin: 0;
+    min-width: 0;
+    background: transparent;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .has-dropdown.is-open > .nav-submenu {
+    display: block;
+  }
+
+  .nav-submenu a {
+    padding: 0.4rem 0;
   }
 }
 
@@ -1115,6 +1530,11 @@ table.data tbody tr:hover {
   font-size: 0.8rem;
   color: var(--color-text-muted);
   margin-top: 0.75rem;
+}
+
+.form-optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
 }
 
 /* Contact — fiche ISO repliable */

@@ -18,13 +18,33 @@
   </head>
   <body>
     <a class="skip" href="#contenu">Aller au contenu</a>
-    <header class="site-header">
+    <header class="site-header" id="site-header">
+      <div class="header-topbar">
+        <div class="header-topbar-inner">
+          <p class="header-tagline">Accompagnement QHSE &amp; certification ISO — Algérie</p>
+          <ul class="header-social" aria-label="Réseaux sociaux">
+            <li>
+              <a class="header-social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Remplacez ce lien par votre page Facebook"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 22v-8.3h2.9l0.4-3.4h-3.3V8.5c0-1 .3-1.7 1.7-1.7h1.8V3.9c-.3 0-1.5-.1-2.8-.1-2.8 0-4.7 1.7-4.7 4.9v2.7H7v3.4h3.5V22h3z" /></svg></a>
+            </li>
+            <li>
+              <a class="header-social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="Remplacez ce lien par votre page LinkedIn"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.5 8.7h3.2V19H6.5V8.7zm1.6-5c1 0 1.8.8 1.8 1.8 0 1-.8 1.8-1.8 1.8S6.3 6.5 6.3 5.5 7.1 3.7 8.1 3.7zm3.8 5H16c2.5 0 4 1.6 4 4.6V19h-3.2v-5.2c0-1.6-.6-2.6-1.9-2.6-1 0-1.6.7-1.9 1.3-.1.3-.1.7-.1 1.1V19h-3.2V8.7z" /></svg></a>
+            </li>
+            <li>
+              <a class="header-social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Remplacez ce lien par votre compte Instagram"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8.2 3h7.6C18 3 21 5.9 21 8.7v7.1c0 2.7-2.5 5.2-5.2 5.2H8.2C5.5 21 3 18.5 3 15.8V8.7C3 6 5.5 3 8.2 3zm7.6 2H8.2C6.6 5 5 6.6 5 8.3v7.4C5 17.3 6.6 19 8.3 19h7.5c1.7 0 3.2-1.7 3.2-3.3V8.3C19 6.6 17.3 5 15.8 5zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm5.2-1.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM12 9.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z" /></svg></a>
+            </li>
+            <li>
+              <a class="header-social-link" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="Remplacez ce lien par votre compte X"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 4l7 9.5L4 20h1.8l6-6.5 4.9 6.5H20l-7.4-10L19.5 4h-1.8l-5.4 6L8.3 4H4z" /></svg></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="header-main">
       <div class="header-inner">
         <div class="header-slot header-slot-brand">
         <a href="index.html" class="logo">
           <img class="logo-img" src="images/logo-ahf.png" alt="AHF CONSULTING" width="180" height="64" decoding="async" />
           <span class="logo-text"
-            ><small>Conseils, accompagnements et formations</small>
+            ><small>Conseils, accompagnements et formations<br />QHSE • Algérie</small>
           </span>
         </a>
         </div>
@@ -36,6 +56,7 @@
             <span class="lang-switch-sep" aria-hidden="true">|</span>
             <a href="ar/offre-iso-9001.html" hreflang="ar" lang="ar">عربي</a>
           </div>
+          <a class="btn btn-primary header-cta header-cta--desktop" href="contact.html">Demander un échange</a>
         <button
           type="button"
           class="nav-toggle"
@@ -50,15 +71,30 @@
         <nav class="nav" id="nav-principal" aria-label="Navigation principale">
           <ul class="nav-list">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="expertise.html">Expertise</a></li>
-            <li><a href="offre-iso-9001.html" aria-current="page">Offre ISO 9001</a></li>
-            <li><a href="a-propos.html">À propos</a></li>
-            <li><a href="references.html">Références</a></li>
+            <li class="has-dropdown">
+              <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-controls="sub-prestations-fr" id="btn-prestations-fr">
+                Expertise<span class="nav-dropdown-chevron" aria-hidden="true"></span>
+              </button>
+              <ul class="nav-submenu" id="sub-prestations-fr" role="menu">
+                <li role="none"><a href="expertise.html" role="menuitem">Prestations QHSE</a></li>
+                <li role="none"><a href="offre-iso-9001.html" role="menuitem" aria-current="page">Offre ISO 9001</a></li>
+              </ul>
+            </li>
+            <li class="has-dropdown">
+              <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-controls="sub-cabinet-fr" id="btn-cabinet-fr">
+                Cabinet<span class="nav-dropdown-chevron" aria-hidden="true"></span>
+              </button>
+              <ul class="nav-submenu" id="sub-cabinet-fr" role="menu">
+                <li role="none"><a href="a-propos.html" role="menuitem">À propos</a></li>
+                <li role="none"><a href="references.html" role="menuitem">Références</a></li>
+              </ul>
+            </li>
             <li><a href="contact.html">Contact</a></li>
-            <li class="nav-cta"><a class="btn btn-primary" href="contact.html">Demander un échange</a></li>
+            <li class="nav-cta nav-cta--drawer-only"><a class="btn btn-primary" href="contact.html">Demander un échange</a></li>
           </ul>
         </nav>
         </div>
+      </div>
       </div>
     </header>
 
@@ -311,7 +347,7 @@
         <div>
           <h3>Contact</h3>
           <p><a href="tel:+213661467003">+213 (0) 661 46 70 03</a></p>
-          <p><a href="mailto:ahf.consulting.dz@gmail.com">ahf.consulting.dz@gmail.com</a></p>
+          <p><a href="mailto:beldimohamedlamine@gmail.com">beldimohamedlamine@gmail.com</a></p>
         </div>
       </div>
       <p class="footer-bottom">© AHF CONSULTING — Tous droits réservés.</p>
