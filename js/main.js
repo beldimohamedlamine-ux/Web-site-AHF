@@ -110,6 +110,10 @@
   syncHeaderOffset();
   window.addEventListener("resize", syncHeaderOffset);
   window.addEventListener("load", syncHeaderOffset);
+  /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du menu fixe */
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", syncHeaderOffset);
+  }
 
   var siteHeader = document.getElementById("site-header");
   /* Hystérésis : évite le « tremblement » quand scrollY oscille autour du seuil ou quand la hauteur du header modifie la position. */
