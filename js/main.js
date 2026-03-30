@@ -173,6 +173,24 @@
     });
   }
 
+  function isDesktopDropdownNav() {
+    return window.matchMedia("(min-width: 901px)").matches;
+  }
+
+  /* Bureau : au survol d’un menu, fermer les autres (évite panneaux superposés survol + clic). */
+  document.querySelectorAll(".has-dropdown").forEach(function (li) {
+    li.addEventListener("mouseenter", function () {
+      if (!isDesktopDropdownNav()) return;
+      document.querySelectorAll(".has-dropdown.is-open").forEach(function (other) {
+        if (other !== li) {
+          other.classList.remove("is-open");
+          var ob = other.querySelector(".nav-dropdown-btn");
+          if (ob) ob.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  });
+
   document.querySelectorAll(".nav-dropdown-btn").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -430,6 +448,50 @@
       });
     });
   }
+
+  /* Bouton retour en haut (toutes les pages) */
+  function backToTopLabels() {
+    var lang = document.documentElement.getAttribute("lang") || "fr";
+    if (lang === "en") return { label: "Back to top" };
+    if (lang === "ar") return { label: "العودة إلى الأعلى" };
+    return { label: "Retour en haut de page" };
+  }
+
+  var backTopBtn = document.createElement("button");
+  backTopBtn.type = "button";
+  backTopBtn.className = "back-to-top";
+  backTopBtn.setAttribute("aria-label", backToTopLabels().label);
+  backTopBtn.innerHTML =
+    '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 5l7 7h-4v7h-6v-7H5l7-7z"/></svg>';
+  document.body.appendChild(backTopBtn);
+
+  var BACK_TOP_SHOW_AT = 320;
+  var backTopRaf = null;
+  function updateBackToTop() {
+    if (backTopRaf !== null) return;
+    backTopRaf = requestAnimationFrame(function () {
+      backTopRaf = null;
+      var show = window.scrollY > BACK_TOP_SHOW_AT;
+      backTopBtn.classList.toggle("is-visible", show);
+    });
+  }
+
+  updateBackToTop();
+  window.addEventListener("scroll", updateBackToTop, { passive: true });
+  window.addEventListener("load", updateBackToTop);
+
+  backTopBtn.addEventListener("click", function () {
+    var instant =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: instant ? "auto" : "smooth" });
+    var target = document.getElementById("contenu") || document.querySelector("main");
+    if (target && typeof target.focus === "function") {
+      try {
+        target.setAttribute("tabindex", "-1");
+        target.focus({ preventScroll: true });
+      } catch (ignore) {}
+    }
+  });
 })();
 
 var FICHE_FORM_LABELS = {
