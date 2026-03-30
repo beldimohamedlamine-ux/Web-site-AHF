@@ -1,0 +1,29 @@
+# AHF CONSULTING — en-têtes de sécurité (Apache 2.4+ avec mod_headers)
+# À placer à la racine du site (même dossier que index.html).
+# Décommentez la section HTTPS si vous servez le site uniquement en HTTPS.
+
+<IfModule mod_headers.c>
+  # Ne pas deviner le type MIME (réduit certains risques XSS)
+  Header set X-Content-Type-Options "nosniff"
+  # Ancien navigateurs sans CSP frame-ancestors
+  Header set X-Frame-Options "DENY"
+  # Politique de référent (alignée avec la balise meta)
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  # Capacités navigateur désactivées (aligné avec Permissions-Policy meta)
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()"
+  # Même CSP que dans les pages HTML (évite un seul des deux si vous supprimez la meta plus tard)
+  Header set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co; upgrade-insecure-requests"
+
+  # Décommenter une fois le site servi UNIQUEMENT en HTTPS (sinon risque pour les visiteurs en HTTP)
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+</IfModule>
+
+# Pas de listage des dossiers
+Options -Indexes
+
+# Bloquer l’accès aux chemins cachés type /.git/ (sauf /.well-known/ pour SSL / Let’s Encrypt)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteRule (^|/)\. - [F,L]
+</IfModule>

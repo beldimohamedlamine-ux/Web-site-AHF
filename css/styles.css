@@ -1619,6 +1619,16 @@ table.data tbody tr:hover {
   color: var(--color-text-muted);
 }
 
+/* Honeypot anti-spam: champ masqué pour bots */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Contact — fiche ISO repliable */
 .contact-compose {
   display: flex;

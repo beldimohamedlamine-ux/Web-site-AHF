@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()" />
     <meta name="description" content="Contact AHF CONSULTING — El Khroub, Constantine, Algérie. Téléphone, email, formulaire de demande." />
     <title>Contact | AHF CONSULTING</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -127,7 +130,9 @@
           <div class="contact-card">
             <h2>Envoyer un message</h2>
             <div class="contact-compose">
-              <form id="contact-quick-form" novalidate></form>
+              <form id="contact-quick-form" novalidate>
+                <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field" />
+              </form>
 
               <div class="form-group">
                 <label for="contact-name">Nom et prénom</label>
@@ -163,6 +168,7 @@
                     part directement vers notre boîte e-mail.
                   </p>
                   <form class="fiche-form" data-fiche-lang="fr" action="#" method="post" novalidate>
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field" />
                     <div class="fiche-form-head">
                       <div class="fiche-form-head-brand">
                         <img class="fiche-form-logo" src="images/logo-ahf.png" alt="" width="140" height="168" decoding="async" />
@@ -376,3 +382,5 @@
     <script src="js/main.js"></script>
   </body>
 </html>
+
+

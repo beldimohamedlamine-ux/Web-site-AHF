@@ -31,7 +31,7 @@
     var m = formSubmitMessages(lang);
     var prevText = submitBtn ? submitBtn.textContent : "";
     var body = {
-      _captcha: false,
+      _captcha: true,
       _template: "table",
     };
     var reply = (fields.email && String(fields.email).trim()) || "";
@@ -233,11 +233,18 @@
   }
 
   var contactQuickForm = document.getElementById("contact-quick-form");
+  var MIN_SUBMIT_INTERVAL_MS = 6000;
+  var lastQuickSubmitAt = 0;
+  var lastFicheSubmitAt = 0;
   if (contactQuickForm) {
     contactQuickForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var lang = document.documentElement.getAttribute("lang") || "fr";
+      var now = Date.now();
+      if (now - lastQuickSubmitAt < MIN_SUBMIT_INTERVAL_MS) return;
       var fd = new FormData(contactQuickForm);
+      var website = (fd.get("website") || "").toString().trim();
+      if (website) return;
       var sub = (fd.get("subject") || "").toString().trim();
       var msg = (fd.get("message") || "").toString().trim();
       var name = (fd.get("name") || "").toString().trim();
@@ -298,7 +305,10 @@
         btn,
         lang
       ).then(function (sent) {
-        if (sent) contactQuickForm.reset();
+        if (sent) {
+          lastQuickSubmitAt = now;
+          contactQuickForm.reset();
+        }
       });
     });
   }
@@ -308,8 +318,12 @@
     ficheForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var lang = ficheForm.getAttribute("data-fiche-lang") || "fr";
+      var now = Date.now();
+      if (now - lastFicheSubmitAt < MIN_SUBMIT_INTERVAL_MS) return;
       var labels = FICHE_FORM_LABELS[lang] || FICHE_FORM_LABELS.fr;
       var fd = new FormData(ficheForm);
+      var website = (fd.get("website") || "").toString().trim();
+      if (website) return;
       var lines = [];
 
       function line(key, value) {
@@ -409,7 +423,10 @@
         btn,
         lang
       ).then(function (sent) {
-        if (sent) ficheForm.reset();
+        if (sent) {
+          lastFicheSubmitAt = now;
+          ficheForm.reset();
+        }
       });
     });
   }

@@ -1,0 +1,36 @@
+AHF CONSULTING — notes hébergement / sécurité des en-têtes HTTP
+================================================================
+
+Fichiers fournis dans ce dépôt :
+- .htaccess              → Apache (hébergements mutualisés souvent OK)
+- nginx-security-snippet.conf → à inclure dans votre server { } Nginx
+- _headers               → Netlify (racine du site publié)
+- vercel.json            → Vercel (en-têtes sur toutes les routes)
+
+Ce que l’assistant ne peut pas faire à votre place :
+- uploader les fichiers sur votre hébergeur ni activer SSL sur votre domaine.
+Avec Netlify ou Vercel, un git push / import du dépôt applique souvent _headers ou vercel.json automatiquement.
+
+Important
+---------
+1) Si vous envoyez déjà la même CSP via le serveur ET via <meta> dans le HTML,
+   les deux politiques s’appliquent (intersection stricte). Pour l’instant elles
+   sont identiques, donc pas de problème.
+2) Strict-Transport-Security (HSTS) : ne l’activez QUE lorsque le site est
+   servi entièrement en HTTPS, sans mélange de contenu HTTP sensible.
+3) Après activation des en-têtes serveur, vous pouvez retirer les balises meta
+   équivalentes du HTML pour éviter la duplication (optionnel).
+
+Cloudflare
+----------
+Sans modifier le serveur d’origine, vous pouvez ajouter des en-têtes dans :
+  Rules → Transform Rules → Modify Response Header
+
+Ajoutez par exemple :
+  X-Content-Type-Options = nosniff
+  Referrer-Policy = strict-origin-when-cross-origin
+  (et HSTS dans SSL/TLS → Edge Certificates → Always Use HTTPS + HSTS)
+
+Vérifiez ensuite avec :
+  https://securityheaders.com
+  (outil tiers, à titre indicatif)
