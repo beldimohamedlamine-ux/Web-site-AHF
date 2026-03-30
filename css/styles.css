@@ -386,37 +386,60 @@ a:hover {
 
 .clients-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1rem 1.25rem;
-  align-items: center;
+  align-items: end;
   margin-top: 0.5rem;
 }
 
 .client-card {
   margin: 0;
-  min-height: 88px;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 1.1rem;
-  background: var(--color-white);
-  border-radius: var(--radius);
-  border: 1px dashed rgba(15, 39, 68, 0.2);
-  box-shadow: var(--shadow-sm);
+  padding: 0.2rem;
+  background: transparent;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+  grid-column: span 3;
 }
 
 .client-card img {
-  max-height: 52px;
+  max-height: var(--client-logo-h, 62px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  filter: grayscale(35%);
-  opacity: 0.92;
-  transition: filter 0.2s, opacity 0.2s;
+  mix-blend-mode: multiply;
+  filter: saturate(1.02) contrast(1.03);
+  opacity: 0.98;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.client-card:nth-child(3n + 1) {
+  --client-logo-h: 74px;
+}
+
+.client-card:nth-child(3n + 2) {
+  --client-logo-h: 58px;
+}
+
+.client-card:nth-child(3n) {
+  --client-logo-h: 66px;
+}
+
+.client-card:nth-child(5n + 2),
+.client-card:nth-child(5n + 4) {
+  margin-top: 0.85rem;
+}
+
+.client-card:nth-child(7n + 3) {
+  margin-top: 1.2rem;
 }
 
 .client-card:hover img {
-  filter: grayscale(0%);
+  transform: translateY(-1px);
   opacity: 1;
 }
 
@@ -1752,6 +1775,13 @@ table.data tbody tr:hover {
     text-align: left;
     box-shadow: var(--shadow-md);
   }
+
+  .hero-certification-img {
+    display: inline-block;
+    width: min(100%, 340px);
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1765,6 +1795,14 @@ table.data tbody tr:hover {
     border-radius: var(--radius);
     font-weight: 700;
     font-size: 0.95rem;
+  }
+
+  .hero-certification-img {
+    display: block;
+    width: min(100%, 300px);
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto;
   }
 }
 
@@ -2356,8 +2394,14 @@ table.data tbody tr:hover {
   }
 
   .client-card {
-    min-height: 76px;
-    padding: 0.75rem 0.65rem;
+    min-height: 0;
+    padding: 0.25rem;
+    margin-top: 0;
+    grid-column: span 1;
+  }
+
+  .client-card img {
+    max-height: var(--client-logo-h, 56px);
   }
 
   .offer-highlight {
