@@ -1717,10 +1717,18 @@ table.data tbody tr:hover {
 /* Honeypot anti-spam: champ masqué pour bots */
 .hp-field {
   position: absolute !important;
-  left: -9999px !important;
+  left: 0 !important;
+  top: 0 !important;
   width: 1px !important;
   height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
   opacity: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
   pointer-events: none !important;
 }
 
