@@ -1486,13 +1486,15 @@ a.card:hover h3 {
 }
 
 .footer-bottom {
-  max-width: var(--max-w);
+  max-width: 100%;
   margin: 2rem auto 0;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 0 !important;
   text-align: center;
   font-size: 0.8rem;
   opacity: 0.75;
+  width: 100%;
+  display: block;
 }
 
 .footer-social {
