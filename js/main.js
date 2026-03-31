@@ -270,6 +270,72 @@
     });
   }
 
+  function initThemeToggle() {
+    var root = document.documentElement;
+    var storageKey = "ahf-theme";
+    var lang = (root.getAttribute("lang") || "fr").toLowerCase();
+    var labels = {
+      fr: { dark: "Mode sombre", light: "Mode clair" },
+      en: { dark: "Dark mode", light: "Light mode" },
+      ar: { dark: "الوضع الداكن", light: "الوضع الفاتح" },
+    };
+    var L = labels[lang] || labels.fr;
+    var saved = null;
+    try {
+      saved = localStorage.getItem(storageKey);
+    } catch (ignore) {}
+    var theme = saved === "dark" || saved === "light" ? saved : "light";
+    root.setAttribute("data-theme", theme);
+
+    var langSlot = document.querySelector(".header-slot-lang");
+    var navList = document.querySelector(".nav-list");
+    var buttons = [];
+
+    function createThemeButton(extraClass) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "theme-toggle " + extraClass;
+      btn.setAttribute("aria-live", "polite");
+      btn.addEventListener("click", function () {
+        var dark = root.getAttribute("data-theme") === "dark";
+        var next = dark ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try {
+          localStorage.setItem(storageKey, next);
+        } catch (ignore) {}
+        renderTheme();
+      });
+      buttons.push(btn);
+      return btn;
+    }
+
+    if (langSlot && !langSlot.querySelector(".theme-toggle--header")) {
+      langSlot.appendChild(createThemeButton("theme-toggle--header"));
+    }
+
+    if (navList && !navList.querySelector(".nav-theme-item")) {
+      var navThemeItem = document.createElement("li");
+      navThemeItem.className = "nav-theme-item";
+      navThemeItem.appendChild(createThemeButton("theme-toggle--nav"));
+      navList.appendChild(navThemeItem);
+    }
+
+    if (!buttons.length) return;
+
+    function renderTheme() {
+      var dark = root.getAttribute("data-theme") === "dark";
+      var nextLabel = dark ? L.light : L.dark;
+      buttons.forEach(function (btn) {
+        btn.setAttribute("aria-pressed", dark ? "true" : "false");
+        btn.setAttribute("aria-label", nextLabel);
+        btn.setAttribute("title", nextLabel);
+        btn.innerHTML = '<span class="theme-toggle-icon" aria-hidden="true">' + (dark ? "☀" : "☾") + "</span>";
+      });
+    }
+
+    renderTheme();
+  }
+
   function closeAllNavDropdowns() {
     document.querySelectorAll(".has-dropdown.is-open").forEach(function (li) {
       li.classList.remove("is-open");
@@ -281,6 +347,7 @@
   syncHeaderOffset();
   applySitemapBreadcrumb();
   initLangDropdown();
+  initThemeToggle();
   window.addEventListener("resize", syncHeaderOffset);
   window.addEventListener("load", syncHeaderOffset);
   /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du menu fixe */
