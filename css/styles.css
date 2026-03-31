@@ -1774,7 +1774,11 @@ a.card:hover h3 {
 
 [data-theme="dark"] .nav {
   background: #0f172a;
-  border-bottom-color: rgba(148, 163, 184, 0.22);
+  border-bottom-color: transparent;
+}
+
+[data-theme="dark"] .site-header::after {
+  display: none;
 }
 
 [data-theme="dark"] .lang-switch {
@@ -1783,9 +1787,27 @@ a.card:hover h3 {
 }
 
 [data-theme="dark"] .lang-switch a,
-[data-theme="dark"] .nav-list > li:not(.nav-cta) a,
+[data-theme="dark"] .nav-list > li:not(.nav-cta) > a,
 [data-theme="dark"] .nav-dropdown-btn {
-  color: #e2e8f0;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+[data-theme="dark"] .nav-submenu {
+  background: #111827;
+  border-color: rgba(148, 163, 184, 0.3);
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.5);
+}
+
+[data-theme="dark"] .nav-submenu a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+[data-theme="dark"] .nav-submenu a:hover,
+[data-theme="dark"] .nav-submenu a[aria-current="page"] {
+  color: #f8fafc;
+  background: rgba(148, 163, 184, 0.16);
 }
 
 [data-theme="dark"] .lang-switch.is-dropdown .lang-switch-trigger {
@@ -1866,6 +1888,19 @@ a.card:hover h3 {
   background: #111827;
   border-color: rgba(148, 163, 184, 0.24);
   box-shadow: none;
+}
+
+[data-theme="dark"] .client-card {
+  background: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 10px;
+  padding: 0.5rem 0.6rem;
+}
+
+[data-theme="dark"] .client-card img {
+  mix-blend-mode: normal;
+  filter: none;
+  opacity: 1;
 }
 
 [data-theme="dark"] .form-group label,
