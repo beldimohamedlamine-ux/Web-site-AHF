@@ -197,6 +197,79 @@
     });
   }
 
+  function initLangDropdown() {
+    document.querySelectorAll(".lang-switch").forEach(function (switcher) {
+      var links = Array.prototype.slice.call(switcher.querySelectorAll("a"));
+      if (links.length < 2) return;
+
+      var current = switcher.querySelector("a.is-current") || links[0];
+      var currentLabel = (current.textContent || "").trim() || "Lang";
+
+      switcher.querySelectorAll(".lang-switch-sep").forEach(function (sep) {
+        sep.remove();
+      });
+
+      var trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "lang-switch-trigger";
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-haspopup", "menu");
+      trigger.setAttribute("aria-label", "Changer de langue");
+      trigger.innerHTML =
+        '<span class="lang-switch-current">' +
+        currentLabel +
+        '</span><span class="lang-switch-caret" aria-hidden="true"></span>';
+
+      var menu = document.createElement("div");
+      menu.className = "lang-switch-menu";
+      menu.setAttribute("role", "menu");
+
+      links.forEach(function (link) {
+        link.classList.add("lang-switch-item");
+        link.removeAttribute("aria-current");
+        link.setAttribute("role", "menuitem");
+        if (link === current) link.setAttribute("aria-current", "page");
+        menu.appendChild(link);
+      });
+
+      switcher.textContent = "";
+      switcher.classList.add("is-dropdown");
+      switcher.appendChild(trigger);
+      switcher.appendChild(menu);
+
+      function closeLangMenu() {
+        switcher.classList.remove("is-open");
+        trigger.setAttribute("aria-expanded", "false");
+      }
+
+      trigger.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var open = !switcher.classList.contains("is-open");
+        document.querySelectorAll(".lang-switch.is-open").forEach(function (other) {
+          if (other !== switcher) {
+            other.classList.remove("is-open");
+            var otherBtn = other.querySelector(".lang-switch-trigger");
+            if (otherBtn) otherBtn.setAttribute("aria-expanded", "false");
+          }
+        });
+        switcher.classList.toggle("is-open", open);
+        trigger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      menu.querySelectorAll("a").forEach(function (item) {
+        item.addEventListener("click", closeLangMenu);
+      });
+
+      document.addEventListener("click", function (e) {
+        if (!switcher.contains(e.target)) closeLangMenu();
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeLangMenu();
+      });
+    });
+  }
+
   function closeAllNavDropdowns() {
     document.querySelectorAll(".has-dropdown.is-open").forEach(function (li) {
       li.classList.remove("is-open");
@@ -207,6 +280,7 @@
 
   syncHeaderOffset();
   applySitemapBreadcrumb();
+  initLangDropdown();
   window.addEventListener("resize", syncHeaderOffset);
   window.addEventListener("load", syncHeaderOffset);
   /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du menu fixe */
