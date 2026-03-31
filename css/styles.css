@@ -1810,6 +1810,13 @@ a.card:hover h3 {
   background: rgba(148, 163, 184, 0.16);
 }
 
+html[data-theme="dark"] .site-header .nav-submenu a,
+html[data-theme="dark"] .site-header .nav-submenu a:visited {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
 [data-theme="dark"] .lang-switch.is-dropdown .lang-switch-trigger {
   color: #e2e8f0;
   background: transparent;
