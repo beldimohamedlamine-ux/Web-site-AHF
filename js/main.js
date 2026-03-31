@@ -99,6 +99,104 @@
     }
   }
 
+  function applySitemapBreadcrumb() {
+    var crumbs = document.querySelectorAll(".site-map-crumb");
+    if (!crumbs.length) return;
+
+    var pathname = (window.location.pathname || "").replace(/\\/g, "/");
+    var parts = pathname.split("/").filter(Boolean);
+    var locale = "fr";
+    if (parts[0] === "en" || parts[0] === "ar") locale = parts[0];
+    var langMap = {
+      fr: {
+        labels: {
+          index: "Accueil",
+          expertise: "Expertise",
+          "offre-iso-9001": "Offre ISO 9001",
+          "a-propos": "À propos",
+          references: "Références",
+          contact: "Contact",
+          cabinet: "Cabinet",
+        },
+      },
+      en: {
+        labels: {
+          index: "Home",
+          expertise: "Expertise",
+          "offre-iso-9001": "ISO 9001 Offer",
+          "a-propos": "About us",
+          references: "References",
+          contact: "Contact",
+          cabinet: "Firm",
+        },
+      },
+      ar: {
+        labels: {
+          index: "الرئيسية",
+          expertise: "الخبرات",
+          "offre-iso-9001": "عرض ISO 9001",
+          "a-propos": "من نحن",
+          references: "المراجع",
+          contact: "الاتصال",
+          cabinet: "المكتب",
+        },
+      },
+    };
+    var labels = (langMap[locale] || langMap.fr).labels;
+
+    var file = parts.length ? parts[parts.length - 1] : "index.html";
+    if (!/\.html$/i.test(file)) file = "index.html";
+    var slug = file.replace(/\.html$/i, "").toLowerCase();
+
+    var trail;
+    if (slug === "offre-iso-9001") trail = ["expertise", "offre-iso-9001"];
+    else if (slug === "a-propos") trail = ["cabinet", "a-propos"];
+    else if (slug === "references") trail = ["cabinet", "references"];
+    else trail = [slug];
+
+    function hrefFor(key) {
+      if (key === "cabinet") return null;
+      return key === "index" ? "index.html" : key + ".html";
+    }
+
+    crumbs.forEach(function (crumb) {
+      var svg = crumb.querySelector("svg");
+      if (!svg) return;
+      Array.prototype.slice.call(crumb.children).forEach(function (node) {
+        if (node !== svg) crumb.removeChild(node);
+      });
+
+      var pathWrap = document.createElement("span");
+      pathWrap.className = "site-map-crumb-path";
+
+      trail.forEach(function (key, idx) {
+        var sep = document.createElement("span");
+        sep.className = "site-map-crumb-sep";
+        sep.textContent = "/";
+        pathWrap.appendChild(sep);
+
+        var label = labels[key] || key;
+        var isLast = idx === trail.length - 1;
+        var href = hrefFor(key);
+
+        if (!isLast && href) {
+          var link = document.createElement("a");
+          link.className = "site-map-crumb-link";
+          link.href = href;
+          link.textContent = label;
+          pathWrap.appendChild(link);
+        } else {
+          var current = document.createElement("span");
+          current.className = "site-map-crumb-current";
+          current.textContent = label;
+          pathWrap.appendChild(current);
+        }
+      });
+
+      crumb.appendChild(pathWrap);
+    });
+  }
+
   function closeAllNavDropdowns() {
     document.querySelectorAll(".has-dropdown.is-open").forEach(function (li) {
       li.classList.remove("is-open");
@@ -108,6 +206,7 @@
   }
 
   syncHeaderOffset();
+  applySitemapBreadcrumb();
   window.addEventListener("resize", syncHeaderOffset);
   window.addEventListener("load", syncHeaderOffset);
   /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du menu fixe */
