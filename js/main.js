@@ -465,13 +465,22 @@
     '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 5l7 7h-4v7h-6v-7H5l7-7z"/></svg>';
   document.body.appendChild(backTopBtn);
 
-  var BACK_TOP_SHOW_AT = 320;
+  var BACK_TOP_SHOW_AT_DESKTOP = 320;
+  var BACK_TOP_SHOW_AT_MOBILE = 140;
   var backTopRaf = null;
+  function getScrollTop() {
+    return window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
+
+  function backTopThreshold() {
+    return window.matchMedia("(max-width: 900px)").matches ? BACK_TOP_SHOW_AT_MOBILE : BACK_TOP_SHOW_AT_DESKTOP;
+  }
+
   function updateBackToTop() {
     if (backTopRaf !== null) return;
     backTopRaf = requestAnimationFrame(function () {
       backTopRaf = null;
-      var show = window.scrollY > BACK_TOP_SHOW_AT;
+      var show = getScrollTop() > backTopThreshold();
       backTopBtn.classList.toggle("is-visible", show);
     });
   }
@@ -479,6 +488,7 @@
   updateBackToTop();
   window.addEventListener("scroll", updateBackToTop, { passive: true });
   window.addEventListener("load", updateBackToTop);
+  window.addEventListener("resize", updateBackToTop);
 
   backTopBtn.addEventListener("click", function () {
     var instant =

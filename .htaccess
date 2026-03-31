@@ -24,6 +24,12 @@ Options -Indexes
 # Bloquer l’accès aux chemins cachés type /.git/ (sauf /.well-known/ pour SSL / Let’s Encrypt)
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Permet les URLs sans extension (.html), ex: /ar/contact -> /ar/contact.html
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+
   RewriteCond %{REQUEST_URI} !^/\.well-known/
   RewriteRule (^|/)\. - [F,L]
 </IfModule>
