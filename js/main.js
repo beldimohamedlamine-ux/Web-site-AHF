@@ -502,6 +502,26 @@
       } catch (ignore) {}
     }
   });
+
+  /* Déplacer les réseaux sociaux du topbar vers le footer */
+  (function moveSocialToFooter() {
+    var headerSocial = document.querySelector(".header-social");
+    var footer = document.querySelector(".site-footer");
+    if (!headerSocial || !footer) return;
+    if (footer.querySelector(".footer-social")) return;
+
+    var footerSocial = document.createElement("ul");
+    footerSocial.className = "footer-social";
+    footerSocial.setAttribute("aria-label", headerSocial.getAttribute("aria-label") || "Social links");
+    footerSocial.innerHTML = headerSocial.innerHTML;
+
+    var footerBottom = footer.querySelector(".footer-bottom");
+    if (footerBottom && footerBottom.parentNode) {
+      footerBottom.parentNode.insertBefore(footerSocial, footerBottom);
+    } else {
+      footer.appendChild(footerSocial);
+    }
+  })();
 })();
 
 var FICHE_FORM_LABELS = {
