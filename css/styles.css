@@ -1772,6 +1772,11 @@ a.card:hover h3 {
   background: #020617;
 }
 
+[data-theme="dark"] .nav {
+  background: #0f172a;
+  border-bottom-color: rgba(148, 163, 184, 0.22);
+}
+
 [data-theme="dark"] .lang-switch {
   border-color: rgba(148, 163, 184, 0.3);
   background: rgba(148, 163, 184, 0.12);
