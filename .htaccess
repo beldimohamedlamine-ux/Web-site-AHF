@@ -1,4 +1,4 @@
-﻿# AHF CONSULTING â€” en-tÃªtes de sÃ©curitÃ© (Apache 2.4+ avec mod_headers)
+# AHF CONSULTING â€” en-tÃªtes de sÃ©curitÃ© (Apache 2.4+ avec mod_headers)
 # Ã€ placer Ã  la racine du site (mÃªme dossier que index.html).
 # DÃ©commentez la section HTTPS si vous servez le site uniquement en HTTPS.
 
@@ -12,7 +12,7 @@
   # CapacitÃ©s navigateur dÃ©sactivÃ©es (alignÃ© avec Permissions-Policy meta)
   Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()"
   # MÃªme CSP que dans les pages HTML (Ã©vite un seul des deux si vous supprimez la meta plus tard)
-  Header set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formsubmit.co; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formsubmit.co; frame-src 'self' https://www.google.com https://maps.google.com; upgrade-insecure-requests"
+  Header set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io; frame-src 'self' https://www.google.com https://maps.google.com; upgrade-insecure-requests"
 
   # DÃ©commenter une fois le site servi UNIQUEMENT en HTTPS (sinon risque pour les visiteurs en HTTP)
   # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS

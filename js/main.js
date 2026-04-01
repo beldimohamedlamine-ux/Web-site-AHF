@@ -1,7 +1,6 @@
 (function () {
-  /** Envoi vers la boîte cabinet via FormSubmit (https://formsubmit.co). Au premier message, confirmer l’activation depuis l’e-mail reçu sur cette boîte. */
-  var AHF_INBOX_EMAIL = "beldimohamedlamine@gmail.com";
-  var AHF_FORM_SUBMIT_AJAX = "https://formsubmit.co/ajax/" + AHF_INBOX_EMAIL;
+  /** Envoi vers la boîte cabinet via Formspree (https://formspree.io). */
+  var AHF_FORM_SUBMIT_AJAX = "https://formspree.io/f/xwvwqbjn";
 
   function formSubmitMessages(lang) {
     var L = {
@@ -45,7 +44,7 @@
       submitBtn.textContent = m.wait;
     }
 
-    /* FormSubmit attend le même format qu’un <form> classique (comme l’exemple jQuery), pas du JSON brut. */
+    /* Formspree accepte le format URL-encoded pour ce formulaire. */
     var params = new URLSearchParams();
     Object.keys(body).forEach(function (k) {
       var v = body[k];
@@ -66,8 +65,8 @@
           try {
             data = text ? JSON.parse(text) : null;
           } catch (ignore) {}
-          var success = data && (data.success === true || data.success === "true");
-          return { ok: res.ok && success, data: data };
+          var hasErrors = data && Array.isArray(data.errors) && data.errors.length > 0;
+          return { ok: res.ok && !hasErrors, data: data };
         });
       })
       .catch(function () {
