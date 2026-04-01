@@ -30,10 +30,7 @@
     var url = endpoint && String(endpoint).trim() ? String(endpoint).trim() : AHF_FORM_SUBMIT_AJAX;
     var m = formSubmitMessages(lang);
     var prevText = submitBtn ? submitBtn.textContent : "";
-    var body = {
-      _captcha: true,
-      _template: "table",
-    };
+    var body = {};
     var reply = (fields.email && String(fields.email).trim()) || "";
     if (reply) body._replyto = reply;
     Object.keys(fields).forEach(function (k) {
@@ -503,7 +500,7 @@
       var fd = new FormData(contactQuickForm);
       var website = (fd.get("website") || "").toString().trim();
       if (website) return;
-      var sub = (fd.get("subject") || "").toString().trim();
+      var sub = (fd.get("message_subject") || "").toString().trim();
       var msg = (fd.get("message") || "").toString().trim();
       var name = (fd.get("name") || "").toString().trim();
       var email = (fd.get("email") || "").toString().trim();
@@ -552,14 +549,17 @@
         document.querySelector('button[type="submit"][form="contact-quick-form"]') ||
         contactQuickForm.querySelector('button[type="submit"]');
       var formspreeAction = contactQuickForm.getAttribute("action");
+      var objetPrefix =
+        lang === "en" ? "Subject" : lang === "ar" ? "الموضوع" : "Objet";
+      var messageWithObjet = objetPrefix + " : " + sub + "\n\n" + msg;
       postToInbox(
         {
           _subject: "[Site AHF] " + sub,
           name: name,
           email: email,
           phone: phone || "—",
-          subject: sub,
-          message: msg,
+          message_subject: sub,
+          message: messageWithObjet,
         },
         btn,
         lang,
