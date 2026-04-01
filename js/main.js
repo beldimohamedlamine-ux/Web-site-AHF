@@ -26,7 +26,8 @@
     return L[lang] || L.fr;
   }
 
-  function postToInbox(fields, submitBtn, lang) {
+  function postToInbox(fields, submitBtn, lang, endpoint) {
+    var url = endpoint && String(endpoint).trim() ? String(endpoint).trim() : AHF_FORM_SUBMIT_AJAX;
     var m = formSubmitMessages(lang);
     var prevText = submitBtn ? submitBtn.textContent : "";
     var body = {
@@ -51,7 +52,7 @@
       if (v !== undefined && v !== null) params.append(k, String(v));
     });
 
-    return fetch(AHF_FORM_SUBMIT_AJAX, {
+    return fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -550,6 +551,7 @@
       var btn =
         document.querySelector('button[type="submit"][form="contact-quick-form"]') ||
         contactQuickForm.querySelector('button[type="submit"]');
+      var formspreeAction = contactQuickForm.getAttribute("action");
       postToInbox(
         {
           _subject: "[Site AHF] " + sub,
@@ -560,7 +562,8 @@
           message: msg,
         },
         btn,
-        lang
+        lang,
+        formspreeAction
       ).then(function (sent) {
         if (sent) {
           lastQuickSubmitAt = now;
@@ -668,6 +671,7 @@
           .join(" ") || (fd.get("signed_by") || "").toString().trim() || "—";
 
       var btn = ficheForm.querySelector('button[type="submit"]');
+      var ficheAction = ficheForm.getAttribute("action");
       postToInbox(
         {
           _subject: "[Site AHF] " + subject,
@@ -678,7 +682,8 @@
           message: body,
         },
         btn,
-        lang
+        lang,
+        ficheAction
       ).then(function (sent) {
         if (sent) {
           lastFicheSubmitAt = now;
