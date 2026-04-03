@@ -747,8 +747,71 @@
     }
   });
 
+  function initHomeHeroSwiper() {
+    var el = document.querySelector(".home-hero-swiper");
+    if (!el || typeof Swiper === "undefined") return;
+    var rtl = document.documentElement.getAttribute("dir") === "rtl";
+    var lang = (document.documentElement.getAttribute("lang") || "fr").toLowerCase();
+    var a11yPrev =
+      lang === "en" ? "Previous slide" : lang === "ar" ? "الشريحة السابقة" : "Diapositive précédente";
+    var a11yNext =
+      lang === "en" ? "Next slide" : lang === "ar" ? "الشريحة التالية" : "Diapositive suivante";
+    new Swiper(el, {
+      loop: true,
+      speed: 650,
+      rtl: rtl,
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: el.querySelector(".swiper-pagination"),
+        clickable: true,
+      },
+      navigation: {
+        nextEl: el.querySelector(".swiper-button-next"),
+        prevEl: el.querySelector(".swiper-button-prev"),
+      },
+      a11y: {
+        enabled: true,
+        prevSlideMessage: a11yPrev,
+        nextSlideMessage: a11yNext,
+      },
+    });
+  }
+
+  function initRevealOnScroll() {
+    var nodes = document.querySelectorAll("[data-reveal]");
+    if (!nodes.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      nodes.forEach(function (n) {
+        n.classList.add("is-revealed");
+      });
+      return;
+    }
+    var obs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add("is-revealed");
+            obs.unobserve(en.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.06 }
+    );
+    nodes.forEach(function (n) {
+      obs.observe(n);
+    });
+  }
+
+  initHomeHeroSwiper();
+  initRevealOnScroll();
+
   /* Déplacer les réseaux sociaux du topbar vers le footer */
   (function moveSocialToFooter() {
+    if (document.body.classList.contains("page-home")) return;
     var headerSocial = document.querySelector(".header-social");
     var footer = document.querySelector(".site-footer");
     if (!headerSocial || !footer) return;
