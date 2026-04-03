@@ -267,72 +267,6 @@
     });
   }
 
-  function initThemeToggle() {
-    var root = document.documentElement;
-    var storageKey = "ahf-theme";
-    var lang = (root.getAttribute("lang") || "fr").toLowerCase();
-    var labels = {
-      fr: { dark: "Mode sombre", light: "Mode clair" },
-      en: { dark: "Dark mode", light: "Light mode" },
-      ar: { dark: "الوضع الداكن", light: "الوضع الفاتح" },
-    };
-    var L = labels[lang] || labels.fr;
-    var saved = null;
-    try {
-      saved = localStorage.getItem(storageKey);
-    } catch (ignore) {}
-    var theme = saved === "dark" || saved === "light" ? saved : "light";
-    root.setAttribute("data-theme", theme);
-
-    var langSlot = document.querySelector(".header-slot-lang");
-    var navList = document.querySelector(".nav-list");
-    var buttons = [];
-
-    function createThemeButton(extraClass) {
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "theme-toggle " + extraClass;
-      btn.setAttribute("aria-live", "polite");
-      btn.addEventListener("click", function () {
-        var dark = root.getAttribute("data-theme") === "dark";
-        var next = dark ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        try {
-          localStorage.setItem(storageKey, next);
-        } catch (ignore) {}
-        renderTheme();
-      });
-      buttons.push(btn);
-      return btn;
-    }
-
-    if (langSlot && !langSlot.querySelector(".theme-toggle--header")) {
-      langSlot.appendChild(createThemeButton("theme-toggle--header"));
-    }
-
-    if (navList && !navList.querySelector(".nav-theme-item")) {
-      var navThemeItem = document.createElement("li");
-      navThemeItem.className = "nav-theme-item";
-      navThemeItem.appendChild(createThemeButton("theme-toggle--nav"));
-      navList.appendChild(navThemeItem);
-    }
-
-    if (!buttons.length) return;
-
-    function renderTheme() {
-      var dark = root.getAttribute("data-theme") === "dark";
-      var nextLabel = dark ? L.light : L.dark;
-      buttons.forEach(function (btn) {
-        btn.setAttribute("aria-pressed", dark ? "true" : "false");
-        btn.setAttribute("aria-label", nextLabel);
-        btn.setAttribute("title", nextLabel);
-        btn.innerHTML = '<span class="theme-toggle-icon" aria-hidden="true">' + (dark ? "☀" : "☾") + "</span>";
-      });
-    }
-
-    renderTheme();
-  }
-
   function closeAllNavDropdowns() {
     document.querySelectorAll(".has-dropdown.is-open").forEach(function (li) {
       li.classList.remove("is-open");
@@ -344,7 +278,6 @@
   syncHeaderOffset();
   applySitemapBreadcrumb();
   initLangDropdown();
-  initThemeToggle();
   window.addEventListener("resize", syncHeaderOffset);
   window.addEventListener("load", syncHeaderOffset);
   /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du menu fixe */
@@ -747,6 +680,57 @@
     }
   });
 
+  function initClientsCarousel() {
+    var el = document.querySelector(".clients-swiper");
+    if (!el || typeof Swiper === "undefined") return;
+    var rtl = document.documentElement.getAttribute("dir") === "rtl";
+    var reduceMotion =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var pag = el.querySelector(".clients-swiper-pagination");
+    new Swiper(el, {
+      loop: !reduceMotion,
+      slidesPerView: 2,
+      slidesPerGroup: 1,
+      spaceBetween: 12,
+      speed: reduceMotion ? 0 : 1400,
+      rtl: rtl,
+      watchOverflow: true,
+      keyboard: { enabled: true, onlyInViewport: true },
+      autoplay: reduceMotion
+        ? false
+        : {
+            delay: 900,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+            waitForTransition: true,
+          },
+      pagination: pag
+        ? {
+            el: pag,
+            clickable: true,
+            dynamicBullets: true,
+          }
+        : undefined,
+      breakpoints: {
+        520: {
+          slidesPerView: 3,
+          slidesPerGroup: 1,
+          spaceBetween: 14,
+        },
+        768: {
+          slidesPerView: 4,
+          slidesPerGroup: 1,
+          spaceBetween: 16,
+        },
+        1100: {
+          slidesPerView: 5,
+          slidesPerGroup: 1,
+          spaceBetween: 18,
+        },
+      },
+    });
+  }
+
   function initHomeHeroSwiper() {
     var el = document.querySelector(".home-hero-swiper");
     if (!el || typeof Swiper === "undefined") return;
@@ -807,28 +791,8 @@
   }
 
   initHomeHeroSwiper();
+  initClientsCarousel();
   initRevealOnScroll();
-
-  /* Déplacer les réseaux sociaux du topbar vers le footer */
-  (function moveSocialToFooter() {
-    if (document.body.classList.contains("page-home")) return;
-    var headerSocial = document.querySelector(".header-social");
-    var footer = document.querySelector(".site-footer");
-    if (!headerSocial || !footer) return;
-    if (footer.querySelector(".footer-social")) return;
-
-    var footerSocial = document.createElement("ul");
-    footerSocial.className = "footer-social";
-    footerSocial.setAttribute("aria-label", headerSocial.getAttribute("aria-label") || "Social links");
-    footerSocial.innerHTML = headerSocial.innerHTML;
-
-    var footerBottom = footer.querySelector(".footer-bottom");
-    if (footerBottom && footerBottom.parentNode) {
-      footerBottom.parentNode.insertBefore(footerSocial, footerBottom);
-    } else {
-      footer.appendChild(footerSocial);
-    }
-  })();
 })();
 
 var FICHE_FORM_LABELS = {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io; frame-src 'self' https://www.google.com https://maps.google.com; upgrade-insecure-requests" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io; frame-src 'self' https://www.google.com https://maps.google.com; upgrade-insecure-requests" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()" />
     <meta name="description" content="Contact AHF CONSULTING — El Khroub, Constantine, Algérie. Téléphone, email, formulaire de demande." />
@@ -15,58 +15,46 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
   </head>
   <body>
     <a class="skip" href="#contenu">Aller au contenu</a>
     <header class="site-header" id="site-header">
-      <div class="header-topbar">
-        <div class="header-topbar-inner header-topbar-inner--split">
-          <p class="header-topbar-contact-line">
-            <span class="header-topbar-label">Contactez-nous :</span>
-            <a class="header-topbar-link-inline" href="tel:+213661467003">+213 (0) 661 46 70 03</a>
-            <span class="header-topbar-sep" aria-hidden="true">|</span>
-            <a class="header-topbar-link-inline" href="mailto:beldimohamedlamine@gmail.com">beldimohamedlamine@gmail.com</a>
-          </p>
-          <ul class="header-social" aria-label="Réseaux sociaux">
-            <li>
-              <a class="header-social-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Remplacez ce lien par votre page Facebook"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 22v-8.3h2.9l0.4-3.4h-3.3V8.5c0-1 .3-1.7 1.7-1.7h1.8V3.9c-.3 0-1.5-.1-2.8-.1-2.8 0-4.7 1.7-4.7 4.9v2.7H7v3.4h3.5V22h3z" /></svg></a>
-            </li>
-            <li>
-              <a class="header-social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="Remplacez ce lien par votre page LinkedIn"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.5 8.7h3.2V19H6.5V8.7zm1.6-5c1 0 1.8.8 1.8 1.8 0 1-.8 1.8-1.8 1.8S6.3 6.5 6.3 5.5 7.1 3.7 8.1 3.7zm3.8 5H16c2.5 0 4 1.6 4 4.6V19h-3.2v-5.2c0-1.6-.6-2.6-1.9-2.6-1 0-1.6.7-1.9 1.3-.1.3-.1.7-.1 1.1V19h-3.2V8.7z" /></svg></a>
-            </li>
-            <li>
-              <a class="header-social-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Remplacez ce lien par votre compte Instagram"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8.2 3h7.6C18 3 21 5.9 21 8.7v7.1c0 2.7-2.5 5.2-5.2 5.2H8.2C5.5 21 3 18.5 3 15.8V8.7C3 6 5.5 3 8.2 3zm7.6 2H8.2C6.6 5 5 6.6 5 8.3v7.4C5 17.3 6.6 19 8.3 19h7.5c1.7 0 3.2-1.7 3.2-3.3V8.3C19 6.6 17.3 5 15.8 5zM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm5.2-1.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM12 9.8a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z" /></svg></a>
-            </li>
-            <li>
-              <a class="header-social-link" href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="Remplacez ce lien par votre compte X"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 4l7 9.5L4 20h1.8l6-6.5 4.9 6.5H20l-7.4-10L19.5 4h-1.8l-5.4 6L8.3 4H4z" /></svg></a>
-            </li>
-            <li>
-              <a class="header-social-link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="Remplacez ce lien par votre chaîne YouTube"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21.6 7.2s-.2-1.3-.8-1.9c-.7-.8-1.6-.8-2--.9C16.9 4.2 12 4.2 12 4.2h-.1s-4.9 0-6.8.2c-.4 0-1.3.1-2 .9-.6.6-.8 1.9-.8 1.9S2 8.9 2 10.6v1.7c0 1.7.2 3.4.2 3.4s.2 1.3.8 1.9c.7.8 1.7.7 2.1.8 1.5.1 6.2.2 6.2.2s4.9 0 6.8-.2c.4 0 1.3-.1 2-.9.6-.6.8-1.9.8-1.9s.2-1.7.2-3.4v-1.7c0-1.7-.2-3.4-.2-3.4zM9.8 13.9V8.9l5.2 2.5-5.2 2.5z" /></svg></a>
-            </li>
-          </ul>
-        </div>
+    <div class="header-topbar">
+      <div class="header-topbar-inner header-topbar-inner--split">
+        <p class="header-topbar-contact-line">
+          <span class="header-topbar-label">Contactez-nous :</span>
+          <a class="header-topbar-link-inline" href="tel:+213661467003">+213 (0) 661 46 70 03</a>
+          <span class="header-topbar-sep" aria-hidden="true">|</span>
+          <a class="header-topbar-link-inline" href="mailto:beldimohamedlamine@gmail.com">beldimohamedlamine@gmail.com</a>
+        </p>
+                <ul class="header-social" aria-label="Réseaux sociaux">
+          <li>
+            <a class="header-social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.5 8.7h3.2V19H6.5V8.7zm1.6-5c1 0 1.8.8 1.8 1.8 0 1-.8 1.8-1.8 1.8S6.3 6.5 6.3 5.5 7.1 3.7 8.1 3.7zm3.8 5H16c2.5 0 4 1.6 4 4.6V19h-3.2v-5.2c0-1.6-.6-2.6-1.9-2.6-1 0-1.6.7-1.9 1.3-.1.3-.1.7-.1 1.1V19h-3.2V8.7z"/></svg></a>
+          </li>
+          <li>
+            <a class="header-social-link" href="https://wa.me/213661467003" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+          </li>
+        </ul>
       </div>
-      <div class="header-main">
+    </div>
+    <div class="header-main">
       <div class="header-inner">
-        <button
-          type="button"
-          class="nav-toggle"
-          aria-label="Ouvrir le menu"
-          aria-expanded="false"
-          aria-controls="nav-principal"
-        >
+        <button type="button" class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principal">
           <span></span><span></span><span></span>
         </button>
         <div class="header-slot header-slot-brand">
-        <a href="index.html" class="logo">
-          <img class="logo-img" src="images/logo-ahf.png" alt="AHF CONSULTING" width="200" height="240" decoding="async" />
+          <a href="index.html" class="logo">
+            <img class="logo-img" src="images/logo-ahf.png" alt="AHF CONSULTING" width="200" height="240" decoding="async" />
           </a>
         </div>
         <div class="header-right-panel">
           <div class="header-slot header-slot-nav">
-        <nav class="nav" id="nav-principal" aria-label="Navigation principale">
-          <ul class="nav-list">
+            <nav class="nav" id="nav-principal" aria-label="Navigation principale">
+              <ul class="nav-list">
             <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#about">Qui sommes-nous ?</a></li>
+            <li><a href="index.html#services">Nos services</a></li>
             <li class="has-dropdown">
               <button type="button" class="nav-dropdown-btn" aria-expanded="false" aria-controls="sub-prestations-fr" id="btn-prestations-fr">
                 Expertise<span class="nav-dropdown-chevron" aria-hidden="true"></span>
@@ -86,9 +74,8 @@
               </ul>
             </li>
             <li><a href="contact.html" aria-current="page">Contact</a></li>
-            <li class="nav-cta nav-cta--drawer-only"><a class="btn btn-primary" href="contact.html">Demander un échange</a></li>
           </ul>
-        </nav>
+            </nav>
           </div>
           <div class="header-end-tools header-slot-lang">
             <a class="header-search-link" href="#site-map-title" aria-label="Aller au plan du site" title="Plan du site">
@@ -101,12 +88,11 @@
               <span class="lang-switch-sep" aria-hidden="true">|</span>
               <a href="ar/contact.html" hreflang="ar" lang="ar">AR</a>
             </div>
-            <a class="btn btn-primary header-cta header-cta--desktop" href="contact.html">Demander un échange</a>
           </div>
         </div>
       </div>
-      </div>
-    </header>
+    </div>
+  </header>
 
     <main id="contenu">
       <div class="page-hero">
@@ -134,19 +120,28 @@
               <a href="mailto:beldimohamedlamine@gmail.com">beldimohamedlamine@gmail.com</a>
             </div>
             <p class="form-hint" style="margin: 0">
-              <a href="https://maps.google.com/?q=El+Khroub+Constantine+Algérie" target="_blank" rel="noopener noreferrer"
-                >Voir sur la carte (Google Maps)</a
+              <a
+                href="https://www.google.com/maps/place/RIMES+FOODS/@36.2841487,6.7078932,15z/data=!4m6!3m5!1s0x12f173f69f4b1479%3A0x55a406f86127d6af!8m2!3d36.2841487!4d6.7078932!16s%2Fg%2F11rby_ncsq"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Voir sur la carte (Google Maps) — RIMES FOODS</a
               >
             </p>
-            <div class="contact-map" aria-label="Localisation sur la carte">
-              <iframe
-                title="AHF CONSULTING - El Khroub Constantine"
-                src="https://www.google.com/maps?q=El+Khroub+Constantine+Alg%C3%A9rie&output=embed"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                allowfullscreen
-              ></iframe>
-            </div>
+            <div
+              id="contact-map-canvas"
+              class="contact-map contact-map--leaflet"
+              role="region"
+              aria-label="Carte — repère RIMES FOODS"
+              data-lat="36.2841487"
+              data-lng="6.7078932"
+              data-zoom="15"
+              data-title="RIMES FOODS"
+              data-address="El Khroub — Constantine — Algérie"
+              data-phone-label="Téléphone :"
+              data-phone="+213 (0) 661 46 70 03"
+              data-close-label="Fermer l’étiquette"
+              data-pin-label="RIMES FOODS — afficher l’étiquette"
+            ></div>
           </div>
 
           <div class="contact-card">
@@ -458,6 +453,8 @@
       </div>
       <p class="footer-bottom">© AHF CONSULTING — Tous droits réservés.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="js/contact-map.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
