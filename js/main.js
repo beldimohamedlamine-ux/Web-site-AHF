@@ -286,33 +286,22 @@
   }
 
   var siteHeader = document.getElementById("site-header");
-  /* Hystérésis : évite le « tremblement » quand scrollY oscille autour du seuil ou quand la hauteur du header modifie la position. */
-  var HEADER_SCROLL_COMPACT = 96;
-  var HEADER_SCROLL_EXPAND = 24;
-  var HEADER_OFFSET_SYNC_FRAMES = 22;
-  var HEADER_OFFSET_SYNC_MS = 450;
+  /* Hystérésis large : évite les oscillations quand scrollY ou la hauteur du header varie au seuil. */
+  var HEADER_SCROLL_COMPACT = 132;
+  var HEADER_SCROLL_EXPAND = 40;
+  /* Aligné sur --header-compact-duration (0.4s) : un seul resync après la transition au lieu d’une boucle rAF qui force des reflows à chaque frame. */
+  var HEADER_OFFSET_SYNC_AFTER_MS = 480;
   var headerIsCompact = false;
-  var headerOffsetAnimFrame = 0;
   var headerOffsetSyncTimeout = 0;
   function applyHeaderCompact() {
     if (!siteHeader) return;
     siteHeader.classList.toggle("is-compact", headerIsCompact);
     syncHeaderOffset();
-    /* Recalcule --header-offset pendant l’animation CSS (menu mobile, etc.) */
-    if (headerOffsetAnimFrame) cancelAnimationFrame(headerOffsetAnimFrame);
     if (headerOffsetSyncTimeout) clearTimeout(headerOffsetSyncTimeout);
-    var frame = 0;
-    function stepHeaderOffset() {
-      syncHeaderOffset();
-      frame++;
-      if (frame < HEADER_OFFSET_SYNC_FRAMES) headerOffsetAnimFrame = requestAnimationFrame(stepHeaderOffset);
-      else headerOffsetAnimFrame = 0;
-    }
-    headerOffsetAnimFrame = requestAnimationFrame(stepHeaderOffset);
     headerOffsetSyncTimeout = window.setTimeout(function () {
       headerOffsetSyncTimeout = 0;
       syncHeaderOffset();
-    }, HEADER_OFFSET_SYNC_MS);
+    }, HEADER_OFFSET_SYNC_AFTER_MS);
   }
   var headerCompactScrollRaf = null;
   function updateHeaderCompact() {

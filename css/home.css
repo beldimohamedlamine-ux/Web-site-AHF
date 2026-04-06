@@ -202,11 +202,20 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   background: rgba(112, 32, 60, 0.08);
 }
 
-/* Processus d’accompagnement — 5 phases */
+/* Processus d’accompagnement — 5 phases (thème sombre type carte « Qualité ») */
 .home-process {
+  --process-bg-deep: #0f1c2e;
+  --process-card-bg: #243347;
+  --process-card-border: #3b4a5f;
+  --process-burgundy: #802b40;
+  --process-burgundy-mid: #99334a;
+  --process-burgundy-dark: #5c1f2d;
+  --process-text-soft: rgba(255, 255, 255, 0.82);
+  --process-arrow: #6b7c95;
+
   padding: var(--home-section-py) 1.25rem;
-  background: var(--color-white);
-  border-bottom: 1px solid rgba(20, 42, 69, 0.08);
+  background: var(--process-bg-deep);
+  border-bottom: 1px solid rgba(59, 74, 95, 0.45);
 }
 
 .home-process-inner {
@@ -220,18 +229,23 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   margin: 0 auto 2.25rem;
 }
 
+.home-process-head .home-section-title {
+  color: #ffffff;
+}
+
 .home-process-eyebrow {
   margin: 0 0 0.35rem;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-logo-burgundy-soft);
+  color: #c45a72;
 }
 
 .home-process-intro {
   margin-left: auto;
   margin-right: auto;
+  color: var(--process-text-soft);
 }
 
 .home-process-phases {
@@ -259,10 +273,10 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   gap: 0.45rem;
   padding: 0.65rem 0.35rem 0.75rem;
   margin-inline-end: clamp(0.85rem, 1.8vw, 1.35rem);
-  background: linear-gradient(165deg, #f3f8fd 0%, #eef4fb 100%);
-  border-radius: calc(var(--radius) - 2px);
-  border: 1px solid rgba(100, 150, 200, 0.38);
-  box-shadow: 0 2px 10px rgba(20, 42, 69, 0.06);
+  background: var(--process-card-bg);
+  border-radius: clamp(14px, 2vw, 18px);
+  border: 1px solid var(--process-card-border);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
 .home-process-phase:last-child {
@@ -280,8 +294,8 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   height: 0;
   border-style: solid;
   border-width: 6px 0 6px 10px;
-  border-color: transparent transparent transparent var(--color-logo-navy-mid);
-  opacity: 0.85;
+  border-color: transparent transparent transparent var(--process-arrow);
+  opacity: 0.95;
   pointer-events: none;
   z-index: 2;
 }
@@ -299,12 +313,14 @@ html[dir="rtl"] .home-process-phase:not(:last-child)::after {
   border-radius: 50%;
   font-size: clamp(0.72rem, 1.35vw, 0.88rem);
   font-weight: 800;
-  color: var(--color-white);
+  color: #ffffff;
   background: linear-gradient(
     145deg,
-    var(--color-logo-burgundy-soft),
-    var(--color-logo-navy-mid)
+    var(--process-burgundy-mid) 0%,
+    var(--process-burgundy) 45%,
+    var(--process-burgundy-dark) 100%
   );
+  border: 1px solid rgba(255, 255, 255, 0.12);
   flex-shrink: 0;
 }
 
@@ -312,7 +328,7 @@ html[dir="rtl"] .home-process-phase:not(:last-child)::after {
   margin: 0 0 0.35rem;
   font-size: clamp(0.62rem, 1.05vw, 0.82rem);
   font-weight: 800;
-  color: var(--color-navy);
+  color: #ffffff;
   line-height: 1.2;
   text-align: center;
   hyphens: auto;
@@ -328,12 +344,16 @@ html[dir="rtl"] .home-process-phase:not(:last-child)::after {
 .home-process-phase-body ul {
   margin: 0;
   padding: 0 0 0 clamp(0.65rem, 1.2vw, 0.85rem);
-  color: var(--color-text-muted);
+  color: var(--process-text-soft);
   font-size: clamp(0.58rem, 0.95vw, 0.74rem);
   line-height: 1.32;
   list-style-type: circle;
   overflow-wrap: anywhere;
   hyphens: auto;
+}
+
+.home-process-phase-body ul li::marker {
+  color: rgba(255, 255, 255, 0.38);
 }
 
 html[dir="rtl"] .home-process-phase-body ul {

@@ -48,6 +48,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Ancres / focus : décalage stable avec la hauteur d’en-tête (évite les « sauts » liés au sticky) */
+  scroll-padding-top: var(--header-offset, 100px);
 }
 
 body {
@@ -144,6 +146,10 @@ a:hover {
   border-bottom: none;
   box-shadow: var(--shadow-sm);
   isolation: isolate;
+  /* Réduit saccades / reflow au scroll (collage du sticky + recalcul offset) */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  contain: layout;
 }
 
 /* Trait sous le header = dégradé logo (bordeaux → bleu) */
