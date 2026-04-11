@@ -89,11 +89,15 @@
       });
   }
 
-  function syncHeaderOffset() {
+  /** Décalage ancres (scroll-padding / scroll-margin) : mesuré une seule fois en haut de page, pas lié au mode compact. */
+  function syncHeaderScrollPadding() {
     var header = document.querySelector(".site-header");
-    if (header) {
-      document.documentElement.style.setProperty("--header-offset", header.offsetHeight + "px");
-    }
+    if (!header) return;
+    if (window.scrollY > 48) return;
+    document.documentElement.style.setProperty(
+      "--header-scroll-padding",
+      Math.ceil(header.offsetHeight + 16) + "px"
+    );
   }
 
   function applySitemapBreadcrumb() {
@@ -111,7 +115,6 @@
           expertise: "Expertise",
           "offre-iso-9001": "Offre ISO 9001",
           "a-propos": "À propos",
-          references: "Références",
           contact: "Contact",
           cabinet: "Cabinet",
         },
@@ -122,7 +125,6 @@
           expertise: "Expertise",
           "offre-iso-9001": "ISO 9001 Offer",
           "a-propos": "About us",
-          references: "References",
           contact: "Contact",
           cabinet: "Firm",
         },
@@ -133,7 +135,6 @@
           expertise: "الخبرات",
           "offre-iso-9001": "عرض ISO 9001",
           "a-propos": "من نحن",
-          references: "المراجع",
           contact: "الاتصال",
           cabinet: "المكتب",
         },
@@ -148,7 +149,6 @@
     var trail;
     if (slug === "offre-iso-9001") trail = ["expertise", "offre-iso-9001"];
     else if (slug === "a-propos") trail = ["cabinet", "a-propos"];
-    else if (slug === "references") trail = ["cabinet", "references"];
     else trail = [slug];
 
     function hrefFor(key) {
@@ -275,33 +275,24 @@
     });
   }
 
-  syncHeaderOffset();
+  syncHeaderScrollPadding();
   applySitemapBreadcrumb();
   initLangDropdown();
-  window.addEventListener("resize", syncHeaderOffset);
-  window.addEventListener("load", syncHeaderOffset);
-  /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du menu fixe */
+  window.addEventListener("resize", syncHeaderScrollPadding);
+  window.addEventListener("load", syncHeaderScrollPadding);
+  /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du décalage ancres */
   if (window.visualViewport) {
-    window.visualViewport.addEventListener("resize", syncHeaderOffset);
+    window.visualViewport.addEventListener("resize", syncHeaderScrollPadding);
   }
 
   var siteHeader = document.getElementById("site-header");
-  /* Hystérésis large : évite les oscillations quand scrollY ou la hauteur du header varie au seuil. */
+  /* Hystérésis : évite les oscillations au seuil. --header-offset est défini en CSS (pas de setProperty au scroll). */
   var HEADER_SCROLL_COMPACT = 132;
   var HEADER_SCROLL_EXPAND = 40;
-  /* Aligné sur --header-compact-duration (0.4s) : un seul resync après la transition au lieu d’une boucle rAF qui force des reflows à chaque frame. */
-  var HEADER_OFFSET_SYNC_AFTER_MS = 480;
   var headerIsCompact = false;
-  var headerOffsetSyncTimeout = 0;
   function applyHeaderCompact() {
     if (!siteHeader) return;
     siteHeader.classList.toggle("is-compact", headerIsCompact);
-    syncHeaderOffset();
-    if (headerOffsetSyncTimeout) clearTimeout(headerOffsetSyncTimeout);
-    headerOffsetSyncTimeout = window.setTimeout(function () {
-      headerOffsetSyncTimeout = 0;
-      syncHeaderOffset();
-    }, HEADER_OFFSET_SYNC_AFTER_MS);
   }
   var headerCompactScrollRaf = null;
   function updateHeaderCompact() {

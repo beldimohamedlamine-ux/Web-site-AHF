@@ -29,7 +29,13 @@
   --shadow-md: 0 8px 24px rgba(20, 42, 69, 0.12);
   --radius: 12px;
   --header-h: 108px;
-  --header-offset: 100px;
+  /* Menu mobile `top` / max-height : valeurs stables par état (évite setProperty sur html au scroll → jitter Chrome) */
+  --header-offset-expanded-desktop: 170px;
+  --header-offset-compact-desktop: 72px;
+  --header-offset-expanded-mobile: 232px;
+  --header-offset-compact-mobile: 88px;
+  /* Décalage ancres / focus : stable, basé sur l’en-tête pleine hauteur (évite les à-coups si --header-offset varie au scroll) */
+  --header-scroll-padding: 152px;
   /* Logo PNG vertical (globe + CONSULTING), fond transparent — tailles d’affichage */
   --header-logo-max-h: 88px;
   --header-logo-max-w: 210px;
@@ -48,8 +54,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* Ancres / focus : décalage stable avec la hauteur d’en-tête (évite les « sauts » liés au sticky) */
-  scroll-padding-top: var(--header-offset, 100px);
+  /* Ancres : variable dédiée, indépendante de --header-offset (compact header) */
+  scroll-padding-top: var(--header-scroll-padding, 152px);
 }
 
 body {
@@ -59,6 +65,13 @@ body {
   line-height: 1.6;
   color: var(--color-text);
   background: var(--color-bg);
+  /* Réduit les corrections d’ancrage du navigateur quand le sticky change de hauteur (Chrome) */
+  overflow-anchor: none;
+}
+
+main,
+main#contenu {
+  overflow-anchor: none;
 }
 
 img {
@@ -146,10 +159,17 @@ a:hover {
   border-bottom: none;
   box-shadow: var(--shadow-sm);
   isolation: isolate;
+  /* Limite l’ajustement d’ancrage du navigateur quand la hauteur du sticky change */
+  overflow-anchor: none;
   /* Réduit saccades / reflow au scroll (collage du sticky + recalcul offset) */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  contain: layout;
+  /* Hauteur logique pour descendants (.nav fixed) — pas de JS au scroll */
+  --header-offset: var(--header-offset-expanded-desktop);
+}
+
+.site-header.is-compact {
+  --header-offset: var(--header-offset-compact-desktop);
 }
 
 /* Trait sous le header = dégradé logo (bordeaux → bleu) */
@@ -1685,7 +1705,7 @@ a.card:hover h3 {
 }
 
 #site-map-title {
-  scroll-margin-top: calc(var(--header-offset, 100px) + 0.75rem);
+  scroll-margin-top: calc(var(--header-scroll-padding, 152px) + 0.75rem);
 }
 
 .site-map-grid {
@@ -1974,6 +1994,189 @@ table.data tbody tr:hover {
   display: grid;
   place-items: center;
   font-size: 1rem;
+}
+
+/* À propos — pourquoi nous choisir comme partenaire (3 cartes) */
+#pourquoi-partenaire {
+  scroll-margin-top: calc(var(--header-scroll-padding, 152px) + 0.5rem);
+}
+
+.about-partner-section {
+  padding-block: 2.5rem 2rem;
+}
+
+.about-partner-eyebrow {
+  margin: 0 0 0.5rem;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-logo-burgundy);
+}
+
+.about-partner-heading {
+  text-align: center;
+  max-width: 52rem;
+  margin-inline: auto;
+  margin-bottom: 0;
+}
+
+.about-partner-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  margin-top: 2.75rem;
+  padding-top: 0.5rem;
+}
+
+.about-partner-card {
+  position: relative;
+  flex: 1 1 0;
+  min-width: min(100%, 200px);
+  max-width: 100%;
+  margin-top: 1.75rem;
+  margin-inline-end: clamp(0.85rem, 1.8vw, 1.35rem);
+  padding: 2.15rem 1.1rem 1.35rem;
+  border: 2px solid var(--color-logo-burgundy);
+  border-radius: var(--radius);
+  text-align: center;
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.about-partner-card:last-child {
+  margin-inline-end: 0;
+}
+
+@media (min-width: 1024px) {
+  .about-partner-card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: calc(-1 * clamp(0.55rem, 1.2vw, 0.85rem));
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent var(--color-logo-burgundy-soft);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  html[dir="rtl"] .about-partner-card:not(:last-child)::after {
+    transform: translateY(-50%) scaleX(-1);
+  }
+}
+
+@media (max-width: 1023px) {
+  .about-partner-card {
+    flex: 1 1 100%;
+    margin-inline-end: 0;
+  }
+
+  .about-partner-card::after {
+    display: none !important;
+  }
+}
+
+.about-partner-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  color: var(--color-navy);
+  transition: color 0.28s ease;
+}
+
+.about-partner-card p {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  transition: color 0.28s ease;
+}
+
+.about-partner-card-icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 2px solid var(--color-logo-burgundy);
+  display: grid;
+  place-items: center;
+  color: var(--color-logo-burgundy);
+  transition:
+    background 0.28s ease,
+    border-color 0.28s ease,
+    color 0.28s ease;
+}
+
+.about-partner-card-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.about-partner-card-link {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-top: 0.15rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-logo-burgundy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.28s ease;
+}
+
+.about-partner-card:hover,
+.about-partner-card:focus-within {
+  background: var(--color-logo-burgundy);
+  border-color: var(--color-logo-burgundy-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.about-partner-card:hover h3,
+.about-partner-card:focus-within h3 {
+  color: var(--color-white);
+}
+
+.about-partner-card:hover p,
+.about-partner-card:focus-within p {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.about-partner-card:hover .about-partner-card-icon,
+.about-partner-card:focus-within .about-partner-card-icon {
+  background: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.95);
+  color: var(--color-logo-burgundy);
+}
+
+.about-partner-card:hover .about-partner-card-link,
+.about-partner-card:focus-within .about-partner-card-link {
+  color: var(--color-white);
+}
+
+.about-partner-card-link:focus-visible {
+  outline: 2px solid var(--color-logo-burgundy);
+  outline-offset: 3px;
+}
+
+.about-partner-card:focus-within .about-partner-card-link:focus-visible {
+  outline-color: var(--color-white);
 }
 
 /* Reference sectors */
@@ -2802,6 +3005,11 @@ table.data tbody tr:hover {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    --header-offset: var(--header-offset-expanded-mobile);
+  }
+
+  .site-header.is-compact {
+    --header-offset: var(--header-offset-compact-mobile);
   }
 
   main,

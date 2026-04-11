@@ -17,7 +17,7 @@ body.page-home #services,
 body.page-home #values,
 body.page-home #newsletter,
 body.page-home #nos-clients {
-  scroll-margin-top: calc(var(--header-offset, 100px) + 0.75rem);
+  scroll-margin-top: calc(var(--header-scroll-padding, 152px) + 0.75rem);
 }
 
 body.page-home {
