@@ -449,15 +449,89 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
   }
 }
 
-@media (max-width: 520px) {
-  .home-process-phase {
-    padding: 0.55rem 0.28rem 0.65rem;
-    margin-inline-end: clamp(0.65rem, 2vw, 0.9rem);
+/* Téléphone / portrait étroit : une carte par ligne (lisibilité) */
+@media (max-width: 768px) {
+  .home-process {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
   }
 
+  .home-process-phases {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .home-process-phase {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-inline-end: 0;
+    padding: 1rem 1.1rem 1.15rem;
+  }
+
+  /* Flèche horizontale → lien vertical entre les cartes */
   .home-process-phase:not(:last-child)::after {
-    border-width: 5px 0 5px 8px;
-    inset-inline-end: calc(-1 * clamp(0.45rem, 1.8vw, 0.65rem));
+    inset-inline-end: auto;
+    left: 50%;
+    right: auto;
+    top: calc(100% + 0.38rem);
+    transform: translateX(-50%);
+    border-width: 9px 7px 0 7px;
+    border-color: var(--process-arrow) transparent transparent transparent;
+  }
+
+  html[dir="rtl"] .home-process-phase:not(:last-child)::after {
+    transform: translateX(-50%);
+  }
+
+  .home-process-phase-num {
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: 0.88rem;
+  }
+
+  .home-process-phase-body h3 {
+    font-size: clamp(0.95rem, 4.2vw, 1.05rem);
+    line-height: 1.28;
+    hyphens: manual;
+    overflow-wrap: break-word;
+  }
+
+  .home-process-phase-body ul {
+    font-size: clamp(0.82rem, 3.5vw, 0.92rem);
+    line-height: 1.45;
+    hyphens: manual;
+    padding-inline-start: 1.1rem;
+  }
+
+  @keyframes home-process-card-in-mobile {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 0.85rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(1),
+  .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(2),
+  .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(3),
+  .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(4),
+  .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(5) {
+    animation-name: home-process-card-in-mobile;
+  }
+
+  html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(1),
+  html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(2),
+  html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(3),
+  html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(4),
+  html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-phase:nth-child(5) {
+    animation-name: home-process-card-in-mobile;
   }
 }
 
