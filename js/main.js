@@ -660,6 +660,35 @@
     }
   });
 
+  /* Bouton WhatsApp flottant (toutes les pages) */
+  function whatsappFloatLabels() {
+    var lang = document.documentElement.getAttribute("lang") || "fr";
+    if (lang === "en") return { label: "Open WhatsApp chat", notif: "1", title: "WhatsApp" };
+    if (lang === "ar") return { label: "فتح محادثة واتساب", notif: "1", title: "واتساب" };
+    return { label: "Ouvrir la discussion WhatsApp", notif: "1", title: "WhatsApp" };
+  }
+
+  function initWhatsAppFloat() {
+    var labels = whatsappFloatLabels();
+    var waBtn = document.createElement("a");
+    waBtn.className = "whatsapp-float";
+    waBtn.setAttribute("aria-label", labels.label);
+    waBtn.setAttribute("title", labels.title);
+    waBtn.setAttribute("target", "_blank");
+    waBtn.setAttribute("rel", "noopener noreferrer");
+    /* TODO : remplacez le numéro par votre WhatsApp final si besoin. */
+    waBtn.href = "https://wa.me/213661467003";
+    waBtn.innerHTML =
+      '<span class="whatsapp-float__pulse" aria-hidden="true"></span>' +
+      '<span class="whatsapp-float__icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" focusable="false"><path fill="currentColor" d="M20.5 3.5A11.8 11.8 0 0012.1 0C5.7 0 .5 5.2.5 11.6c0 2 .5 4 1.5 5.8L0 24l6.8-1.8a11.7 11.7 0 005.3 1.3h.1c6.4 0 11.6-5.2 11.6-11.6 0-3.1-1.2-6-3.3-8.4zM12.2 21.4h-.1c-1.7 0-3.4-.5-4.8-1.4l-.3-.2-4 .9.9-3.8-.2-.3a9.5 9.5 0 01-1.5-5c0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.7 2.8 1.8 1.8 2.8 4.2 2.8 6.7 0 5.2-4.2 9.5-9.5 9.5zm5.2-7.1c-.3-.2-1.9-.9-2.1-1-.3-.1-.5-.1-.7.2-.2.3-.8.9-1 1.1-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.7-.9-.8-1.5-1.9-1.7-2.2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.6-1.5-.9-2.1-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.7.4-.2.3-1 1-1 2.4s1 2.8 1.2 3.1c.1.2 2 3.1 4.8 4.3.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>' +
+      "</span>" +
+      '<span class="whatsapp-float__notif" aria-hidden="true">' +
+      labels.notif +
+      "</span>";
+    document.body.appendChild(waBtn);
+  }
+
   function initClientsCarousel() {
     var el = document.querySelector(".clients-swiper");
     if (!el || typeof Swiper === "undefined") return;
@@ -773,6 +802,7 @@
   initHomeHeroSwiper();
   initClientsCarousel();
   initRevealOnScroll();
+  initWhatsAppFloat();
 })();
 
 var FICHE_FORM_LABELS = {

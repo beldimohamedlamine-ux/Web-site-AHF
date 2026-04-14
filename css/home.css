@@ -21,9 +21,9 @@ body.page-home #nos-clients {
 }
 
 body.page-home {
-  --home-section-py: clamp(3rem, 6vw, 4.5rem);
+  --home-section-py: clamp(3.25rem, 7vw, 5rem);
   --swiper-theme-color: var(--color-logo-burgundy);
-  --swiper-navigation-size: 2.25rem;
+  --swiper-navigation-size: 2.35rem;
 }
 
 /* Barre contact — homepage (styles globaux dans styles.css) */
@@ -86,12 +86,14 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    105deg,
-    rgba(12, 24, 38, 0.91) 0%,
-    rgba(20, 42, 69, 0.78) 38%,
-    rgba(112, 32, 60, 0.55) 100%
-  );
+  background:
+    radial-gradient(ellipse 90% 70% at 100% 20%, rgba(112, 32, 60, 0.28), transparent 52%),
+    linear-gradient(
+      105deg,
+      rgba(10, 22, 38, 0.93) 0%,
+      rgba(20, 42, 69, 0.82) 40%,
+      rgba(60, 28, 45, 0.52) 100%
+    );
   z-index: 0;
 }
 
@@ -177,8 +179,9 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
 
 /* Bandeau piliers QHSE sous hero */
 .home-pillars {
-  background: var(--color-white);
-  border-bottom: 1px solid rgba(20, 42, 69, 0.08);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  box-shadow: 0 4px 24px -12px rgba(15, 23, 42, 0.08);
 }
 
 .home-pillars .pillars-inner {
@@ -197,25 +200,27 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
 }
 
 .home-pillars .pillars-inner span {
-  padding: 0.35rem 0.75rem;
+  padding: 0.4rem 0.85rem;
   border-radius: 999px;
-  background: rgba(112, 32, 60, 0.08);
+  background: rgba(112, 32, 60, 0.07);
+  border: 1px solid rgba(112, 32, 60, 0.12);
+  transition: background 0.2s var(--ease-out, ease), border-color 0.2s ease;
 }
 
 /* Processus d’accompagnement — 5 phases (thème sombre type carte « Qualité ») */
 .home-process {
-  --process-bg-deep: #0f1c2e;
-  --process-card-bg: #243347;
-  --process-card-border: #3b4a5f;
-  --process-burgundy: #802b40;
-  --process-burgundy-mid: #99334a;
+  --process-bg-deep: #0c1624;
+  --process-card-bg: #1e2d42;
+  --process-card-border: rgba(100, 116, 139, 0.35);
+  --process-burgundy: #8b3350;
+  --process-burgundy-mid: #a34462;
   --process-burgundy-dark: #5c1f2d;
-  --process-text-soft: rgba(255, 255, 255, 0.82);
-  --process-arrow: #6b7c95;
+  --process-text-soft: rgba(255, 255, 255, 0.86);
+  --process-arrow: #7c8ca3;
 
   padding: var(--home-section-py) 1.25rem;
-  background: var(--process-bg-deep);
-  border-bottom: 1px solid rgba(59, 74, 95, 0.45);
+  background: linear-gradient(180deg, #0a1422 0%, var(--process-bg-deep) 40%, #0a1422 100%);
+  border-bottom: 1px solid rgba(59, 74, 95, 0.35);
 }
 
 .home-process-inner {
@@ -273,10 +278,10 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   gap: 0.45rem;
   padding: 0.65rem 0.35rem 0.75rem;
   margin-inline-end: clamp(0.85rem, 1.8vw, 1.35rem);
-  background: var(--process-card-bg);
+  background: linear-gradient(165deg, #243349 0%, var(--process-card-bg) 100%);
   border-radius: clamp(14px, 2vw, 18px);
   border: 1px solid var(--process-card-border);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .home-process-phase:last-child {
@@ -539,9 +544,10 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
 .home-section-title {
   font-size: clamp(1.45rem, 3vw, 1.85rem);
   font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--color-navy);
   margin: 0 0 0.65rem;
-  line-height: 1.2;
+  line-height: 1.22;
 }
 
 .home-section-intro {
@@ -636,9 +642,10 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
 }
 
 .home-accomp-panel--goal {
-  background: #e8ecf2;
+  background: linear-gradient(165deg, #eef2f7 0%, #e4eaf2 100%);
   color: var(--color-text);
   border-color: rgba(20, 42, 69, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .home-accomp-panel-title {
@@ -693,18 +700,18 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
   display: flex;
   gap: 1rem;
   align-items: flex-start;
-  padding: 1rem 1.15rem;
-  background: var(--color-white);
-  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(20, 42, 69, 0.07);
-  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  border: 1px solid var(--color-border-subtle);
+  transition: box-shadow 0.25s var(--ease-smooth, ease), transform 0.25s var(--ease-smooth, ease), border-color 0.25s ease;
 }
 
 .home-why-item:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-  border-color: rgba(112, 32, 60, 0.22);
+  transform: translateY(-3px);
+  border-color: rgba(112, 32, 60, 0.2);
 }
 
 .home-why-icon {
@@ -766,11 +773,12 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
 .home-service-card {
   display: flex;
   flex-direction: column;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: var(--color-bg);
-  border: 1px solid rgba(20, 42, 69, 0.08);
-  transition: box-shadow 0.25s, transform 0.25s;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s var(--ease-smooth, ease), transform 0.3s var(--ease-smooth, ease);
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -786,8 +794,8 @@ a.home-service-card:focus-visible {
 }
 
 .home-service-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
 }
 
 .home-service-card-media {
@@ -835,11 +843,12 @@ a.home-service-card:focus-visible {
     calc(var(--home-section-py) + clamp(4rem, 10vw, 7rem));
   background: linear-gradient(
     165deg,
-    var(--color-logo-navy-deep) 0%,
-    var(--color-logo-navy) 45%,
-    #1a0f18 100%
+    #070f18 0%,
+    var(--color-logo-navy-deep) 38%,
+    var(--color-logo-navy) 55%,
+    #1a1520 100%
   );
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.92);
   position: relative;
   overflow: hidden;
 }
@@ -848,7 +857,9 @@ a.home-service-card:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 50% at 100% 0%, rgba(112, 32, 60, 0.35), transparent 55%);
+  background:
+    radial-gradient(ellipse 85% 55% at 100% 0%, rgba(112, 32, 60, 0.38), transparent 58%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(30, 63, 102, 0.35), transparent 50%);
   pointer-events: none;
 }
 
