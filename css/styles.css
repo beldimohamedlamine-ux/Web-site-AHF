@@ -2858,14 +2858,45 @@ table.data tbody tr:hover {
 
 @media (max-width: 640px) {
   .normes-cards {
-    display: flex;
-    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .norme-card,
+  .normes-cards .norme-card:nth-child(n + 6) {
+    flex-basis: calc(50% - 0.4rem);
+    max-width: calc(50% - 0.4rem);
   }
 
   .norme-card,
   .norme-card img {
-    max-width: 100%;
-    min-height: 240px;
+    min-height: 190px;
+  }
+
+  .norme-card-overlay {
+    padding: 0.72rem 0.6rem 0.8rem;
+  }
+
+  .norme-card-overlay h3 {
+    font-size: 0.92rem;
+  }
+
+  .norme-card-overlay p {
+    margin-top: 0.2rem;
+    font-size: 0.72rem;
+    line-height: 1.28;
+  }
+}
+
+@media (max-width: 420px) {
+  .norme-card,
+  .normes-cards .norme-card:nth-child(n + 6) {
+    flex-basis: calc(50% - 0.35rem);
+    max-width: calc(50% - 0.35rem);
+  }
+
+  .norme-card,
+  .norme-card img {
+    min-height: 170px;
   }
 }
 
