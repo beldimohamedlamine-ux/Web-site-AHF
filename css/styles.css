@@ -444,6 +444,17 @@ a:hover {
   animation: wa-float-bob 2.4s ease-in-out infinite;
 }
 
+/* Pages AR : inverser WhatsApp et retour en haut */
+html[lang="ar"] .whatsapp-float {
+  left: auto;
+  right: max(0.9rem, env(safe-area-inset-right, 0px));
+}
+
+html[lang="ar"] .back-to-top {
+  inset-inline-end: auto;
+  left: max(0.85rem, env(safe-area-inset-left, 0px));
+}
+
 .whatsapp-float:hover {
   color: #ffffff;
   transform: translateY(-1px);
@@ -544,6 +555,15 @@ a:hover {
     --wa-size: 3rem;
     left: max(0.75rem, env(safe-area-inset-left, 0px));
     bottom: max(0.95rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  html[lang="ar"] .whatsapp-float {
+    left: auto;
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
+  }
+
+  html[lang="ar"] .back-to-top {
+    left: max(0.75rem, env(safe-area-inset-left, 0px));
   }
 }
 
