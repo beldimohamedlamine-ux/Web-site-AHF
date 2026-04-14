@@ -2849,27 +2849,37 @@ table.data tbody tr:hover {
 }
 
 @media (max-width: 820px) {
-  .norme-card,
-  .normes-cards .norme-card:nth-child(n + 6) {
-    flex-basis: calc(50% - 0.6rem);
-    max-width: calc(50% - 0.6rem);
-  }
-}
-
-@media (max-width: 640px) {
   .normes-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
   }
 
   .norme-card,
   .normes-cards .norme-card:nth-child(n + 6) {
-    flex-basis: calc(50% - 0.4rem);
-    max-width: calc(50% - 0.4rem);
+    flex: initial;
+    max-width: none;
+    min-height: 190px;
+  }
+
+  .norme-card img {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 640px) {
+  .normes-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
   }
 
   .norme-card,
+  .normes-cards .norme-card:nth-child(n + 6) {
+    min-height: 175px;
+  }
+
   .norme-card img {
-    min-height: 190px;
+    min-height: 175px;
   }
 
   .norme-card-overlay {
@@ -2888,15 +2898,18 @@ table.data tbody tr:hover {
 }
 
 @media (max-width: 420px) {
-  .norme-card,
-  .normes-cards .norme-card:nth-child(n + 6) {
-    flex-basis: calc(50% - 0.35rem);
-    max-width: calc(50% - 0.35rem);
+  .normes-cards {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
   }
 
   .norme-card,
+  .normes-cards .norme-card:nth-child(n + 6) {
+    min-height: 210px;
+  }
+
   .norme-card img {
-    min-height: 170px;
+    min-height: 210px;
   }
 }
 
