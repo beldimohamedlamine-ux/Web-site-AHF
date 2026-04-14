@@ -113,7 +113,6 @@
         labels: {
           index: "Accueil",
           expertise: "Expertise",
-          "offre-iso-9001": "Offre ISO 9001",
           "a-propos": "À propos",
           contact: "Contact",
           cabinet: "Cabinet",
@@ -123,7 +122,6 @@
         labels: {
           index: "Home",
           expertise: "Expertise",
-          "offre-iso-9001": "ISO 9001 Offer",
           "a-propos": "About us",
           contact: "Contact",
           cabinet: "Firm",
@@ -133,7 +131,6 @@
         labels: {
           index: "الرئيسية",
           expertise: "الخبرات",
-          "offre-iso-9001": "عرض ISO 9001",
           "a-propos": "من نحن",
           contact: "الاتصال",
           cabinet: "المكتب",
@@ -147,8 +144,7 @@
     var slug = file.replace(/\.html$/i, "").toLowerCase();
 
     var trail;
-    if (slug === "offre-iso-9001") trail = ["expertise", "offre-iso-9001"];
-    else if (slug === "a-propos") trail = ["cabinet", "a-propos"];
+    if (slug === "a-propos") trail = ["cabinet", "a-propos"];
     else trail = [slug];
 
     function hrefFor(key) {
