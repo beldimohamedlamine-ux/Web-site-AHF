@@ -55,10 +55,10 @@
             <nav class="nav" id="nav-principal" aria-label="Navigation principale">
               <ul class="nav-list">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="a-propos.html#qui-sommes-nous">Qui sommes-nous ?</a></li>
             <li><a href="index.html#services">Nos services</a></li>
+            <li><a href="index.html#nos-clients">Nos clients</a></li>
+            <li><a href="a-propos.html#qui-sommes-nous">Qui sommes-nous ?</a></li>
             <li><a href="expertise.html">Présentation QHSE</a></li>
-            <li><a href="a-propos.html#a-propos">À propos</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
             </nav>
@@ -81,9 +81,10 @@
   </header>
 
     <main id="contenu">
-      <div class="page-hero" id="a-propos">
+      <span id="qui-sommes-nous" aria-hidden="true"></span>
+      <div class="page-hero" id="a-propos" aria-labelledby="qui-sommes-nous-title">
         <div class="page-hero-inner">
-          <h1>Faites-vous assister par des experts</h1>
+          <h1 id="qui-sommes-nous-title">Faites-vous assister par des experts</h1>
           <p>
             Bureau de conseil, d’accompagnement et de formation, spécialisé dans la mise en place des systèmes de management qualité,
             environnement, santé-sécurité au travail et sécurité alimentaire pour les entreprises en Algérie.
@@ -91,7 +92,7 @@
         </div>
       </div>
 
-      <section class="bg-white" id="qui-sommes-nous">
+      <section class="bg-white">
         <div class="section-inner two-col">
           <div class="prose-block">
             <h2 class="section-title">Mission</h2>
@@ -238,12 +239,6 @@
             <h3>Expertise</h3>
             <ul>
               <li><a href="expertise.html">Prestations QHSE</a></li>
-            </ul>
-          </nav>
-          <nav class="site-map-column" aria-label="Rubrique Cabinet">
-            <h3>Cabinet</h3>
-            <ul>
-              <li><a href="a-propos.html#a-propos">À propos</a></li>
             </ul>
           </nav>
           <nav class="site-map-column" aria-label="Rubrique Langues">

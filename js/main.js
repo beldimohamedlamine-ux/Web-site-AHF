@@ -113,7 +113,7 @@
         labels: {
           index: "Accueil",
           expertise: "Expertise",
-          "a-propos": "À propos",
+          "a-propos": "Qui sommes-nous ?",
           contact: "Contact",
           cabinet: "Cabinet",
         },
@@ -122,7 +122,7 @@
         labels: {
           index: "Home",
           expertise: "Expertise",
-          "a-propos": "About us",
+          "a-propos": "Who we are?",
           contact: "Contact",
           cabinet: "Firm",
         },
@@ -131,7 +131,7 @@
         labels: {
           index: "الرئيسية",
           expertise: "الخبرات",
-          "a-propos": "من نحن",
+          "a-propos": "من نحن؟",
           contact: "الاتصال",
           cabinet: "المكتب",
         },
@@ -373,6 +373,33 @@
   applySitemapBreadcrumb();
   initLangDropdown();
   initHeaderNavActivePill();
+  function normalizeHashScrollPosition() {
+    var rawHash = window.location.hash || "";
+    if (!rawHash || rawHash.length < 2) return;
+    var id = "";
+    try {
+      id = decodeURIComponent(rawHash.slice(1));
+    } catch (e) {
+      id = rawHash.slice(1);
+    }
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    var header = document.querySelector(".site-header");
+    var headerOffset = header ? Math.ceil(header.getBoundingClientRect().height) : 0;
+    var top = Math.max(0, Math.round(window.scrollY + target.getBoundingClientRect().top - headerOffset - 12));
+    window.scrollTo({ top: top, behavior: "auto" });
+  }
+
+  window.addEventListener("hashchange", function () {
+    normalizeHashScrollPosition();
+    window.requestAnimationFrame(normalizeHashScrollPosition);
+  });
+
+  window.addEventListener("load", function () {
+    normalizeHashScrollPosition();
+    window.setTimeout(normalizeHashScrollPosition, 120);
+  });
   window.addEventListener("resize", syncHeaderScrollPadding);
   window.addEventListener("load", syncHeaderScrollPadding);
   /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du décalage ancres */

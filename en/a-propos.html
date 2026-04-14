@@ -55,10 +55,10 @@
             <nav class="nav" id="nav-principal" aria-label="Main navigation">
               <ul class="nav-list">
             <li><a href="index.html">Home</a></li>
-            <li><a href="a-propos.html#qui-sommes-nous">Who we are?</a></li>
             <li><a href="index.html#services">Our services</a></li>
+            <li><a href="index.html#nos-clients">Our clients</a></li>
+            <li><a href="a-propos.html#qui-sommes-nous">Who we are?</a></li>
             <li><a href="expertise.html">QHSE presentation</a></li>
-            <li><a href="a-propos.html#a-propos">About us</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
             </nav>
@@ -81,9 +81,10 @@
   </header>
 
     <main id="contenu">
-      <div class="page-hero" id="a-propos">
+      <span id="qui-sommes-nous" aria-hidden="true"></span>
+      <div class="page-hero" id="a-propos" aria-labelledby="qui-sommes-nous-title">
         <div class="page-hero-inner">
-          <h1>Get support from experts</h1>
+          <h1 id="qui-sommes-nous-title">Get support from experts</h1>
           <p>
             A consulting, support and training firm specialised in quality, environment, occupational health &amp; safety and food safety management
             systems for companies in Algeria.
@@ -91,7 +92,7 @@
         </div>
       </div>
 
-      <section class="bg-white" id="qui-sommes-nous">
+      <section class="bg-white">
         <div class="section-inner two-col">
           <div class="prose-block">
             <h2 class="section-title">Mission</h2>
@@ -233,12 +234,6 @@
             <h3>Expertise</h3>
             <ul>
               <li><a href="expertise.html">QHSE Services</a></li>
-            </ul>
-          </nav>
-          <nav class="site-map-column" aria-label="Firm section">
-            <h3>Firm</h3>
-            <ul>
-              <li><a href="a-propos.html#a-propos">About us</a></li>
             </ul>
           </nav>
           <nav class="site-map-column" aria-label="Languages section">
