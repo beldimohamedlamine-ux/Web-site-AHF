@@ -563,6 +563,54 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
   background: var(--color-bg);
 }
 
+.home-about-banner {
+  width: 100vw;
+  margin: 0 0 1.5rem;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-about-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 18, 32, 0.28) 0%, rgba(5, 18, 32, 0.5) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.home-about-banner img {
+  width: 100%;
+  height: clamp(230px, 34vw, 420px);
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.04);
+  transition: transform 0.55s var(--ease-out, ease);
+}
+
+.home-about-banner:hover img {
+  transform: scale(1.1);
+}
+
+.home-about-banner-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  margin: 0;
+  padding: 0.35rem 1rem;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
 .home-about-grid {
   max-width: var(--max-w);
   margin: 0 auto;
@@ -572,7 +620,28 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
   align-items: start;
 }
 
+.home-about-grid .home-about-prose {
+  grid-column: 1 / -1;
+}
+
+.home-about-grid #why-us {
+  grid-column: 1 / -1;
+}
+
 @media (max-width: 900px) {
+  .home-about-banner {
+    margin-bottom: 1.2rem;
+  }
+
+  .home-about-banner img {
+    height: clamp(190px, 52vw, 280px);
+  }
+
+  .home-about-banner-title {
+    font-size: clamp(1.25rem, 7vw, 1.7rem);
+    padding: 0.25rem 0.7rem;
+  }
+
   .home-about-grid {
     grid-template-columns: 1fr;
   }
