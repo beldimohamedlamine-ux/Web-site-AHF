@@ -2757,7 +2757,127 @@ table.data tbody tr:hover {
   scroll-margin-top: calc(var(--header-h, 72px) + 16px);
 }
 
-/* ISO list */
+/* Expertise — cartes normes visuelles */
+.normes-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.norme-card {
+  position: relative;
+  margin: 0;
+  flex: 0 0 calc(20% - 0.8rem);
+  min-width: 0;
+  max-width: calc(20% - 0.8rem);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 220px;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  box-shadow: var(--shadow-sm);
+  background: #0e2238;
+  isolation: isolate;
+}
+
+.norme-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.45s var(--ease-out, ease);
+}
+
+.norme-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(4, 18, 32, 0.18) 0%, rgba(4, 18, 32, 0.7) 100%);
+  z-index: 1;
+}
+
+.norme-card-overlay {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  padding: 1rem 0.9rem 1.05rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.norme-card-overlay h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.norme-card-overlay p {
+  margin: 0.35rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.norme-card:hover img,
+.norme-card:focus-within img {
+  transform: scale(1.1);
+}
+
+/* Expertise FR : cartes normes sur toute la largeur */
+.normes-section-grid .normes-column {
+  grid-column: 1 / -1;
+}
+
+.normes-section-grid .normes-piliers {
+  grid-column: 1 / -1;
+}
+
+/* Force 2 lignes (5 + 4) sur grand écran */
+.normes-cards .norme-card:nth-child(n + 6) {
+  flex-basis: calc(25% - 0.8rem);
+  max-width: calc(25% - 0.8rem);
+}
+
+@media (max-width: 1024px) {
+  .norme-card,
+  .normes-cards .norme-card:nth-child(n + 6) {
+    flex-basis: calc(33.333% - 0.7rem);
+    max-width: calc(33.333% - 0.7rem);
+  }
+}
+
+@media (max-width: 820px) {
+  .norme-card,
+  .normes-cards .norme-card:nth-child(n + 6) {
+    flex-basis: calc(50% - 0.6rem);
+    max-width: calc(50% - 0.6rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .normes-cards {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .norme-card,
+  .norme-card img {
+    max-width: 100%;
+    min-height: 240px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .normes-section-grid .normes-piliers {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Fallback liste ISO (pages EN/AR non migrées) */
 .iso-list {
   list-style: none;
   padding: 0;
@@ -2768,9 +2888,9 @@ table.data tbody tr:hover {
 
 .iso-list li {
   padding: 0.75rem 1rem;
-  background: var(--color-white);
-  border-radius: 8px;
-  border: 1px solid rgba(15, 39, 68, 0.08);
+  background: var(--color-surface);
+  border-radius: 10px;
+  border: 1px solid var(--color-border-subtle);
   font-weight: 600;
 }
 
