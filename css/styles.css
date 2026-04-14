@@ -1287,20 +1287,34 @@ html[lang="ar"] .site-header a.btn.header-cta--desktop {
   white-space: nowrap;
   padding: 0.4rem 0.6rem;
   border-radius: 8px;
-  transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  transition: color 0.25s var(--ease-out), background 0.25s var(--ease-out),
+    border-radius 0.25s var(--ease-out);
 }
 
-.nav-list > li:not(.nav-cta) a:hover {
+.nav-list > li:not(.nav-cta) a:hover:not(.is-nav-active) {
   color: var(--color-red);
   text-decoration: none;
   background: rgba(112, 32, 60, 0.07);
 }
 
-.nav-list > li:not(.nav-cta) a[aria-current="page"] {
-  color: var(--color-red);
+/* Pastille active (un seul lien à la fois — géré par js/main.js) */
+.nav-list > li:not(.nav-cta) a.is-nav-active {
+  color: #8b3a4a;
   text-decoration: none;
-  background: rgba(112, 32, 60, 0.1);
+  background: #f3d5dc;
+  border-radius: 9999px;
   font-weight: 700;
+}
+
+.nav-list > li:not(.nav-cta) a.is-nav-active:hover {
+  color: #7a3040;
+  background: #ebc6cf;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-list > li:not(.nav-cta) a {
+    transition: none;
+  }
 }
 
 .nav-cta {

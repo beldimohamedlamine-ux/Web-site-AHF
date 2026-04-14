@@ -271,9 +271,108 @@
     });
   }
 
+  /** Un seul lien du menu principal avec pastille active (clic + URL + hash). */
+  function initHeaderNavActivePill() {
+    var nav = document.getElementById("nav-principal");
+    if (!nav) return;
+    var links = nav.querySelectorAll(".nav-list > li > a");
+    if (!links.length) return;
+
+    function htmlFileFromPathname(path) {
+      if (!path) return "index.html";
+      var p = String(path).replace(/\\/g, "/").replace(/\/+$/, "");
+      var parts = p.split("/").filter(Boolean);
+      var last = parts.length ? parts[parts.length - 1] : "";
+      if (/\.html$/i.test(last)) return last;
+      return "index.html";
+    }
+
+    function safeUrl(href) {
+      if (!href || typeof href !== "string") return null;
+      try {
+        return new URL(href, window.location.href);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function clearActive() {
+      links.forEach(function (a) {
+        a.classList.remove("is-nav-active");
+        a.removeAttribute("aria-current");
+      });
+    }
+
+    function setActive(anchor) {
+      if (!anchor) return;
+      clearActive();
+      anchor.classList.add("is-nav-active");
+      anchor.setAttribute("aria-current", "page");
+    }
+
+    function findBestMatchForLocation() {
+      var locUrl = safeUrl(window.location.href);
+      if (!locUrl) return null;
+      var locFile = htmlFileFromPathname(locUrl.pathname).toLowerCase();
+      var locHash = (locUrl.hash || "").toLowerCase();
+
+      var sameFile = [];
+      Array.prototype.forEach.call(links, function (a) {
+        var href = a.getAttribute("href");
+        if (!href) return;
+        var u = safeUrl(href);
+        if (!u) return;
+        var f = htmlFileFromPathname(u.pathname).toLowerCase();
+        if (f === locFile) sameFile.push(a);
+      });
+      if (!sameFile.length) return null;
+
+      if (locHash) {
+        for (var i = 0; i < sameFile.length; i++) {
+          var u1 = safeUrl(sameFile[i].getAttribute("href"));
+          if (u1 && (u1.hash || "").toLowerCase() === locHash) return sameFile[i];
+        }
+        for (var j = 0; j < sameFile.length; j++) {
+          var u2 = safeUrl(sameFile[j].getAttribute("href"));
+          if (u2 && !u2.hash) return sameFile[j];
+        }
+        return sameFile[0];
+      }
+
+      for (var k = 0; k < sameFile.length; k++) {
+        var u3 = safeUrl(sameFile[k].getAttribute("href"));
+        if (u3 && !u3.hash) return sameFile[k];
+      }
+      return sameFile[0];
+    }
+
+    function syncFromLocation() {
+      var match = findBestMatchForLocation();
+      if (match) setActive(match);
+      else clearActive();
+    }
+
+    nav.addEventListener(
+      "click",
+      function (e) {
+        if (e.button !== 0) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var t = e.target && e.target.closest ? e.target.closest("a") : null;
+        if (!t || !nav.contains(t)) return;
+        setActive(t);
+      },
+      false
+    );
+
+    window.addEventListener("hashchange", syncFromLocation, false);
+    window.addEventListener("popstate", syncFromLocation, false);
+    syncFromLocation();
+  }
+
   syncHeaderScrollPadding();
   applySitemapBreadcrumb();
   initLangDropdown();
+  initHeaderNavActivePill();
   window.addEventListener("resize", syncHeaderScrollPadding);
   window.addEventListener("load", syncHeaderScrollPadding);
   /* iOS Safari : barre d’adresse qui réduit la hauteur visible — recalcul du décalage ancres */
