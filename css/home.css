@@ -828,14 +828,22 @@ html[dir="rtl"] .home-process.is-revealed .home-process-phases > .home-process-p
 .home-services-grid {
   max-width: var(--max-w);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: 1.5rem;
 }
 
+.home-services-grid > .home-service-card {
+  flex: 1 1 260px;
+  max-width: calc((100% - (2 * 1.5rem)) / 3);
+}
+
 @media (max-width: 900px) {
-  .home-services-grid {
-    grid-template-columns: 1fr;
+  .home-services-grid > .home-service-card {
+    flex-basis: 100%;
+    max-width: 100%;
   }
 }
 
