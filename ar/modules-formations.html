@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="دليل التكوين QHSE من AHF CONSULTING."
+    />
+    <title>التكوين | AHF CONSULTING</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+      .training-catalog-shell { border: 1px solid #dfe6f4; border-radius: 20px; padding: 1.1rem; background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%); box-shadow: 0 18px 40px rgba(9, 30, 66, 0.08); }
+      .training-catalog-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.9rem; }
+      .training-chip { display: inline-flex; align-items: center; border-radius: 999px; padding: 0.42rem 0.78rem; font-size: 0.84rem; font-weight: 700; color: #103a6f; background: #eaf2ff; border: 1px solid #d4e3ff; }
+      .training-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid #d9e2f2; background: #ffffff; }
+      .training-table { width: 100%; min-width: 960px; border-collapse: collapse; }
+      .training-table thead th { color: #fff; border-color: #21589c !important; background: linear-gradient(135deg, #133f7b 0%, #1f67b5 100%); }
+      .training-table tbody tr:nth-child(even) { background: #f8fbff; }
+      .training-table tbody tr:hover { background: #eef5ff; }
+      .training-table td:first-child strong { color: #0f3768; }
+      .training-filter-bar { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; margin-bottom: 0.95rem; }
+      .training-filter-label { font-size: 0.88rem; font-weight: 700; color: #133f7b; }
+      .training-filter-select { min-width: 260px; border: 1px solid #c5d7f0; border-radius: 10px; padding: 0.55rem 0.7rem; font: inherit; color: #123154; background: #fff; }
+      .training-filter-reset { border: 1px solid #cbd8ea; border-radius: 10px; padding: 0.53rem 0.75rem; font: inherit; font-weight: 600; color: #28466e; background: #f4f8ff; cursor: pointer; }
+      .training-filter-reset:hover { background: #eaf2ff; }
+      .training-filter-count { font-size: 0.84rem; color: #4d627e; }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#content">تخطي إلى المحتوى</a>
+    <header class="site-header" id="site-header">
+      <div class="header-main">
+        <div class="header-inner">
+          <button type="button" class="nav-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="nav-principal">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="header-slot header-slot-brand">
+            <a href="index.html" class="logo">
+              <img class="logo-img" src="../images/logo-ahf.png" alt="AHF CONSULTING" width="200" height="240" decoding="async" />
+            </a>
+          </div>
+          <div class="header-right-panel">
+            <div class="header-slot header-slot-nav">
+              <nav class="nav" id="nav-principal" aria-label="التنقل الرئيسي">
+                <ul class="nav-list">
+                  <li><a href="index.html">الرئيسية</a></li>
+                  <li><a href="index.html#services">الخدمات</a></li>
+                  <li><a href="index.html#nos-clients">العملاء</a></li>
+                  <li><a href="a-propos.html">من نحن</a></li>
+                  <li><a href="expertise.html">QHSE</a></li>
+                  <li><a href="modules-formations.html" aria-current="page">التكوين</a></li>
+                  <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header-end-tools header-slot-lang">
+              <div class="lang-switch" role="navigation" aria-label="اللغة">
+                <a href="../formation.html" hreflang="fr" lang="fr">FR</a>
+                <span class="lang-switch-sep" aria-hidden="true">|</span>
+                <a href="../en/modules-formations.html" hreflang="en" lang="en">EN</a>
+                <span class="lang-switch-sep" aria-hidden="true">|</span>
+                <a href="modules-formations.html" class="is-current" hreflang="ar" lang="ar">AR</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="content">
+      <div class="page-hero" id="training-catalog">
+        <div class="page-hero-inner">
+          <h1>التكوين</h1>
+          <p>وحدات التكوين QHSE موجهة لفرق الجودة وHSE والإنتاج والصيانة والتدقيق والمخبر والإدارة.</p>
+        </div>
+      </div>
+
+      <section class="bg-white">
+        <div class="section-inner">
+          <div class="training-catalog-shell">
+            <div class="training-catalog-meta" aria-label="معلومات الدليل">
+              <span class="training-chip">دليل 2026</span>
+              <span class="training-chip">QHSE متعدد القطاعات</span>
+              <span class="training-chip">مدد قابلة للتكييف</span>
+            </div>
+            <div class="training-filter-bar" aria-label="فلتر الوحدات">
+              <label class="training-filter-label" for="training-module-filter">اختر وحدة:</label>
+              <select id="training-module-filter" class="training-filter-select">
+                <option value="all">كل الوحدات</option>
+              </select>
+              <button type="button" id="training-module-reset" class="training-filter-reset">إعادة الضبط</button>
+              <span id="training-filter-count" class="training-filter-count" aria-live="polite"></span>
+            </div>
+            <div class="training-table-wrap">
+              <table class="training-table">
+                <thead>
+                  <tr>
+                    <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: right;">وحدة التكوين</th>
+                    <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: right;">التفاصيل الأساسية</th>
+                    <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: right;">المدة (أيام)</th>
+                    <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: right;">الفئة المستهدفة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة الجودة</strong><br />ISO 9001:2015 (مراجعة 2026)</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">هيكل HLS، مقاربة المخاطر والفرص، قيادة نظام إدارة الجودة، الأطراف المعنية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو الجودة/QHSE، المدققون الداخليون، قادة العمليات.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>الإدارة البيئية</strong><br />ISO 14001:2015 (مراجعة 2026)</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">القضايا المناخية، دورة الحياة، الامتثال التنظيمي والأداء البيئي.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو البيئة/QHSE، المدققون، فرق HSE.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة الصحة والسلامة المهنية</strong><br />ISO 45001:2018</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">خفض المخاطر المهنية، إشراك العمال، التحسين المستمر لنظام SST.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">أعضاء CPHS، الموارد البشرية، المدققون الداخليون، المدراء التشغيليون.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة سلامة الأغذية</strong><br />ISO 22000:2018 &amp; HACCP</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">تطبيق PRPO وHACCP، تحليل المخاطر البيولوجية والكيميائية والفيزيائية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو جودة الأغذية، المخابر، فرق الإنتاج الغذائي.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة الطاقة</strong><br />ISO 50001:2018</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مراجعة الطاقة، مؤشرات الأداء، خطط تحسين وتقليل تكاليف الطاقة.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو الطاقة والبيئة وQSE والصيانة.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة أمن المعلومات</strong><br />ISO 27001:2022</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">إنشاء نظام SMSI، إدارة المخاطر السيبرانية، الامتثال القانوني، معالجة الحوادث.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو IT، المدققون الداخليون، مدراء مشاريع نظم المعلومات.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة جودة السيارات</strong><br />IATF 16949:2016</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">أدوات الجودة في السيارات (APQP/AMDEC/SPC/MSA)، متطلبات الزبون والتحكم في العمليات.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو الجودة، مهندسو الإنتاج والجودة في قطاع السيارات.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة الأجهزة الطبية</strong><br />ISO 13485:2016</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">التتبع، اعتماد العمليات، إدارة المخاطر طيلة دورة الحياة، المتطلبات التنظيمية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">فرق الجودة والشؤون التنظيمية، المدققون الداخليون في الطبي/الصيدلاني.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>معايير الاعتماد</strong><br />ISO 17025 &amp; ISO 17020</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">كفاءة المخابر وهيئات التفتيش، التحقق من الطرق، التتبع واللايقين.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">المسؤولون التقنيون بالمخابر، التقنيون، المدققون.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>تكامل أنظمة QHSE</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">دمج ISO 9001/14001/45001، توحيد الوثائق، قيادة نظام شامل فعال.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو QSE، المدققون المدمجون، الإدارة.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>مدقق داخلي QHSE</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">تخطيط وتنفيذ التدقيق، تقنيات المقابلة، معالجة عدم المطابقة، متابعة الإجراءات.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 إلى 5 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">المدققون الداخليون المستقبليون، المدراء، مسؤولو QSE.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>قيادة الأداء حسب العمليات</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">خرائط العمليات، مؤشرات الأداء KPI، مراجعات العمليات، تحسين التدفقات.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو الجودة/QSE، قادة المشاريع، المدراء التشغيليون.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>AMDEC المنتج والعملية</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">تحليل أنماط الفشل، تقييم الحرجية، خطط التحكم وتقليل المخاطر.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مهندسو الجودة، الإنتاج، الطرق، المدققون الداخليون.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>منهجيات حل المشكلات (MRP)</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">8D، PDCA، QQOQCCP، 5 لماذا، إيشيكاوا، خطط الإجراءات التصحيحية والوقائية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يومان</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">فرق الجودة، الإنتاج، الصيانة واللوجستيك.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>5S وأداء الورشة</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">منهجية 5S الكاملة، الإدارة البصرية، الانضباط التشغيلي والتحسين المستمر.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 إلى 2 يوم</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">المشغلون، مسؤولو الورشات، الصيانة واللوجستيك.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>الوقاية من حوادث العمل والأمراض المهنية</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">تحليل الأسباب، إحصائيات AT/MP، شجرة الأسباب، خطة الوقاية، استخلاص الدروس.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يومان</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">المدراء، CPHS، مسؤولو HSE، الموارد البشرية، الوقاية.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>CPHS: الأدوار والمهام</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">الإطار القانوني، الاستشارات الإلزامية، التفتيشات، التحقيقات، حق الإنذار والتكوين.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 إلى 2 يوم</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">أعضاء CPHS، مسؤولو HSE، الإدارة.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>السلامة من الحرائق ومكافحتها</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">أصناف الحرائق، الإخلاء، التعليمات، استعمال المطفآت والتمارين التطبيقية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 إلى 2 يوم</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">كل المستخدمين وفرق التدخل الأولي.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>أساسيات SST</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">الوقاية، الحماية، إسعافات أولية أساسية، نظام الإنذار والتنظيم الداخلي.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يومان</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">العمال، التأطير، مرجعو SST.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>الإسعافات الأولية (نظري وتطبيقي)</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">إيقاف النزيف، وضعية الأمان، الإنعاش القلبي، جهاز الصدمات، التعامل مع الطوارئ.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 إلى 2 يوم</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">المؤطرون وفرق الطوارئ.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>EPI / EPC</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">اختيار واستعمال وصيانة ومطابقة معدات الحماية الفردية والجماعية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يوم واحد</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو HSE، الصيانة، المدراء والمشغلون.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>العزل ووضع القفل (Lockout/Tagout)</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">عزل وتحييد مصادر الطاقة، القفل والوسم، التحقق والرفع الآمن للقفل.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 إلى 2 يوم</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">التقنيون، الصيانة، الكهربائيون، فرق التدخل.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>إدارة النفايات</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">تصنيف النفايات، قنوات المعالجة، التتبع، المتطلبات التنظيمية، التقليل من المصدر.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يومان</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو البيئة/QSE، اللوجستيك، الصيانة.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>طرق تقييم المخاطر المهنية</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">تحديد الأخطار، تقييم الشدة/التعرض/الاحتمال، ترتيب الأولويات، خطة الوقاية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو HSE، الوقاية، المدراء، أعضاء CPHS.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>دراسة الأخطار</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">سياق ICPE، سيناريوهات الحوادث، تحديد المناطق، النمذجة، تقرير السلامة وإجراءات التحكم.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مسؤولو السلامة/البيئة، مهندسو المخاطر، مستغلو ICPE.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>المخاطر الفيزيائية-الكيميائية</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">ATEX، التفاعلات الحرارية، عدم التوافق الكيميائي، الضغط والديناميكا الحرارية التطبيقية.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يومان</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">مهندسو السلامة، الكيميائيون، مسؤولو HSE.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>القيادة الدفاعية</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">القيادة الاقتصادية، توقع المخاطر المرورية، الفرملة الوقائية، التكيف مع ظروف السير.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 إلى 2 يوم</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">سائقو المركبات الثقيلة والخفيفة، فرق النقل واللوجستيك.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>مخاطر الصناعات الغذائية</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">المخاطر البيولوجية والكيميائية والفيزيائية، PMS، التتبع، عدم المطابقة، رقابة HACCP.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">يومان</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">الجودة، الإنتاج، المخابر، مدققو قطاع الأغذية.</td></tr>
+                  <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>مخاطر الفندقة والمطاعم</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">نظافة غذائية، TMS، مخاطر المطبخ والخدمة والتنظيف، الوقاية من الحوادث والتطهير.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 إلى 3 أيام</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">موظفو المطبخ والخدمة، مسؤولو المؤسسات الفندقية والمطاعم.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <h3>AHF CONSULTING</h3>
+          <p>الاستشارة والمرافقة والتكوين - QHSE &amp; ISO.</p>
+        </div>
+      </div>
+      <p class="footer-bottom">© AHF CONSULTING - جميع الحقوق محفوظة.</p>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script>
+      (function () {
+        const filterSelect = document.getElementById("training-module-filter");
+        const resetButton = document.getElementById("training-module-reset");
+        const countLabel = document.getElementById("training-filter-count");
+        const tableRows = Array.from(document.querySelectorAll(".training-table tbody tr"));
+        if (!filterSelect || !resetButton || !countLabel || tableRows.length === 0) return;
+        const modules = tableRows.map((row) => {
+          const firstCell = row.querySelector("td");
+          return firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
+        }).filter(Boolean);
+        Array.from(new Set(modules)).forEach((moduleName) => {
+          const option = document.createElement("option");
+          option.value = moduleName;
+          option.textContent = moduleName;
+          filterSelect.appendChild(option);
+        });
+        const updateCount = () => {
+          const visibleCount = tableRows.filter((row) => row.style.display !== "none").length;
+          countLabel.textContent = visibleCount + " وحدة ظاهرة";
+        };
+        const applyFilter = () => {
+          const selected = filterSelect.value;
+          tableRows.forEach((row) => {
+            const firstCell = row.querySelector("td");
+            const moduleName = firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
+            row.style.display = selected === "all" || moduleName === selected ? "" : "none";
+          });
+          updateCount();
+        };
+        filterSelect.addEventListener("change", applyFilter);
+        resetButton.addEventListener("click", () => { filterSelect.value = "all"; applyFilter(); });
+        updateCount();
+      })();
+    </script>
+  </body>
+</html>

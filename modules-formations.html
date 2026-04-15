@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Catalogue des modules de formation QHSE AHF CONSULTING : qualité, environnement, sécurité, HACCP et management des risques."
+    />
+    <title>Catalogue des formations QHSE | AHF CONSULTING</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .training-catalog-shell {
+        border: 1px solid #dfe6f4;
+        border-radius: 20px;
+        padding: 1.1rem;
+        background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+        box-shadow: 0 18px 40px rgba(9, 30, 66, 0.08);
+      }
+
+      .training-catalog-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .training-chip {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0.42rem 0.78rem;
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: #103a6f;
+        background: #eaf2ff;
+        border: 1px solid #d4e3ff;
+      }
+
+      .training-table-wrap {
+        overflow-x: auto;
+        border-radius: 14px;
+        border: 1px solid #d9e2f2;
+        background: #ffffff;
+      }
+
+      .training-table {
+        width: 100%;
+        min-width: 960px;
+        border-collapse: collapse;
+      }
+
+      .training-table thead th {
+        color: #fff;
+        border-color: #21589c !important;
+        background: linear-gradient(135deg, #133f7b 0%, #1f67b5 100%);
+      }
+
+      .training-table tbody tr:nth-child(even) {
+        background: #f8fbff;
+      }
+
+      .training-table tbody tr:hover {
+        background: #eef5ff;
+      }
+
+      .training-table td:first-child strong {
+        color: #0f3768;
+      }
+
+      .training-filter-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        align-items: center;
+        margin-bottom: 0.95rem;
+      }
+
+      .training-filter-label {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #133f7b;
+      }
+
+      .training-filter-select {
+        min-width: 260px;
+        border: 1px solid #c5d7f0;
+        border-radius: 10px;
+        padding: 0.55rem 0.7rem;
+        font: inherit;
+        color: #123154;
+        background: #fff;
+      }
+
+      .training-filter-reset {
+        border: 1px solid #cbd8ea;
+        border-radius: 10px;
+        padding: 0.53rem 0.75rem;
+        font: inherit;
+        font-weight: 600;
+        color: #28466e;
+        background: #f4f8ff;
+        cursor: pointer;
+      }
+
+      .training-filter-reset:hover {
+        background: #eaf2ff;
+      }
+
+      .training-filter-count {
+        font-size: 0.84rem;
+        color: #4d627e;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#contenu">Aller au contenu</a>
+    <header class="site-header" id="site-header">
+      <div class="header-topbar">
+        <div class="header-topbar-inner header-topbar-inner--split">
+          <p class="header-topbar-contact-line">
+            <span class="header-topbar-label">Contactez-nous :</span>
+            <a class="header-topbar-link-inline" href="tel:+213661467003">+213 (0) 661 46 70 03</a>
+            <span class="header-topbar-sep" aria-hidden="true">|</span>
+            <a class="header-topbar-link-inline" href="mailto:AHF@ahf-consulting.com">AHF@ahf-consulting.com</a>
+          </p>
+          <ul class="header-social" aria-label="Réseaux sociaux">
+            <li>
+              <a class="header-social-link" href="https://www.linkedin.com/in/ahf-consulting-algeria-384a73b3?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.5 8.7h3.2V19H6.5V8.7zm1.6-5c1 0 1.8.8 1.8 1.8 0 1-.8 1.8-1.8 1.8S6.3 6.5 6.3 5.5 7.1 3.7 8.1 3.7zm3.8 5H16c2.5 0 4 1.6 4 4.6V19h-3.2v-5.2c0-1.6-.6-2.6-1.9-2.6-1 0-1.6.7-1.9 1.3-.1.3-.1.7-.1 1.1V19h-3.2V8.7z"/></svg></a>
+            </li>
+            <li>
+              <a class="header-social-link" href="https://wa.me/213661467003" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp"><svg class="header-social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="header-main">
+        <div class="header-inner">
+          <button type="button" class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principal">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="header-slot header-slot-brand">
+            <a href="index.html" class="logo">
+              <img class="logo-img" src="images/logo-ahf.png" alt="AHF CONSULTING" width="200" height="240" decoding="async" />
+            </a>
+          </div>
+          <div class="header-right-panel">
+            <div class="header-slot header-slot-nav">
+              <nav class="nav" id="nav-principal" aria-label="Navigation principale">
+                <ul class="nav-list">
+                  <li><a href="index.html">Accueil</a></li>
+                  <li><a href="index.html#services">Nos services</a></li>
+                  <li><a href="index.html#nos-clients">Nos clients</a></li>
+                  <li><a href="a-propos.html#qui-sommes-nous">Qui sommes-nous ?</a></li>
+                  <li><a href="expertise.html">Présentation QHSE</a></li>
+                  <li><a href="formation.html">Formation</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenu">
+      <div class="page-hero" id="catalogue-formations">
+        <div class="page-hero-inner">
+          <h1>Catalogue de formations QHSE</h1>
+          <p>Modules de formation destinés aux équipes qualité, HSE, production, maintenance, audit, laboratoire et management.</p>
+        </div>
+      </div>
+
+      <section class="bg-white">
+        <div class="section-inner">
+          <div class="training-catalog-shell">
+            <div class="training-catalog-meta" aria-label="Informations catalogue">
+              <span class="training-chip">Catalogue 2026</span>
+              <span class="training-chip">QHSE multi-secteurs</span>
+              <span class="training-chip">Durées adaptables</span>
+            </div>
+            <div class="training-filter-bar" aria-label="Filtre des modules">
+              <label class="training-filter-label" for="training-module-filter">Choisir un module :</label>
+              <select id="training-module-filter" class="training-filter-select">
+                <option value="all">Tous les modules</option>
+              </select>
+              <button type="button" id="training-module-reset" class="training-filter-reset">Réinitialiser</button>
+              <span id="training-filter-count" class="training-filter-count" aria-live="polite"></span>
+            </div>
+            <div class="training-table-wrap">
+            <table class="training-table">
+              <thead>
+                <tr>
+                  <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: left;">Module de formation</th>
+                  <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: left;">Détails &amp; contenu clé</th>
+                  <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: left;">Durée (jours estimée)</th>
+                  <th style="border: 1px solid #d9dee8; padding: 0.75rem; text-align: left;">Public ciblé</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management de la Qualité</strong><br />ISO 9001:2015 (et révision 2026)</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Structure HLS, approche risques et opportunités, pilotage du SMQ, parties intéressées, anticipation des évolutions 2026.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables qualité/QHSE, auditeurs internes, pilotes de processus.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management Environnemental</strong><br />ISO 14001:2015 (et révision 2026)</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Enjeux climatiques (amendement A1:2024), cycle de vie, conformité réglementaire, performance environnementale.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables environnement/QHSE, auditeurs, services HSE.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management de la Santé &amp; Sécurité au Travail</strong><br />ISO 45001:2018</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Réduction des risques professionnels, consultation/participation des travailleurs, amélioration continue du SST.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">CPHS, RRH, auditeurs internes, managers opérationnels.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management de la Sécurité des Denrées Alimentaires</strong><br />ISO 22000:2018 &amp; HACCP</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">PRPO, HACCP, analyse des dangers biologiques/chimiques/physiques, maîtrise opérationnelle.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables qualité alimentaire, laboratoire, production agroalimentaire.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management de l’Énergie</strong><br />ISO 50001:2018</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Revue énergétique, indicateurs de performance, plan d’actions d’optimisation et réduction des coûts énergétiques.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables énergie, environnement, QSE, maintenance.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management de la Sécurité de l’Information</strong><br />ISO 27001:2022</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Mise en place du SMSI, gestion des risques cyber, conformité réglementaire, réponse aux incidents.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables IT, auditeurs internes, chefs de projet SI.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management pour l’Automobile</strong><br />IATF 16949:2016</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Core tools auto (APQP/AMDEC/SPC/MSA), exigences client, management qualité secteur automobile.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables qualité, ingénieurs production et qualité automobile.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management pour les Dispositifs Médicaux</strong><br />ISO 13485:2016</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Traçabilité, validation des processus, gestion des risques sur le cycle de vie, exigences réglementaires.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Qualité, affaires réglementaires, auditeurs internes médical/pharma.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Management des organismes en vue d’accréditation</strong><br />ISO 17025 &amp; ISO 17020</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Compétence des laboratoires et organismes d’inspection, validation des méthodes, traçabilité et incertitudes.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables techniques laboratoire, techniciens, auditeurs.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Intégration des systèmes QHSE</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Intégration ISO 9001/14001/45001, harmonisation documentaire et pilotage d’un système global performant.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables QSE, auditeurs intégrés, directions.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Auditeur Interne QHSE</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Préparation, planification et conduite d’audit, techniques d’entretien, traitement des non-conformités, suivi d’actions.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 à 5 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Futurs auditeurs internes, managers, responsables QSE.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Pilotage des processus</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Cartographie des processus, KPI, tableau de bord, revue de processus, optimisation des flux et interfaces.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables qualité/QSE, chefs de projet, managers opérationnels.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>AMDEC Produit et Processus</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Analyse des modes de défaillance, criticité (gravité/occurrence/détection), plans de maîtrise.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Ingénieurs qualité, production, méthodes, auditeurs internes.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Méthodes de Résolution de Problèmes (MRP)</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">8D, PDCA, QQOQCCP, 5 pourquoi, Ishikawa, plan d’actions correctives et préventives.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Équipes qualité, production, maintenance, logistique.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>5S et performance terrain</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Méthodologie 5S complète, visual management, discipline opérationnelle et amélioration continue poste de travail.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 à 2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Opérateurs, responsables d’atelier, maintenance, logistique.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Prévention des accidents du travail et des maladies professionnelles</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Analyse des causes, statistiques AT/MP, arbre des causes, plan de prévention, retour d’expérience.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Managers, CPHS, responsables HSE, RRH, préventeurs.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>CPHS : rôle et missions</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Cadre légal, consultations obligatoires, inspections, enquêtes, droit d’alerte, formation des membres.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 à 2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Membres CPHS, responsables HSE, direction.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Sécurité incendie et lutte contre le feu</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Classes de feu, évacuation, consignes, manipulation extincteurs et exercice pratique.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 à 2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Tous collaborateurs, équipes premiers intervenants.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>SST – Fondements de la sécurité au travail</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Prévention, protection, gestes de secours, alerte et organisation SST.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Salariés, encadrement, référents SST.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Premiers secours (théorie et pratique)</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Arrêt hémorragie, PLS, massage cardiaque, défibrillateur, conduite d’urgence.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 à 2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Personnels d’encadrement, équipes d’urgence.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>EPI / EPC</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Choix, utilisation, entretien, conformité des équipements de protection individuelle et collective.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 jour</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables HSE, maintenance, managers, opérateurs.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Consignation et déconsignation</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Isolation/neutralisation des énergies, cadenassage, vérification et levée de consignation.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 à 2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Techniciens, maintenance, électriciens, personnel d’intervention.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Gestion des déchets</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Classification, filières de traitement, traçabilité, exigences réglementaires et réduction à la source.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables environnement/QSE, logistique, maintenance.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Méthodes d’évaluation des risques professionnels</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Identification des dangers, cotation gravité/exposition/probabilité, hiérarchisation et plan de prévention.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables HSE, préventeurs, managers, membres CPHS.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Étude de dangers</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">ICPE, scénarios d’accidents, cartographie des zones, modélisation, rapport de sécurité et mesures de maîtrise.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Responsables sécurité/environnement, ingénieurs risques, exploitants ICPE.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Phénomènes physico-chimiques dangereux</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">ATEX, réactions exothermiques, incompatibilités chimiques, pression, thermodynamique appliquée.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Ingénieurs sécurité, chimistes, responsables HSE.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Conduite défensive</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Éco-conduite, anticipation des risques routiers, freinage préventif, adaptation aux conditions de circulation.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">1 à 2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Conducteurs poids lourds/légers, équipes transport et logistique.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Risques agroalimentaires</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Dangers biologiques, chimiques et physiques, PMS, traçabilité, gestion des non-conformités, autocontrôles HACCP.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Qualité, production, laboratoire, auditeurs du secteur agroalimentaire.</td></tr>
+                <tr><td style="border: 1px solid #d9dee8; padding: 0.75rem;"><strong>Risques liés à l’hôtellerie et la restauration</strong></td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Hygiène alimentaire, TMS, risques cuisine/salle/nettoyage, prévention des AT et désinfection.</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">2 à 3 jours</td><td style="border: 1px solid #d9dee8; padding: 0.75rem;">Personnel de cuisine et de salle, responsables d’établissement hôtelier/restauration.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          <p style="margin-top: 1rem; color: var(--color-text-muted);">
+            Ces durées sont indicatives et peuvent être adaptées selon vos objectifs, votre secteur et le niveau des participants.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <h3>AHF CONSULTING</h3>
+          <p>Cabinet de conseil, accompagnement et formation — QHSE &amp; ISO.</p>
+        </div>
+        <div>
+          <h3>Adresse</h3>
+          <p>Cité 620 logts LPP, Bloc 19, Local n° 94</p>
+          <p>El Khroub — Constantine — Algérie</p>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p><a href="tel:+213661467003">+213 (0) 661 46 70 03</a></p>
+          <p><a href="mailto:AHF@ahf-consulting.com">AHF@ahf-consulting.com</a></p>
+        </div>
+      </div>
+      <p class="footer-bottom">© AHF CONSULTING — Tous droits réservés.</p>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+      (function () {
+        const filterSelect = document.getElementById("training-module-filter");
+        const resetButton = document.getElementById("training-module-reset");
+        const countLabel = document.getElementById("training-filter-count");
+        const tableRows = Array.from(document.querySelectorAll(".training-table tbody tr"));
+
+        if (!filterSelect || !resetButton || !countLabel || tableRows.length === 0) {
+          return;
+        }
+
+        const modules = tableRows
+          .map((row) => {
+            const firstCell = row.querySelector("td");
+            return firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
+          })
+          .filter(Boolean);
+
+        const uniqueModules = Array.from(new Set(modules));
+        uniqueModules.forEach((moduleName) => {
+          const option = document.createElement("option");
+          option.value = moduleName;
+          option.textContent = moduleName;
+          filterSelect.appendChild(option);
+        });
+
+        const updateCount = () => {
+          const visibleCount = tableRows.filter((row) => row.style.display !== "none").length;
+          countLabel.textContent = visibleCount + " module(s) affiché(s)";
+        };
+
+        const applyFilter = () => {
+          const selected = filterSelect.value;
+          tableRows.forEach((row) => {
+            const firstCell = row.querySelector("td");
+            const moduleName = firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
+            row.style.display = selected === "all" || moduleName === selected ? "" : "none";
+          });
+          updateCount();
+        };
+
+        filterSelect.addEventListener("change", applyFilter);
+        resetButton.addEventListener("click", () => {
+          filterSelect.value = "all";
+          applyFilter();
+        });
+
+        updateCount();
+      })();
+    </script>
+  </body>
+</html>
