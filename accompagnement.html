@@ -380,6 +380,48 @@
         padding-right: 1.1rem;
       }
 
+      @media (max-width: 900px) {
+        .support-domains-grid {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .support-domain-card,
+        .support-domain-card:first-child {
+          width: 100%;
+          max-width: 420px;
+          height: 320px;
+          margin-left: 0;
+          transform: none !important;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
+
+        .support-domain-card:hover,
+        .support-domain-card:focus-within {
+          transform: translateY(-4px) !important;
+        }
+
+        .support-domain-card.is-flipped {
+          transform: translateY(-4px) !important;
+          z-index: 10;
+        }
+
+        .support-domain-inner {
+          -webkit-transform-style: preserve-3d;
+        }
+
+        .support-domain-card:hover .support-domain-inner,
+        .support-domain-card:focus-within .support-domain-inner {
+          transform: rotateY(0deg) !important;
+        }
+
+        .support-domain-card.is-flipped .support-domain-inner {
+          transform: rotateY(180deg) !important;
+        }
+      }
+
       @media (max-width: 700px) {
         .support-hero-cta {
           flex-direction: column;
@@ -419,27 +461,6 @@
         .support-roadmap > .support-process-grid:nth-child(odd),
         .support-roadmap > .support-process-grid:nth-child(even) {
           transform: translateX(16px);
-        }
-
-        .support-domains-grid {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 1rem;
-        }
-
-        .support-domain-card,
-        .support-domain-card:first-child {
-          width: 100%;
-          max-width: 420px;
-          height: 320px;
-          margin-left: 0;
-          transform: none;
-        }
-
-        .support-domain-card:hover,
-        .support-domain-card:focus-within,
-        .support-domain-card.is-flipped {
-          transform: translateY(-4px);
         }
 
         .support-highlight--accent {
@@ -814,12 +835,29 @@
     </script>
     <script>
       (function () {
+        var mq = window.matchMedia("(max-width: 900px)");
         var cards = Array.prototype.slice.call(document.querySelectorAll(".support-domain-card"));
         if (!cards.length) return;
         cards.forEach(function (card) {
-          card.addEventListener("click", function () {
-            if (window.matchMedia("(max-width: 900px)").matches) {
-              card.classList.toggle("is-flipped");
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("role", "button");
+          function onActivate() {
+            if (!mq.matches) return;
+            card.classList.toggle("is-flipped");
+            window.requestAnimationFrame(function () {
+              if (!card.classList.contains("is-flipped")) {
+                var ae = document.activeElement;
+                if (ae && card.contains(ae)) {
+                  ae.blur();
+                }
+              }
+            });
+          }
+          card.addEventListener("click", onActivate);
+          card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onActivate();
             }
           });
         });

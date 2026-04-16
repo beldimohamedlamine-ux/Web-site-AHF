@@ -6,6 +6,199 @@
     <meta name="description" content="خدمة المرافقة من AHF CONSULTING." />
     <title>المرافقة | AHF CONSULTING</title>
     <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap");
+
+      .journey-cards-section {
+        background: #0a0a0a;
+        border-radius: 20px;
+        padding: 2.1rem 1rem 1.2rem;
+        color: #fff;
+      }
+
+      .journey-cards-title {
+        margin: 0 0 0.75rem;
+        text-align: center;
+        color: #fff;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+      }
+
+      .journey-cards-lead {
+        margin: 0 0 1rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.74);
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .journey-cards-grid {
+        perspective: 1200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: 1rem 0 0.75rem;
+      }
+
+      .journey-card {
+        width: 220px;
+        height: 320px;
+        position: relative;
+        border-radius: 16px;
+        transform-style: preserve-3d;
+        transform: var(--fan-transform);
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        margin-left: -18px;
+        z-index: var(--card-z, 1);
+      }
+
+      .journey-card:first-child {
+        margin-left: 0;
+      }
+
+      .journey-card:nth-child(1) { --fan-transform: rotateY(12deg) rotateZ(-3deg); --card-z: 4; }
+      .journey-card:nth-child(2) { --fan-transform: rotateY(6deg) rotateZ(-1deg); --card-z: 3; }
+      .journey-card:nth-child(3) { --fan-transform: rotateY(-4deg) rotateZ(1deg); --card-z: 2; }
+      .journey-card:nth-child(4) { --fan-transform: rotateY(-10deg) rotateZ(3deg); --card-z: 1; }
+
+      .journey-card:hover,
+      .journey-card:focus-within,
+      .journey-card.is-flipped {
+        transform: translateY(-8px) var(--fan-transform);
+        z-index: 10;
+      }
+
+      .journey-card-inner {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      }
+
+      .journey-card:hover .journey-card-inner,
+      .journey-card:focus-within .journey-card-inner,
+      .journey-card.is-flipped .journey-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .journey-face {
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        overflow: hidden;
+        padding: 1.1rem 1rem;
+        display: flex;
+        flex-direction: column;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      .journey-front {
+        color: #f8f8f8;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .journey-back {
+        transform: rotateY(180deg);
+        color: #f8f8f8;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .journey-card:nth-child(1) .journey-face { background: #f0f0f0; color: #121212; }
+      .journey-card:nth-child(2) .journey-face { background: #e63329; }
+      .journey-card:nth-child(3) .journey-face { background: #1a1a1a; }
+      .journey-card:nth-child(4) .journey-face { background: #0f1623; }
+
+      .journey-card:nth-child(3) .journey-title,
+      .journey-card:nth-child(3) .journey-back p,
+      .journey-card:nth-child(3) .journey-arrow,
+      .journey-card:nth-child(4) .journey-title,
+      .journey-card:nth-child(4) .journey-back p,
+      .journey-card:nth-child(4) .journey-arrow { color: #fff; }
+
+      .journey-label {
+        position: absolute;
+        top: 0.85rem;
+        right: 0.95rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        opacity: 0.75;
+      }
+
+      .journey-title {
+        margin: 0;
+        font-family: "Playfair Display", serif;
+        font-style: italic;
+        font-weight: 700;
+        font-size: 1.8rem;
+        line-height: 1.05;
+      }
+
+      .journey-back p {
+        margin: 0;
+        font-size: 0.98rem;
+        line-height: 1.45;
+      }
+
+      .journey-arrow {
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      @media (max-width: 900px) {
+        .journey-cards-grid {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+        .journey-card,
+        .journey-card:first-child {
+          width: 100%;
+          max-width: 420px;
+          height: 320px;
+          margin-left: 0;
+          transform: none !important;
+          -webkit-tap-highlight-color: transparent;
+          touch-action: manipulation;
+        }
+        .journey-card:hover,
+        .journey-card:focus-within {
+          transform: translateY(-4px) !important;
+        }
+        .journey-card.is-flipped {
+          transform: translateY(-4px) !important;
+          z-index: 10;
+        }
+        .journey-card-inner {
+          -webkit-transform-style: preserve-3d;
+        }
+        .journey-card:hover .journey-card-inner,
+        .journey-card:focus-within .journey-card-inner {
+          transform: rotateY(0deg) !important;
+        }
+        .journey-card.is-flipped .journey-card-inner {
+          transform: rotateY(180deg) !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <a class="skip" href="#content">تجاوز إلى المحتوى</a>
@@ -71,6 +264,64 @@
           <p>نرافق فرقكم في هيكلة مشاريع التحسين QHSE وتنفيذها وضمان استمراريتها بفعالية.</p>
         </div>
       </div>
+      <section class="bg-white">
+        <div class="section-inner">
+          <div class="journey-cards-section">
+            <h2 class="journey-cards-title">مجالات التدخل</h2>
+            <p class="journey-cards-lead">نقدم قيمة مضافة قوية لكل مشاريعكم بأدوات تساعد على التحفيز والتيسير ومرافقة التغيير والنمو.</p>
+            <div class="journey-cards-grid">
+              <article class="journey-card">
+                <div class="journey-card-inner">
+                  <div class="journey-face journey-front">
+                    <span class="journey-label">01</span>
+                    <h3 class="journey-title">الجودة</h3>
+                  </div>
+                  <div class="journey-face journey-back">
+                    <p>هيكلة الممارسات، قيادة الأداء، وتحويل إدارة الجودة إلى رافعة فعلية.</p>
+                    <span class="journey-arrow">→</span>
+                  </div>
+                </div>
+              </article>
+              <article class="journey-card">
+                <div class="journey-card-inner">
+                  <div class="journey-face journey-front">
+                    <span class="journey-label">02</span>
+                    <h3 class="journey-title">الصحة والسلامة المهنية</h3>
+                  </div>
+                  <div class="journey-face journey-back">
+                    <p>وضع إجراءات عملية للوقاية، المطابقة، والتحسين المستمر في SST.</p>
+                    <span class="journey-arrow">→</span>
+                  </div>
+                </div>
+              </article>
+              <article class="journey-card">
+                <div class="journey-card-inner">
+                  <div class="journey-face journey-front">
+                    <span class="journey-label">03</span>
+                    <h3 class="journey-title">النظافة، السلامة، البيئة</h3>
+                  </div>
+                  <div class="journey-face journey-back">
+                    <p>تنظيم متطلبات HSE للوقاية الأفضل من المخاطر والتحكم في الأثر التشغيلي.</p>
+                    <span class="journey-arrow">→</span>
+                  </div>
+                </div>
+              </article>
+              <article class="journey-card">
+                <div class="journey-card-inner">
+                  <div class="journey-face journey-front">
+                    <span class="journey-label">04</span>
+                    <h3 class="journey-title">سلامة الأغذية</h3>
+                  </div>
+                  <div class="journey-face journey-back">
+                    <p>تأمين سلسلة الغذاء وتنظيم أفضل ممارسات النظافة وضبط HACCP.</p>
+                    <span class="journey-arrow">→</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <section class="site-map" aria-labelledby="site-map-title">
       <div class="site-map-inner">
@@ -154,5 +405,35 @@
       </div>
     </footer>
     <script src="../js/main.js"></script>
+    <script>
+      (function () {
+        var mq = window.matchMedia("(max-width: 900px)");
+        var cards = Array.prototype.slice.call(document.querySelectorAll(".journey-card"));
+        if (!cards.length) return;
+        cards.forEach(function (card) {
+          card.setAttribute("tabindex", "0");
+          card.setAttribute("role", "button");
+          function onActivate() {
+            if (!mq.matches) return;
+            card.classList.toggle("is-flipped");
+            window.requestAnimationFrame(function () {
+              if (!card.classList.contains("is-flipped")) {
+                var ae = document.activeElement;
+                if (ae && card.contains(ae)) {
+                  ae.blur();
+                }
+              }
+            });
+          }
+          card.addEventListener("click", onActivate);
+          card.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onActivate();
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
