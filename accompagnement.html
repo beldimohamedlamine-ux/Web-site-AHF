@@ -6,6 +6,96 @@
     <meta name="description" content="Service d'accompagnement QHSE AHF CONSULTING." />
     <title>Accompagnement | AHF CONSULTING</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .support-intro-grid,
+      .support-process-grid,
+      .support-domains-grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .support-intro-grid,
+      .support-domains-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .support-process-grid {
+        grid-template-columns: 88px 1fr;
+        align-items: start;
+      }
+
+      .support-highlight {
+        border-radius: 20px;
+        padding: 1.5rem;
+        color: #fff;
+      }
+
+      .support-highlight--accent {
+        background: linear-gradient(135deg, #cc0f72 0%, #8e124d 100%);
+      }
+
+      .support-highlight--dark {
+        background: linear-gradient(135deg, #4e5661 0%, #2f3740 100%);
+      }
+
+      .support-domain-card,
+      .support-process-card {
+        border: 1px solid rgba(15, 39, 68, 0.08);
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .support-domain-card {
+        padding: 1.25rem;
+        text-align: center;
+      }
+
+      .support-domain-card h3,
+      .support-process-card h3 {
+        margin-top: 0;
+      }
+
+      .support-step {
+        display: grid;
+        place-items: center;
+        width: 88px;
+        min-height: 88px;
+        border: 2px solid rgba(15, 39, 68, 0.14);
+        clip-path: polygon(50% 0%, 100% 18%, 100% 82%, 50% 100%, 0% 82%, 0% 18%);
+        color: var(--color-navy);
+        font-size: 2.3rem;
+        font-weight: 800;
+        background: #fff;
+      }
+
+      .support-process-card {
+        padding: 1.15rem 1.25rem;
+      }
+
+      .support-process-card ul,
+      .support-highlight ul {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      [dir="rtl"] .support-process-card ul,
+      [dir="rtl"] .support-highlight ul {
+        padding-left: 0;
+        padding-right: 1.1rem;
+      }
+
+      @media (max-width: 700px) {
+        .support-process-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .support-step {
+          width: 76px;
+          min-height: 76px;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -26,8 +116,145 @@
       </div>
     </header>
     <main id="contenu">
-      <div class="page-hero"><div class="page-hero-inner"><h1>Accompagnement</h1><p>Nous accompagnons votre organisation de l'état des lieux jusqu'à la préparation de l'audit de certification.</p></div></div>
-      <section class="bg-white"><div class="section-inner"><p><a class="btn btn-primary" href="services.html">Retour aux services</a></p></div></section>
+      <div class="page-hero">
+        <div class="page-hero-inner">
+          <h1>Accompagnement</h1>
+          <p>Un accompagnement structure pour conduire le changement, mobiliser les equipes et transformer vos objectifs QHSE en actions concretes.</p>
+        </div>
+      </div>
+
+      <section class="bg-white">
+        <div class="section-inner">
+          <div class="prose-block card" style="margin-bottom: 1.5rem;">
+            <p>
+              Avant de se lancer dans une politique de changement, l'entreprise doit mener une reflexion strategique sur la conduite de ce changement
+              en mettant en oeuvre un systeme de management capable d'accompagner ses collaborateurs.
+            </p>
+            <p style="margin-bottom: 0;">
+              Cet accompagnement doit etre bien dimensionne, adapte a la taille et au contexte de l'entreprise, afin d'impliquer le personnel et
+              d'assurer l'efficacite durable de la demarche.
+            </p>
+          </div>
+
+          <div class="support-intro-grid" style="margin-bottom: 2rem;">
+            <article class="support-highlight support-highlight--accent">
+              <h2 style="margin-top: 0; color: #fff;">L'accompagnement, pour quoi faire ?</h2>
+              <p style="margin-bottom: 0;">
+                Les demarches QHSE sont aujourd'hui un enjeu majeur pour l'entreprise. Parce qu'elles sont souvent des leviers de transformation,
+                l'accompagnement permet de structurer le projet, de limiter l'instabilite et de faciliter l'adhesion des equipes.
+              </p>
+            </article>
+            <article class="support-highlight support-highlight--dark">
+              <h2 style="margin-top: 0; color: #fff;">Notre objectif</h2>
+              <p>Nous vous accompagnons dans vos demarches Qualite, Securite, Hygiene et Environnement pour vous permettre :</p>
+              <ul>
+                <li>d'anticiper les enjeux et les evolutions lies a vos projets ;</li>
+                <li>de favoriser des solutions innovantes et realistes ;</li>
+                <li>de reduire la periode d'instabilite inherente a tout changement.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="prose-block" style="margin-bottom: 1rem;">
+            <h2 class="section-title" style="margin-bottom: 0.75rem;">Domaines d'intervention</h2>
+            <p>
+              Nous apportons une valeur ajoutee significative a l'ensemble de vos projets avec des outils permettant de susciter, de faciliter et
+              d'accompagner vos processus de changement, de croissance ou d'evolution.
+            </p>
+          </div>
+
+          <div class="support-domains-grid" style="margin-bottom: 2rem;">
+            <article class="support-domain-card">
+              <h3>Qualite</h3>
+              <p>Structurer les pratiques, piloter la performance et transformer le management de la qualite en veritable levier.</p>
+            </article>
+            <article class="support-domain-card">
+              <h3>Sante et securite au travail</h3>
+              <p>Mettre en place des dispositifs concrets de prevention, de conformite et d'amelioration continue SST.</p>
+            </article>
+            <article class="support-domain-card">
+              <h3>Hygiene, securite, environnement</h3>
+              <p>Organiser les exigences HSE pour mieux prevenir les risques et maitriser l'impact des activites.</p>
+            </article>
+            <article class="support-domain-card">
+              <h3>Securite des aliments</h3>
+              <p>Securiser la chaine alimentaire et structurer les bonnes pratiques d'hygiene et de maitrise HACCP.</p>
+            </article>
+          </div>
+
+          <div class="prose-block" style="margin-bottom: 1rem;">
+            <h2 class="section-title" style="margin-bottom: 0.75rem;">Un processus d'accompagnement en 5 phases</h2>
+          </div>
+
+          <div style="display: grid; gap: 1rem;">
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">1</div>
+              <article class="support-process-card">
+                <h3>Etat des lieux, diagnostics</h3>
+                <ul>
+                  <li>Deceler les points forts et les points faibles de l'entreprise.</li>
+                  <li>Evaluer l'environnement, les risques et les contraintes du marche.</li>
+                  <li>Analyser le potentiel et les ressources disponibles pour faire les bons choix.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">2</div>
+              <article class="support-process-card">
+                <h3>Formulation des objectifs</h3>
+                <ul>
+                  <li>Constituer un repere solide pour la fixation des priorites a moyen terme.</li>
+                  <li>Orienter les actions en coherence avec les axes strategiques et operationnels.</li>
+                  <li>Mettre les collaborateurs en mouvement en suscitant l'action.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">3</div>
+              <article class="support-process-card">
+                <h3>Mise en oeuvre du plan d'action</h3>
+                <ul>
+                  <li>Choisir les actions prioritaires et mobiliser les partenaires utiles.</li>
+                  <li>Organiser les travaux et les instances de pilotage.</li>
+                  <li>Selectionner les indicateurs d'objectifs et de resultats.</li>
+                  <li>Preciser les taches et les actions a derouler pour chaque objectif.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">4</div>
+              <article class="support-process-card">
+                <h3>Evaluation des performances</h3>
+                <ul>
+                  <li>Mesurer l'efficacite des actions engagees.</li>
+                  <li>Evaluer l'ecart entre le resultat attendu et le resultat obtenu.</li>
+                  <li>Ajuster les plans en cours et renforcer la capacite d'anticipation.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">5</div>
+              <article class="support-process-card">
+                <h3>Surveillance et amelioration</h3>
+                <ul>
+                  <li>Evaluer de maniere systematique et methodique les differents processus.</li>
+                  <li>Controler la pertinence et l'application des procedures par des audits adaptes.</li>
+                  <li>Verifier la conformite aux exigences des clients, de l'entreprise et de la reglementation.</li>
+                  <li>Conforter les bonnes pratiques observees et inscrire l'amelioration dans la duree.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
+          <p style="margin-top: 1.5rem;">
+            <a class="btn btn-primary" href="services.html">Retour aux services</a>
+          </p>
+        </div>
+      </section>
     </main>
     <script src="js/main.js"></script>
   </body>
