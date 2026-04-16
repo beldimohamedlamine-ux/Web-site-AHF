@@ -36,6 +36,16 @@
   <body>
     <a class="skip" href="#content">تخطي إلى المحتوى</a>
     <header class="site-header" id="site-header">
+      <div class="header-topbar">
+        <div class="header-topbar-inner header-topbar-inner--split">
+          <p class="header-topbar-contact-line">
+            <span class="header-topbar-label">اتصل بنا:</span>
+            <a class="header-topbar-link-inline" href="tel:+213661467003">+213 (0) 661 46 70 03</a>
+            <span class="header-topbar-sep" aria-hidden="true">|</span>
+            <a class="header-topbar-link-inline" href="mailto:AHF@ahf-consulting.com">AHF@ahf-consulting.com</a>
+          </p>
+        </div>
+      </div>
       <div class="header-main">
         <div class="header-inner">
           <button type="button" class="nav-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="nav-principal">
@@ -51,11 +61,20 @@
               <nav class="nav" id="nav-principal" aria-label="التنقل الرئيسي">
                 <ul class="nav-list">
                   <li><a href="index.html">الرئيسية</a></li>
-                  <li><a href="index.html#services">الخدمات</a></li>
+                  <li class="has-dropdown">
+                    <button type="button" class="nav-dropdown-btn" aria-expanded="false">
+                      الخدمات <span class="nav-dropdown-chevron" aria-hidden="true"></span>
+                    </button>
+                    <ul class="nav-submenu">
+                      <li><a href="expertise.html">المرافقة</a></li>
+                      <li><a href="modules-formations.html">التكوين</a></li>
+                      <li><a href="expertise.html">التدقيق</a></li>
+                      <li><a href="expertise.html">الاستشارة</a></li>
+                    </ul>
+                  </li>
                   <li><a href="index.html#nos-clients">العملاء</a></li>
                   <li><a href="a-propos.html">من نحن</a></li>
                   <li><a href="expertise.html">QHSE</a></li>
-                  <li><a href="modules-formations.html" aria-current="page">التكوين</a></li>
                   <li><a href="contact.html">اتصل بنا</a></li>
                 </ul>
               </nav>

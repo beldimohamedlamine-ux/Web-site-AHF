@@ -77,6 +77,8 @@ body {
   color: var(--color-text);
   background: var(--color-bg);
   background-image: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(112, 32, 60, 0.04), transparent 50%);
+  /* Header global fixe: reserve space under top bars */
+  padding-top: var(--header-offset-expanded-desktop);
   /* Réduit les corrections d’ancrage du navigateur quand le sticky change de hauteur (Chrome) */
   overflow-anchor: none;
 }
@@ -168,8 +170,11 @@ a:hover {
 
 /* Header */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   z-index: 100;
   background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid var(--color-border-subtle);
@@ -655,12 +660,16 @@ html[lang="ar"] .back-to-top {
 .nav-submenu {
   list-style: none;
   margin: 0;
-  padding: 0.4rem 0;
-  min-width: 14rem;
-  max-width: min(18rem, calc(100vw - 2rem));
+  padding: 0.35rem;
+  min-width: max-content;
+  max-width: calc(100vw - 2rem);
   position: absolute;
   top: calc(100% + 0.35rem);
   left: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0.2rem;
   background: var(--color-white);
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
@@ -670,6 +679,9 @@ html[lang="ar"] .back-to-top {
   transform: translateY(-6px);
   transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
   z-index: 200;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 /* Bureau : clic / focus clavier + survol (souris fine). Le JS ferme les autres entrées au survol pour éviter 2 panneaux superposés. */
@@ -715,13 +727,18 @@ html[lang="ar"] .back-to-top {
   }
 }
 
+.nav-submenu li {
+  flex: 0 0 auto;
+}
+
 .nav-submenu a {
   display: block;
-  padding: 0.45rem 1rem;
+  padding: 0.45rem 0.9rem;
   font-size: 0.86rem;
   font-weight: 600;
   color: var(--color-navy);
   text-decoration: none;
+  border-radius: 0.65rem;
 }
 
 .nav-submenu a:hover,
@@ -3401,6 +3418,7 @@ table.data tbody tr:hover {
     width: 100%;
     max-width: 100%;
     margin: 0;
+    padding-top: var(--header-offset-expanded-mobile);
   }
 
   .site-header {

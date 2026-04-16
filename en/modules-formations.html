@@ -36,6 +36,16 @@
   <body>
     <a class="skip" href="#content">Skip to content</a>
     <header class="site-header" id="site-header">
+      <div class="header-topbar">
+        <div class="header-topbar-inner header-topbar-inner--split">
+          <p class="header-topbar-contact-line">
+            <span class="header-topbar-label">Contact us:</span>
+            <a class="header-topbar-link-inline" href="tel:+213661467003">+213 (0) 661 46 70 03</a>
+            <span class="header-topbar-sep" aria-hidden="true">|</span>
+            <a class="header-topbar-link-inline" href="mailto:AHF@ahf-consulting.com">AHF@ahf-consulting.com</a>
+          </p>
+        </div>
+      </div>
       <div class="header-main">
         <div class="header-inner">
           <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-principal">
@@ -51,11 +61,20 @@
               <nav class="nav" id="nav-principal" aria-label="Main navigation">
                 <ul class="nav-list">
                   <li><a href="index.html">Home</a></li>
-                  <li><a href="index.html#services">Services</a></li>
+                  <li class="has-dropdown">
+                    <button type="button" class="nav-dropdown-btn" aria-expanded="false">
+                      Services <span class="nav-dropdown-chevron" aria-hidden="true"></span>
+                    </button>
+                    <ul class="nav-submenu">
+                      <li><a href="expertise.html">Implementation support</a></li>
+                      <li><a href="modules-formations.html">Training</a></li>
+                      <li><a href="expertise.html">Audit</a></li>
+                      <li><a href="expertise.html">Consulting</a></li>
+                    </ul>
+                  </li>
                   <li><a href="index.html#nos-clients">Clients</a></li>
                   <li><a href="a-propos.html">About us</a></li>
                   <li><a href="expertise.html">QHSE</a></li>
-                  <li><a href="modules-formations.html" aria-current="page">Training</a></li>
                   <li><a href="contact.html">Contact</a></li>
                 </ul>
               </nav>
