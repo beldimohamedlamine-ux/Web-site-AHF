@@ -921,10 +921,269 @@
     });
   }
 
+  function initTrainingModulesFilter() {
+    var filterInput = document.getElementById("training-module-filter");
+    var resetButton = document.getElementById("training-module-reset");
+    var countLabel = document.getElementById("training-filter-count");
+    var tableRows = Array.prototype.slice.call(document.querySelectorAll(".training-table tbody tr"));
+    if (!filterInput || !resetButton || !countLabel || !tableRows.length) return;
+
+    function updateCount() {
+      var visibleCount = tableRows.filter(function (row) {
+        return row.style.display !== "none";
+      }).length;
+      var lang = (document.documentElement.getAttribute("lang") || "fr").toLowerCase();
+      if (lang === "en") countLabel.textContent = visibleCount === 0 ? "0 results" : visibleCount + " module(s) shown";
+      else if (lang === "ar") countLabel.textContent = visibleCount === 0 ? "0 نتيجة" : visibleCount + " وحدة ظاهرة";
+      else countLabel.textContent = visibleCount === 0 ? "0 resultats" : visibleCount + " module(s) affiche(s)";
+    }
+
+    function applyFilter() {
+      var query = (filterInput.value || "").toLowerCase().trim();
+      tableRows.forEach(function (row) {
+        var searchableText = (row.textContent || "").replace(/\s+/g, " ").toLowerCase();
+        row.style.display = !query || searchableText.indexOf(query) !== -1 ? "" : "none";
+      });
+      updateCount();
+    }
+
+    filterInput.addEventListener("input", applyFilter);
+    resetButton.addEventListener("click", function () {
+      filterInput.value = "";
+      applyFilter();
+      filterInput.focus();
+    });
+    updateCount();
+  }
+
+  function initAccompagnementEnhancements() {
+    var steps = Array.prototype.slice.call(
+      document.querySelectorAll(".support-roadmap .support-process-grid")
+    );
+    var highlightCards = Array.prototype.slice.call(
+      document.querySelectorAll(".support-intro-grid .support-highlight")
+    );
+    if (steps.length || highlightCards.length) {
+      var ticking = false;
+      function updateRoadmapReveal() {
+        ticking = false;
+        var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+        var topTrigger = vh * 0.85;
+        var bottomTrigger = vh * 0.16;
+
+        steps.forEach(function (step) {
+          var rect = step.getBoundingClientRect();
+          var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
+          step.classList.toggle("is-visible", isVisible);
+        });
+
+        highlightCards.forEach(function (card) {
+          var rect = card.getBoundingClientRect();
+          var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
+          card.classList.toggle("is-visible", isVisible);
+        });
+      }
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(updateRoadmapReveal);
+      }
+
+      updateRoadmapReveal();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll);
+      window.addEventListener("load", onScroll);
+    }
+
+    var cards = Array.prototype.slice.call(
+      document.querySelectorAll(".support-domain-card, .journey-card")
+    );
+    if (!cards.length) return;
+    var mq = window.matchMedia("(max-width: 900px)");
+    cards.forEach(function (card) {
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      function onActivate() {
+        if (!mq.matches) return;
+        card.classList.toggle("is-flipped");
+        window.requestAnimationFrame(function () {
+          if (!card.classList.contains("is-flipped")) {
+            var ae = document.activeElement;
+            if (ae && card.contains(ae)) ae.blur();
+          }
+        });
+      }
+      card.addEventListener("click", onActivate);
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onActivate();
+        }
+      });
+    });
+  }
+
+  function initFastPageNavigation() {
+    var prefetched = Object.create(null);
+    var navLock = false;
+    var NAV_LOCK_MS = 1200;
+
+    function isPrefetchableLink(anchor) {
+      if (!anchor || !anchor.href) return false;
+      if (anchor.target && anchor.target !== "_self") return false;
+      if (anchor.hasAttribute("download")) return false;
+      if ((anchor.getAttribute("rel") || "").toLowerCase().indexOf("external") !== -1) return false;
+      var href = anchor.getAttribute("href") || "";
+      if (!href || href.indexOf("#") === 0) return false;
+
+      var url;
+      try {
+        url = new URL(anchor.href, window.location.href);
+      } catch (e) {
+        return false;
+      }
+
+      if (url.origin !== window.location.origin) return false;
+      if (!/\.html$/i.test(url.pathname) && !/\/$/.test(url.pathname)) return false;
+      if (url.pathname === window.location.pathname && url.hash) return false;
+      return true;
+    }
+
+    function prefetchLink(anchor) {
+      if (!isPrefetchableLink(anchor)) return;
+      var url = anchor.href;
+      if (prefetched[url]) return;
+      prefetched[url] = true;
+      var hint = document.createElement("link");
+      hint.rel = "prefetch";
+      hint.as = "document";
+      hint.href = url;
+      document.head.appendChild(hint);
+    }
+
+    document.addEventListener(
+      "pointerenter",
+      function (e) {
+        var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+        if (!a) return;
+        prefetchLink(a);
+      },
+      true
+    );
+
+    document.addEventListener(
+      "touchstart",
+      function (e) {
+        var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+        if (!a) return;
+        prefetchLink(a);
+      },
+      { passive: true, capture: true }
+    );
+
+    document.addEventListener(
+      "click",
+      function (e) {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+        if (!a || !isPrefetchableLink(a)) return;
+        if (navLock) {
+          e.preventDefault();
+          return;
+        }
+        navLock = true;
+        window.setTimeout(function () {
+          navLock = false;
+        }, NAV_LOCK_MS);
+      },
+      true
+    );
+  }
+
+  function initServiceCardSliders() {
+    var sliders = Array.prototype.slice.call(document.querySelectorAll(".js-service-slider"));
+    if (!sliders.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    sliders.forEach(function (slider) {
+      var timer = null;
+
+      function nextSlide() {
+        var card = slider.querySelector(".service-card");
+        if (!card) return;
+        var step = card.getBoundingClientRect().width + 16;
+        var max = Math.max(0, slider.scrollWidth - slider.clientWidth);
+        var target = slider.scrollLeft + step;
+        if (target >= max - 4) target = 0;
+        slider.scrollTo({ left: target, behavior: "smooth" });
+      }
+
+      function start() {
+        if (timer) return;
+        timer = window.setInterval(nextSlide, 3600);
+      }
+
+      function stop() {
+        if (!timer) return;
+        window.clearInterval(timer);
+        timer = null;
+      }
+
+      slider.addEventListener("mouseenter", stop);
+      slider.addEventListener("mouseleave", start);
+      slider.addEventListener("focusin", stop);
+      slider.addEventListener("focusout", start);
+      start();
+    });
+  }
+
+  function initSmoothServiceFaq() {
+    var faqBlocks = Array.prototype.slice.call(document.querySelectorAll(".service-faq details"));
+    if (!faqBlocks.length) return;
+
+    faqBlocks.forEach(function (detail) {
+      var summary = detail.querySelector("summary");
+      if (!summary) return;
+      var content = detail.querySelector(".faq-content");
+
+      if (!content) {
+        var nodes = Array.prototype.slice.call(detail.childNodes).filter(function (node) {
+          return node !== summary;
+        });
+        content = document.createElement("div");
+        content.className = "faq-content";
+        nodes.forEach(function (node) {
+          content.appendChild(node);
+        });
+        detail.appendChild(content);
+      }
+
+      if (detail.open) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.style.maxHeight = "0px";
+      }
+
+      detail.addEventListener("toggle", function () {
+        if (detail.open) {
+          content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+          content.style.maxHeight = "0px";
+        }
+      });
+    });
+  }
+
   initHomeHeroSwiper();
   initClientsCarousel();
   initRevealOnScroll();
+  initTrainingModulesFilter();
+  initAccompagnementEnhancements();
   initWhatsAppFloat();
+  initFastPageNavigation();
+  initServiceCardSliders();
+  initSmoothServiceFaq();
 })();
 
 var FICHE_FORM_LABELS = {

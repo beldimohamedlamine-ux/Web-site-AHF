@@ -6,6 +6,127 @@
     <meta name="description" content="Service d'audit QHSE AHF CONSULTING." />
     <title>Audit | AHF CONSULTING</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+      }
+      .service-card {
+        background: #fff;
+        border: 1px solid #d9e2f2;
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        scroll-snap-align: start;
+      }
+      .service-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 30px rgba(16, 52, 98, 0.16);
+        border-color: #c4d8f7;
+      }
+      .service-slider {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(230px, 280px);
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.15rem 0.2rem 0.6rem;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+      }
+      .service-slider::-webkit-scrollbar {
+        height: 8px;
+      }
+      .service-slider::-webkit-scrollbar-thumb {
+        background: #c8d8f2;
+        border-radius: 999px;
+      }
+      .service-card h3 {
+        margin-top: 0;
+        margin-bottom: 0.45rem;
+      }
+      .steps-list {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+      .steps-list li + li {
+        margin-top: 0.45rem;
+      }
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0.9rem;
+      }
+      .kpi-item {
+        border-radius: 12px;
+        border: 1px solid #d9e2f2;
+        background: #f7faff;
+        padding: 0.85rem 0.95rem;
+      }
+      .kpi-item strong {
+        display: block;
+        color: var(--color-primary, #123f7a);
+        margin-bottom: 0.35rem;
+      }
+      .service-faq details + details {
+        margin-top: 0.7rem;
+      }
+      .service-faq summary {
+        cursor: pointer;
+        font-weight: 700;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .service-faq summary::-webkit-details-marker {
+        display: none;
+      }
+      .service-faq summary::after {
+        content: "+";
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 999px;
+        border: 1px solid #c9d8ef;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #1c4f87;
+        flex: 0 0 auto;
+        transition: transform 0.28s ease, background-color 0.28s ease;
+      }
+      .service-faq details[open] summary::after {
+        transform: rotate(45deg);
+        background: #eaf2ff;
+      }
+      .service-faq .faq-content {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.36s ease, opacity 0.25s ease, padding-top 0.25s ease;
+        padding-top: 0;
+      }
+      .service-faq details[open] .faq-content {
+        opacity: 1;
+        padding-top: 0.5rem;
+      }
+      .service-cta {
+        border-radius: 16px;
+        border: 1px solid #d9e2f2;
+        background: linear-gradient(120deg, #f7faff 0%, #ffffff 100%);
+        padding: 1.25rem;
+      }
+      .service-cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 0.85rem;
+      }
+    </style>
   </head>
   <body>
     <a class="skip" href="#contenu">Aller au contenu</a>
@@ -66,6 +187,98 @@
     </header>
     <main id="contenu">
       <div class="page-hero"><div class="page-hero-inner"><h1>Audit</h1><p>Nos audits internes et évaluations de conformité permettent d'anticiper les écarts et d'améliorer la performance.</p></div></div>
+      <section class="bg-white" data-reveal>
+        <div class="section-inner">
+          <h2 class="section-title">Types d'audits proposes</h2>
+          <p class="section-intro">Des missions adaptees a votre niveau de maturite, vos obligations et vos enjeux de certification.</p>
+          <div class="service-slider js-service-slider" aria-label="Types d'audits">
+            <article class="service-card">
+              <h3>Audit interne</h3>
+              <p>Verification de l'efficacite du systeme QHSE et de son application terrain.</p>
+            </article>
+            <article class="service-card">
+              <h3>Audit blanc pre-certification</h3>
+              <p>Simulation complete avant l'audit officiel pour reduire le risque d'ecarts majeurs.</p>
+            </article>
+            <article class="service-card">
+              <h3>Audit fournisseur</h3>
+              <p>Evaluation des partenaires critiques sur la qualite, la securite et la conformite.</p>
+            </article>
+            <article class="service-card">
+              <h3>Audit de conformite reglementaire</h3>
+              <p>Analyse des exigences applicables et priorisation des actions de mise en conformite.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section data-reveal>
+        <div class="section-inner two-col">
+          <div>
+            <h2 class="section-title">Notre methode en 5 etapes</h2>
+            <ol class="steps-list">
+              <li><strong>Preparation :</strong> cadrage du perimetre, referentiels, plan d'audit et planning.</li>
+              <li><strong>Conduite terrain :</strong> entretiens, revue documentaire, observations et echantillonnage.</li>
+              <li><strong>Rapport :</strong> restitution structuree des constats, ecarts et points sensibles.</li>
+              <li><strong>Plan d'actions :</strong> priorisation par criticite et definition des responsables/delais.</li>
+              <li><strong>Suivi :</strong> verification de cloture des ecarts et mesure de l'efficacite des actions.</li>
+            </ol>
+          </div>
+          <div>
+            <h2 class="section-title">Livrables remis</h2>
+            <ul class="steps-list">
+              <li>Grille d'audit completee et preuves associees.</li>
+              <li>Cartographie des ecarts (mineur / majeur) et niveau de criticite.</li>
+              <li>Plan CAPA (actions correctives et preventives) avec echeances.</li>
+              <li>Synthese manageriale pour la direction.</li>
+              <li>Feuille de route de preparation aux prochaines evaluations.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white" data-reveal>
+        <div class="section-inner">
+          <h2 class="section-title">Indicateurs de pilotage proposes</h2>
+          <p class="section-intro">Des KPI simples pour suivre la progression et la robustesse de votre systeme.</p>
+          <div class="kpi-grid">
+            <article class="kpi-item"><strong>Taux de cloture des ecarts</strong><span>Part des ecarts traites dans les delais convenus.</span></article>
+            <article class="kpi-item"><strong>Delai moyen de traitement</strong><span>Temps moyen entre constat d'ecart et cloture effective.</span></article>
+            <article class="kpi-item"><strong>Taux de recurrence</strong><span>Frequence de reapparition d'un meme type d'ecart.</span></article>
+            <article class="kpi-item"><strong>Couverture des audits internes</strong><span>Part des processus critiques audites sur la periode.</span></article>
+          </div>
+        </div>
+      </section>
+
+      <section data-reveal>
+        <div class="section-inner two-col">
+          <div class="service-faq">
+            <h2 class="section-title">FAQ Audit</h2>
+            <details>
+              <summary>Quelle est la difference entre audit interne et audit blanc ?</summary>
+              <div class="faq-content"><p>L'audit interne est periodique et alimente l'amelioration continue. L'audit blanc reproduit les conditions d'un audit certificateur avant l'echeance officielle.</p></div>
+            </details>
+            <details>
+              <summary>Combien de temps dure une mission ?</summary>
+              <div class="faq-content"><p>Selon le perimetre, de 1 a plusieurs jours. Un planning est etabli en amont pour limiter l'impact operationnel.</p></div>
+            </details>
+            <details>
+              <summary>Intervenez-vous sur plusieurs referentiels ISO ?</summary>
+              <div class="faq-content"><p>Oui, notamment ISO 9001, 14001, 45001, 22000/HACCP et systemes integres QHSE.</p></div>
+            </details>
+          </div>
+          <div>
+            <div class="service-cta">
+              <h2 class="section-title" style="margin-top: 0;">Lancer un pre-diagnostic audit</h2>
+              <p class="section-intro" style="margin-bottom: 0;">Echange de 30 minutes pour cadrer votre besoin, prioriser les risques et definir un plan d'audit adapte.</p>
+              <div class="service-cta-actions">
+                <a class="btn btn-primary" href="contact.html">Demander un pre-diagnostic</a>
+                <a class="btn btn-outline" href="https://wa.me/213661467003" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <section class="site-map" aria-labelledby="site-map-title">
       <div class="site-map-inner">

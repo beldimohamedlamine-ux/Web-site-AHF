@@ -6,6 +6,86 @@
     <meta name="description" content="Consulting service by AHF CONSULTING." />
     <title>Consulting | AHF CONSULTING</title>
     <link rel="stylesheet" href="../css/styles.css" />
+    <style>
+      .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+      .service-card {
+        background: #fff;
+        border: 1px solid #d9e2f2;
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        scroll-snap-align: start;
+      }
+      .service-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(16, 52, 98, 0.16); border-color: #c4d8f7; }
+      .service-slider {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(230px, 280px);
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.15rem 0.2rem 0.6rem;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+      }
+      .service-slider::-webkit-scrollbar { height: 8px; }
+      .service-slider::-webkit-scrollbar-thumb { background: #c8d8f2; border-radius: 999px; }
+      .service-card h3 { margin-top: 0; margin-bottom: 0.45rem; }
+      .steps-list { margin: 0; padding-left: 1.1rem; }
+      .steps-list li + li { margin-top: 0.45rem; }
+      .service-faq details + details { margin-top: 0.7rem; }
+      .service-faq summary {
+        cursor: pointer;
+        font-weight: 700;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .service-faq summary::-webkit-details-marker { display: none; }
+      .service-faq summary::after {
+        content: "+";
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 999px;
+        border: 1px solid #c9d8ef;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #1c4f87;
+        flex: 0 0 auto;
+        transition: transform 0.28s ease, background-color 0.28s ease;
+      }
+      .service-faq details[open] summary::after { transform: rotate(45deg); background: #eaf2ff; }
+      .service-faq .faq-content {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.36s ease, opacity 0.25s ease, padding-top 0.25s ease;
+        padding-top: 0;
+      }
+      .service-faq details[open] .faq-content { opacity: 1; padding-top: 0.5rem; }
+      .service-cta {
+        border-radius: 16px;
+        border: 1px solid #d9e2f2;
+        background: linear-gradient(120deg, #f7faff 0%, #ffffff 100%);
+        padding: 1.25rem;
+      }
+      .service-cta-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.85rem; }
+      .service-badge {
+        display: inline-block;
+        margin-bottom: 0.45rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #123f7a;
+        background: #eaf2ff;
+        border: 1px solid #d2e2ff;
+        border-radius: 999px;
+        padding: 0.22rem 0.62rem;
+      }
+    </style>
   </head>
   <body>
     <a class="skip" href="#content">Skip to content</a>
@@ -71,6 +151,72 @@
           <p>We provide practical and strategic guidance to help you manage QHSE priorities and compliance requirements.</p>
         </div>
       </div>
+      <section class="bg-white" data-reveal>
+        <div class="section-inner">
+          <h2 class="section-title">Your challenges, our consulting support</h2>
+          <p class="section-intro">Structured guidance to make faster decisions and secure QHSE performance.</p>
+          <div class="service-slider js-service-slider" aria-label="Consulting services">
+            <article class="service-card"><span class="service-badge">Management systems</span><h3>QMS / EMS / OHSMS setup</h3><p>Design or upgrade aligned with ISO 9001, 14001 and 45001.</p></article>
+            <article class="service-card"><span class="service-badge">Integrated system</span><h3>QHSE integration</h3><p>Document harmonization, simplification and cross-functional governance.</p></article>
+            <article class="service-card"><span class="service-badge">Risk management</span><h3>Risk analysis and prioritization</h3><p>Risk mapping, criticality matrix and practical control plans.</p></article>
+            <article class="service-card"><span class="service-badge">Governance</span><h3>Management review and KPI setup</h3><p>Decision-oriented dashboards and review routines for leadership.</p></article>
+          </div>
+        </div>
+      </section>
+      <section data-reveal>
+        <div class="section-inner two-col">
+          <div>
+            <h2 class="section-title">Consulting formats</h2>
+            <ul class="steps-list">
+              <li><strong>Targeted mission:</strong> focused support for one critical issue.</li>
+              <li><strong>Monthly support:</strong> continuous guidance over 3, 6 or 12 months.</li>
+              <li><strong>Executive coaching:</strong> strategic support for management decisions.</li>
+              <li><strong>Team workshops:</strong> operational alignment and ownership on the field.</li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="section-title">Expected deliverables</h2>
+            <ul class="steps-list">
+              <li>90-day roadmap with clear priorities.</li>
+              <li>Risk and opportunity matrix linked to processes.</li>
+              <li>Detailed action plan with owners and milestones.</li>
+              <li>Monitoring dashboard with operational KPI.</li>
+              <li>Executive synthesis for steering committees.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="bg-white" data-reveal>
+        <div class="section-inner">
+          <h2 class="section-title">Typical consulting case</h2>
+          <p class="section-intro">Example mission to improve compliance, structure and execution clarity.</p>
+          <div class="service-slider js-service-slider" aria-label="Consulting case">
+            <article class="service-card"><h3>Before</h3><p>Scattered actions, mixed documentation and unclear operational priorities.</p></article>
+            <article class="service-card"><h3>Intervention</h3><p>Short diagnosis, prioritization workshop, phased action plan and weekly follow-up.</p></article>
+            <article class="service-card"><h3>After</h3><p>Clear governance, formalized accountability and stronger audit readiness.</p></article>
+          </div>
+        </div>
+      </section>
+      <section data-reveal>
+        <div class="section-inner two-col">
+          <div class="service-faq">
+            <h2 class="section-title">Consulting FAQ</h2>
+            <details><summary>Is this suitable for SMEs?</summary><div class="faq-content"><p>Yes. Missions are sized according to your resources, sector and priorities.</p></div></details>
+            <details><summary>Can you help without an immediate certification plan?</summary><div class="faq-content"><p>Yes. We can focus first on operational performance, legal compliance and risk reduction.</p></div></details>
+            <details><summary>Do you work directly with field teams?</summary><div class="faq-content"><p>Yes. We combine management vision and operational reality to drive sustainable results.</p></div></details>
+          </div>
+          <div>
+            <div class="service-cta">
+              <h2 class="section-title" style="margin-top: 0;">Discuss your project</h2>
+              <p class="section-intro" style="margin-bottom: 0;">A first exchange helps define priorities and choose the best intervention format.</p>
+              <div class="service-cta-actions">
+                <a class="btn btn-primary" href="contact.html">Request a consultation</a>
+                <a class="btn btn-outline" href="https://wa.me/213661467003" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <section class="site-map" aria-labelledby="site-map-title">
       <div class="site-map-inner">

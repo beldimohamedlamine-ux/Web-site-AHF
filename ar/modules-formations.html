@@ -28,6 +28,7 @@
       .training-filter-bar { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; margin-bottom: 0.95rem; }
       .training-filter-label { font-size: 0.88rem; font-weight: 700; color: #133f7b; }
       .training-filter-select { min-width: 260px; border: 1px solid #c5d7f0; border-radius: 10px; padding: 0.55rem 0.7rem; font: inherit; color: #123154; background: #fff; }
+      .training-filter-select::placeholder { color: #7a8da8; }
       .training-filter-reset { border: 1px solid #cbd8ea; border-radius: 10px; padding: 0.53rem 0.75rem; font: inherit; font-weight: 600; color: #28466e; background: #f4f8ff; cursor: pointer; }
       .training-filter-reset:hover { background: #eaf2ff; }
       .training-filter-count { font-size: 0.84rem; color: #4d627e; }
@@ -105,10 +106,8 @@
         <div class="section-inner">
           <div class="training-catalog-shell">
             <div class="training-filter-bar" aria-label="فلتر الوحدات">
-              <label class="training-filter-label" for="training-module-filter">اختر وحدة:</label>
-              <select id="training-module-filter" class="training-filter-select">
-                <option value="all">كل الوحدات</option>
-              </select>
+              <label class="training-filter-label" for="training-module-filter">ابحث عن وحدة:</label>
+              <input type="search" id="training-module-filter" class="training-filter-select" placeholder="اكتب بحثك..." autocomplete="off" />
               <button type="button" id="training-module-reset" class="training-filter-reset">إعادة الضبط</button>
               <span id="training-filter-count" class="training-filter-count" aria-live="polite"></span>
             </div>
@@ -242,40 +241,5 @@
       </div>
     </footer>
     <script src="../js/main.js"></script>
-    <script>
-      (function () {
-        const filterSelect = document.getElementById("training-module-filter");
-        const resetButton = document.getElementById("training-module-reset");
-        const countLabel = document.getElementById("training-filter-count");
-        const tableRows = Array.from(document.querySelectorAll(".training-table tbody tr"));
-        if (!filterSelect || !resetButton || !countLabel || tableRows.length === 0) return;
-        const modules = tableRows.map((row) => {
-          const firstCell = row.querySelector("td");
-          return firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
-        }).filter(Boolean);
-        Array.from(new Set(modules)).forEach((moduleName) => {
-          const option = document.createElement("option");
-          option.value = moduleName;
-          option.textContent = moduleName;
-          filterSelect.appendChild(option);
-        });
-        const updateCount = () => {
-          const visibleCount = tableRows.filter((row) => row.style.display !== "none").length;
-          countLabel.textContent = visibleCount + " وحدة ظاهرة";
-        };
-        const applyFilter = () => {
-          const selected = filterSelect.value;
-          tableRows.forEach((row) => {
-            const firstCell = row.querySelector("td");
-            const moduleName = firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
-            row.style.display = selected === "all" || moduleName === selected ? "" : "none";
-          });
-          updateCount();
-        };
-        filterSelect.addEventListener("change", applyFilter);
-        resetButton.addEventListener("click", () => { filterSelect.value = "all"; applyFilter(); });
-        updateCount();
-      })();
-    </script>
   </body>
 </html>

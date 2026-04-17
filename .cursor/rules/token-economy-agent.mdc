@@ -1,0 +1,20 @@
+---
+description: Reduce token usage by default in agent interactions
+alwaysApply: true
+---
+
+# Token Economy Defaults
+
+- Keep prompts and responses concise by default.
+- Keep responses under 5 lines unless the user asks for details.
+- Scope work to explicitly mentioned files, symbols, or selections.
+- Do not scan the whole repository unless the user asks for global analysis.
+- Ask for minimal context when missing: exact file path, function, or a short log excerpt.
+- When debugging, request only relevant snippets (around 20-40 lines) instead of full files/logs.
+- Prefer incremental execution: solve one step at a time for large tasks.
+- Avoid repeating unchanged context in follow-up replies.
+- Return only the requested output format (patch, steps, short answer, etc.).
+- For code changes, produce minimal diffs and avoid unrelated edits.
+- If a task is ambiguous, ask one focused clarification question before broad exploration.
+- Do not include explicit "thinking", "reasoning", or "planning" sections unless requested.
+- Skip optional alternatives; provide one best action by default.

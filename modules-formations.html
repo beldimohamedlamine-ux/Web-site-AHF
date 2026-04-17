@@ -288,55 +288,5 @@
       </div>
     </footer>
     <script src="js/main.js"></script>
-    <script>
-      (function () {
-        const filterSelect = document.getElementById("training-module-filter");
-        const resetButton = document.getElementById("training-module-reset");
-        const countLabel = document.getElementById("training-filter-count");
-        const tableRows = Array.from(document.querySelectorAll(".training-table tbody tr"));
-
-        if (!filterSelect || !resetButton || !countLabel || tableRows.length === 0) {
-          return;
-        }
-
-        const modules = tableRows
-          .map((row) => {
-            const firstCell = row.querySelector("td");
-            return firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
-          })
-          .filter(Boolean);
-
-        const uniqueModules = Array.from(new Set(modules));
-        uniqueModules.forEach((moduleName) => {
-          const option = document.createElement("option");
-          option.value = moduleName;
-          option.textContent = moduleName;
-          filterSelect.appendChild(option);
-        });
-
-        const updateCount = () => {
-          const visibleCount = tableRows.filter((row) => row.style.display !== "none").length;
-          countLabel.textContent = visibleCount + " module(s) affiché(s)";
-        };
-
-        const applyFilter = () => {
-          const selected = filterSelect.value;
-          tableRows.forEach((row) => {
-            const firstCell = row.querySelector("td");
-            const moduleName = firstCell ? firstCell.textContent.replace(/\s+/g, " ").trim() : "";
-            row.style.display = selected === "all" || moduleName === selected ? "" : "none";
-          });
-          updateCount();
-        };
-
-        filterSelect.addEventListener("change", applyFilter);
-        resetButton.addEventListener("click", () => {
-          filterSelect.value = "all";
-          applyFilter();
-        });
-
-        updateCount();
-      })();
-    </script>
   </body>
 </html>
