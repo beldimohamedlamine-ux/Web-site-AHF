@@ -9,6 +9,220 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap");
 
+      .support-intro-grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+
+      .support-hero-cta {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem 1.5rem;
+      }
+
+      .support-hero-cta-copy {
+        max-width: 660px;
+      }
+
+      .support-highlight {
+        border-radius: 20px;
+        padding: 1.5rem;
+        color: #fff;
+        opacity: 0;
+        transition: opacity 0.85s var(--ease-out), transform 0.9s var(--ease-out);
+      }
+
+      .support-highlight h2 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.8rem, 2.4vw, 2.2rem);
+        line-height: 1.2;
+        color: #fff;
+      }
+
+      .support-highlight p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.95);
+        line-height: 1.55;
+      }
+
+      .support-highlight ul {
+        margin: 0.8rem 0 0;
+      }
+
+      .support-highlight li {
+        line-height: 1.5;
+        margin-bottom: 0.2rem;
+      }
+
+      .support-highlight--accent {
+        background: linear-gradient(135deg, #cc0f72 0%, #8e124d 100%);
+        transform: translateX(-44px);
+      }
+
+      .support-highlight--dark {
+        background: linear-gradient(135deg, #4e5661 0%, #2f3740 100%);
+        transform: translateX(44px);
+      }
+
+      .support-highlight.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .support-roadmap {
+        position: relative;
+        display: grid;
+        gap: 1.25rem;
+      }
+
+      .support-roadmap::before {
+        content: "";
+        position: absolute;
+        top: 0.65rem;
+        bottom: 0.65rem;
+        left: 50%;
+        width: 8px;
+        border-radius: 999px;
+        transform: translateX(-50%);
+        background: linear-gradient(180deg, #15345a 0%, #245a84 52%, #15345a 100%);
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+      }
+
+      .support-process-grid {
+        display: grid;
+        grid-template-columns: 1fr 84px 1fr;
+        align-items: center;
+        gap: 1.1rem;
+        position: relative;
+        opacity: 0;
+        transition: opacity 0.45s ease, transform 0.45s ease;
+      }
+
+      .support-process-card {
+        border: 1px solid rgba(15, 39, 68, 0.08);
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: var(--shadow-sm);
+        padding: 1.15rem 1.25rem;
+        grid-column: 1 / 2;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(odd) .support-process-card {
+        grid-column: 1 / 2;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(even) .support-process-card {
+        grid-column: 3 / 4;
+      }
+
+      .support-step {
+        display: grid;
+        place-items: center;
+        width: 84px;
+        min-height: 84px;
+        border: 3px solid rgba(21, 52, 90, 0.22);
+        border-radius: 999px;
+        color: #15345a;
+        font-size: 1.75rem;
+        font-weight: 800;
+        background: #fff;
+        grid-column: 2 / 3;
+        z-index: 2;
+        position: relative;
+        box-shadow:
+          0 10px 22px -16px rgba(15, 39, 68, 0.65),
+          inset 0 0 0 5px rgba(255, 255, 255, 0.9);
+      }
+
+      .support-step::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        width: 14px;
+        height: 14px;
+        transform: translateX(-50%);
+        border-radius: 50%;
+        background: #f59e0b;
+        box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+        z-index: 1;
+      }
+
+      .support-step {
+        color: #15345a;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      .support-process-card {
+        transition: transform 0.28s ease, box-shadow 0.28s ease;
+        border-top: 4px solid var(--step-color, #245a84);
+      }
+
+      .support-process-card h3 {
+        margin-top: 0;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(odd) {
+        transform: translateX(-30px);
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(even) {
+        transform: translateX(30px);
+      }
+
+      .support-roadmap > .support-process-grid.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .support-process-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 14px 26px -16px rgba(15, 39, 68, 0.55);
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(1) {
+        --step-color: #2563eb;
+        --step-color-dark: #1d4ed8;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(2) {
+        --step-color: #0f766e;
+        --step-color-dark: #115e59;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(3) {
+        --step-color: #7c3aed;
+        --step-color-dark: #6d28d9;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(4) {
+        --step-color: #c2410c;
+        --step-color-dark: #9a3412;
+      }
+
+      .support-roadmap > .support-process-grid:nth-child(5) {
+        --step-color: #334155;
+        --step-color-dark: #1e293b;
+      }
+
+      .support-roadmap > .support-process-grid .support-step {
+        border-color: color-mix(in srgb, var(--step-color, #245a84) 34%, #ffffff);
+        color: var(--step-color-dark, #15345a);
+      }
+
+      .support-roadmap > .support-process-grid .support-step::after {
+        background: var(--step-color, #245a84);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--step-color, #245a84) 24%, #ffffff);
+      }
+
+      .support-process-card ul,
+      .support-highlight ul {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
       .journey-cards-section {
         background: #0a0a0a;
         border-radius: 20px;
@@ -164,6 +378,46 @@
       }
 
       @media (max-width: 900px) {
+        .support-hero-cta {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .support-roadmap::before {
+          left: 24px;
+          transform: none;
+        }
+
+        .support-process-grid {
+          grid-template-columns: 48px 1fr;
+          align-items: start;
+          gap: 0.85rem;
+        }
+
+        .support-step {
+          width: 48px;
+          min-height: 48px;
+          grid-column: 1 / 2;
+          font-size: 1.1rem;
+          border-width: 2px;
+        }
+
+        .support-roadmap > .support-process-grid:nth-child(odd) .support-process-card,
+        .support-roadmap > .support-process-grid:nth-child(even) .support-process-card {
+          grid-column: 2 / 3;
+        }
+
+        .support-roadmap > .support-process-grid:nth-child(odd),
+        .support-roadmap > .support-process-grid:nth-child(even) {
+          transform: translateX(16px);
+        }
+
+        .support-step::after {
+          width: 10px;
+          height: 10px;
+          bottom: 5px;
+        }
+
         .journey-cards-grid {
           flex-direction: column;
           align-items: center;
@@ -196,6 +450,14 @@
         }
         .journey-card.is-flipped .journey-card-inner {
           transform: rotateY(180deg) !important;
+        }
+
+        .support-highlight--accent {
+          transform: translateX(-18px);
+        }
+
+        .support-highlight--dark {
+          transform: translateX(18px);
         }
       }
     </style>
@@ -232,7 +494,7 @@
                     </button>
                     <ul class="nav-submenu">
                       <li><a href="accompagnement.html" aria-current="page">Implementation support</a></li>
-                      <li><a href="modules-formations.html">Training</a></li>
+                      <li><a href="formation.html">Training</a></li>
                       <li><a href="audit.html">Audit</a></li>
                       <li><a href="conseils.html">Consulting</a></li>
                     </ul>
@@ -260,12 +522,46 @@
     <main id="content">
       <div class="page-hero">
         <div class="page-hero-inner">
-          <h1>Implementation support</h1>
-          <p>We support your teams in structuring, deploying, and sustaining QHSE improvement projects.</p>
+          <div class="support-hero-cta">
+            <div class="support-hero-cta-copy">
+              <h1>Implementation support</h1>
+              <p>We support your teams in structuring, deploying, and sustaining QHSE improvement projects.</p>
+            </div>
+            <a class="btn btn-primary" href="contact.html#fiche-accompagnement-iso">Besoin d'Accompagnement</a>
+          </div>
         </div>
       </div>
       <section class="bg-white">
         <div class="section-inner">
+          <div class="prose-block card" style="margin-bottom: 1.5rem;">
+            <p>
+              Before launching a change policy, the company should run a strategic reflection on how to manage that change
+              by deploying a management system able to support people throughout the journey.
+            </p>
+            <p style="margin-bottom: 0;">
+              This support must be well sized and adapted to the company's context in order to involve teams and ensure long-term effectiveness.
+            </p>
+          </div>
+
+          <div class="support-intro-grid" style="margin-bottom: 2rem;">
+            <article class="support-highlight support-highlight--accent">
+              <h2 style="margin-top: 0; color: #fff;">Why implementation support?</h2>
+              <p style="margin-bottom: 0;">
+                QHSE initiatives are now a major challenge for companies. Because they are often transformation levers,
+                implementation support helps structure the project, limit instability, and foster team engagement.
+              </p>
+            </article>
+            <article class="support-highlight support-highlight--dark">
+              <h2 style="margin-top: 0; color: #fff;">Our objective</h2>
+              <p>We support your Quality, Safety, Hygiene, and Environment initiatives to help you:</p>
+              <ul>
+                <li>anticipate key challenges and project evolution;</li>
+                <li>promote innovative and realistic solutions;</li>
+                <li>reduce the instability period inherent to change.</li>
+              </ul>
+            </article>
+          </div>
+
           <div class="journey-cards-section">
             <h2 class="journey-cards-title">Areas of intervention</h2>
             <p class="journey-cards-lead">We deliver strong added value to your projects with tools that drive, support, and sustain change and growth.</p>
@@ -320,6 +616,75 @@
               </article>
             </div>
           </div>
+
+          <div class="prose-block" style="margin-top: 1.5rem; margin-bottom: 1rem;">
+            <h2 class="section-title" style="margin-bottom: 0.75rem;">A 5-phase implementation process</h2>
+          </div>
+
+          <div class="support-roadmap">
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">1</div>
+              <article class="support-process-card">
+                <h3>Assessment and diagnosis</h3>
+                <ul>
+                  <li>Identify strengths and weaknesses of the organization.</li>
+                  <li>Assess context, risks, and market constraints.</li>
+                  <li>Analyze potential and available resources for better decisions.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">2</div>
+              <article class="support-process-card">
+                <h3>Objective setting</h3>
+                <ul>
+                  <li>Build a clear reference frame for medium-term priorities.</li>
+                  <li>Align actions with strategic and operational directions.</li>
+                  <li>Mobilize teams and trigger action.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">3</div>
+              <article class="support-process-card">
+                <h3>Action plan deployment</h3>
+                <ul>
+                  <li>Select priority actions and mobilize key stakeholders.</li>
+                  <li>Organize workstreams and governance routines.</li>
+                  <li>Select objective and outcome indicators.</li>
+                  <li>Define tasks and deliverables for each objective.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">4</div>
+              <article class="support-process-card">
+                <h3>Performance evaluation</h3>
+                <ul>
+                  <li>Measure effectiveness of implemented actions.</li>
+                  <li>Evaluate the gap between expected and achieved results.</li>
+                  <li>Adjust ongoing plans and strengthen anticipation capacity.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="support-process-grid">
+              <div class="support-step" aria-hidden="true">5</div>
+              <article class="support-process-card">
+                <h3>Monitoring and improvement</h3>
+                <ul>
+                  <li>Evaluate processes in a systematic and methodical way.</li>
+                  <li>Control relevance and application of procedures through tailored audits.</li>
+                  <li>Verify compliance with customer, company, and regulatory requirements.</li>
+                  <li>Consolidate good practices and embed improvement over time.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+
         </div>
       </section>
     </main>
@@ -405,6 +770,48 @@
       </div>
     </footer>
     <script src="../js/main.js"></script>
+    <script>
+      (function () {
+        var steps = Array.prototype.slice.call(
+          document.querySelectorAll(".support-roadmap .support-process-grid")
+        );
+        var highlightCards = Array.prototype.slice.call(
+          document.querySelectorAll(".support-intro-grid .support-highlight")
+        );
+        if (!steps.length && !highlightCards.length) return;
+
+        var ticking = false;
+        function updateRoadmapReveal() {
+          ticking = false;
+          var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          var topTrigger = vh * 0.85;
+          var bottomTrigger = vh * 0.16;
+
+          steps.forEach(function (step) {
+            var rect = step.getBoundingClientRect();
+            var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
+            step.classList.toggle("is-visible", isVisible);
+          });
+
+          highlightCards.forEach(function (card) {
+            var rect = card.getBoundingClientRect();
+            var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
+            card.classList.toggle("is-visible", isVisible);
+          });
+        }
+
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(updateRoadmapReveal);
+        }
+
+        updateRoadmapReveal();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        window.addEventListener("load", onScroll);
+      })();
+    </script>
     <script>
       (function () {
         var mq = window.matchMedia("(max-width: 900px)");

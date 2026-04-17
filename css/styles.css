@@ -2120,6 +2120,85 @@ a.card:hover h3 {
   display: block;
 }
 
+/* Unified footer layout used across all pages */
+.site-footer.site-footer--home {
+  padding-top: 2.5rem;
+}
+
+.site-footer.site-footer--home .footer-home-main {
+  max-width: var(--max-w);
+  margin: 0 auto 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem 3rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .site-footer.site-footer--home .footer-home-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.site-footer.site-footer--home .footer-home-brand .logo-footer-img {
+  max-height: 56px;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+.site-footer.site-footer--home .footer-home-brand p {
+  margin: 0 0 0.4rem;
+  line-height: 1.5;
+}
+
+.site-footer.site-footer--home .footer-home-nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+}
+
+@media (max-width: 480px) {
+  .site-footer.site-footer--home .footer-home-nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.site-footer.site-footer--home .footer-nav-col h3 {
+  margin: 0 0 0.65rem;
+}
+
+.site-footer.site-footer--home .footer-nav-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer.site-footer--home .footer-nav-col li {
+  margin-bottom: 0.4rem;
+}
+
+.site-footer.site-footer--home .footer-nav-col a {
+  text-decoration: none;
+}
+
+.site-footer.site-footer--home .footer-nav-col a:hover {
+  text-decoration: underline;
+}
+
+.site-footer.site-footer--home .footer-home-bottom {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.site-footer.site-footer--home .footer-bottom {
+  margin-top: 0;
+  padding-top: 0;
+  border: none;
+  text-align: center;
+}
+
 /* Page header (inner pages) */
 .page-hero {
   position: relative;
