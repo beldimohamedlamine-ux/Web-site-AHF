@@ -16,5 +16,5 @@ alwaysApply: true
 - Return only the requested output format (patch, steps, short answer, etc.).
 - For code changes, produce minimal diffs and avoid unrelated edits.
 - If a task is ambiguous, ask one focused clarification question before broad exploration.
-- Do not include explicit "thinking", "reasoning", or "planning" sections unless requested.
+- Do not include explicit "thinking", "reasoning", "read", " grepped", or "planning" sections unless requested.
 - Skip optional alternatives; provide one best action by default.

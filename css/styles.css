@@ -68,6 +68,11 @@ html {
   scroll-padding-top: var(--header-scroll-padding, 152px);
 }
 
+/* Étapes du logigramme (accompagnement) : cible d’ancrage stable sous le header */
+[id^="logigramme-phase-"] {
+  scroll-margin-top: calc(var(--header-scroll-padding, 152px) + 0.75rem);
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);

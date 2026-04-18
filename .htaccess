@@ -18,6 +18,9 @@
   # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
 </IfModule>
 
+# Encodage par défaut pour les réponses texte (HTML, CSS, JS)
+AddDefaultCharset UTF-8
+
 # Pas de listage des dossiers
 Options -Indexes
 
