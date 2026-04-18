@@ -964,36 +964,70 @@
       document.querySelectorAll(".support-intro-grid .support-highlight")
     );
     if (steps.length || highlightCards.length) {
-      var ticking = false;
-      function updateRoadmapReveal() {
-        ticking = false;
-        var vh = window.innerHeight || document.documentElement.clientHeight || 0;
-        var topTrigger = vh * 0.85;
-        var bottomTrigger = vh * 0.16;
-
-        steps.forEach(function (step) {
-          var rect = step.getBoundingClientRect();
-          var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
-          step.classList.toggle("is-visible", isVisible);
-        });
-
-        highlightCards.forEach(function (card) {
-          var rect = card.getBoundingClientRect();
-          var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
-          card.classList.toggle("is-visible", isVisible);
+      function setRevealed(nodes, visible) {
+        nodes.forEach(function (node) {
+          node.classList.toggle("is-visible", visible);
         });
       }
 
-      function onScroll() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(updateRoadmapReveal);
-      }
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setRevealed(steps, true);
+        setRevealed(highlightCards, true);
+      } else if (typeof IntersectionObserver !== "undefined") {
+        /*
+         * Ancienne logique getBoundingClientRect + seuils : sur mobile (barre d’adresse,
+         * hauteur viewport) les lignes pouvaient rester en opacity:0 — IO est plus fiable.
+         */
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (en) {
+              en.target.classList.toggle("is-visible", en.isIntersecting);
+            });
+          },
+          {
+            root: null,
+            rootMargin: "18% 0px 28% 0px",
+            threshold: [0, 0.05, 0.15],
+          }
+        );
+        steps.forEach(function (el) {
+          io.observe(el);
+        });
+        highlightCards.forEach(function (el) {
+          io.observe(el);
+        });
+      } else {
+        var ticking = false;
+        function updateRoadmapReveal() {
+          ticking = false;
+          var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+          var topTrigger = vh * 0.92;
+          var bottomTrigger = vh * 0.05;
 
-      updateRoadmapReveal();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll);
-      window.addEventListener("load", onScroll);
+          steps.forEach(function (step) {
+            var rect = step.getBoundingClientRect();
+            var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
+            step.classList.toggle("is-visible", isVisible);
+          });
+
+          highlightCards.forEach(function (card) {
+            var rect = card.getBoundingClientRect();
+            var isVisible = rect.top < topTrigger && rect.bottom > bottomTrigger;
+            card.classList.toggle("is-visible", isVisible);
+          });
+        }
+
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(updateRoadmapReveal);
+        }
+
+        updateRoadmapReveal();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        window.addEventListener("load", onScroll);
+      }
     }
 
     var cards = Array.prototype.slice.call(
