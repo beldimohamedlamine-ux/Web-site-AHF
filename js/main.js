@@ -112,28 +112,19 @@
       fr: {
         labels: {
           index: "Accueil",
-          expertise: "Expertise",
-          "a-propos": "Qui sommes-nous ?",
           contact: "Contact",
-          cabinet: "Cabinet",
         },
       },
       en: {
         labels: {
           index: "Home",
-          expertise: "Expertise",
-          "a-propos": "Who we are?",
           contact: "Contact",
-          cabinet: "Firm",
         },
       },
       ar: {
         labels: {
           index: "الرئيسية",
-          expertise: "الخبرات",
-          "a-propos": "من نحن؟",
           contact: "الاتصال",
-          cabinet: "المكتب",
         },
       },
     };
@@ -143,12 +134,9 @@
     if (!/\.html$/i.test(file)) file = "index.html";
     var slug = file.replace(/\.html$/i, "").toLowerCase();
 
-    var trail;
-    if (slug === "a-propos") trail = ["cabinet", "a-propos"];
-    else trail = [slug];
+    var trail = [slug];
 
     function hrefFor(key) {
-      if (key === "cabinet") return null;
       return key === "index" ? "index.html" : key + ".html";
     }
 

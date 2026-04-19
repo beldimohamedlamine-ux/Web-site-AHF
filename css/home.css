@@ -845,6 +845,21 @@ html[dir="rtl"] .home-process.is-revealed .home-process-titles > li:nth-child(5)
   line-height: 1.55;
 }
 
+/* Referentials (norm cards) — under accompaniment process on homepage */
+.home-referentiels {
+  padding: var(--home-section-py) 1.25rem;
+  background: var(--color-white);
+}
+
+.home-referentiels .section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.home-referentiels .home-section-intro {
+  margin-bottom: 1.5rem;
+}
+
 /* Services grid */
 .home-services {
   padding: var(--home-section-py) 1.25rem;
