@@ -36,6 +36,14 @@
         scroll-snap-type: x mandatory;
         scrollbar-width: thin;
       }
+      .service-slider--centered {
+        justify-content: center;
+      }
+      @media (max-width: 820px) {
+        .service-slider--centered {
+          justify-content: start;
+        }
+      }
       .service-slider::-webkit-scrollbar {
         height: 8px;
       }
@@ -237,7 +245,7 @@
         <div class="section-inner">
           <h2 class="section-title">Exemple de mission conseil</h2>
           <p class="section-intro">Cas type d'accompagnement pour améliorer la maîtrise opérationnelle et la conformité.</p>
-          <div class="service-slider js-service-slider" aria-label="Exemple de mission conseil">
+          <div class="service-slider service-slider--centered js-service-slider" aria-label="Exemple de mission conseil">
             <article class="service-card">
               <h3>Avant</h3>
               <p>Actions dispersées, documentation hétérogène, difficultés à prioriser les urgences.</p>
