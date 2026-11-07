@@ -1,0 +1,14 @@
+---
+description: Maintain French as primary source language and synchronize changes across all 3 languages (FR, EN, AR)
+alwaysApply: true
+---
+
+# Multilingual Synchronization Rules
+
+- **Primary Source:** French (`lang="fr"`) located at the root of the project is the master language for all content, design, and structural changes.
+- **Automatic 3-Language Propagation:** Whenever any edit is made to a root French page (`*.html`), the corresponding changes MUST immediately be applied to both the English (`en/*.html`) and Arabic (`ar/*.html`) versions.
+- **Language Requirements:**
+  - Arabic (`ar/`) pages must preserve `dir="rtl"` and accurate Arabic terminology.
+  - English (`en/`) pages must use clean, professional B2B phrasing.
+  - Verify relative links, language switches, and metadata across all 3 versions for strict parity.
+

@@ -914,7 +914,7 @@
     var resetButton = document.getElementById("training-module-reset");
     var countLabel = document.getElementById("training-filter-count");
     var tableRows = Array.prototype.slice.call(document.querySelectorAll(".training-table tbody tr"));
-    if (!filterInput || !resetButton || !countLabel || !tableRows.length) return;
+    if (!filterInput || !countLabel || !tableRows.length) return;
 
     function updateCount() {
       var visibleCount = tableRows.filter(function (row) {
@@ -936,11 +936,23 @@
     }
 
     filterInput.addEventListener("input", applyFilter);
-    resetButton.addEventListener("click", function () {
-      filterInput.value = "";
-      applyFilter();
-      filterInput.focus();
+    filterInput.addEventListener("search", applyFilter);
+    filterInput.addEventListener("change", applyFilter);
+    filterInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        applyFilter();
+      }
     });
+
+    if (resetButton) {
+      resetButton.addEventListener("click", function () {
+        filterInput.value = "";
+        applyFilter();
+        filterInput.focus();
+      });
+    }
+
     updateCount();
   }
 
