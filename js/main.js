@@ -914,9 +914,10 @@
     var resetButton = document.getElementById("training-module-reset");
     var countLabel = document.getElementById("training-filter-count");
     var tableRows = Array.prototype.slice.call(document.querySelectorAll(".training-table tbody tr"));
-    if (!filterInput || !countLabel || !tableRows.length) return;
+    if (!filterInput || !tableRows.length) return;
 
     function updateCount() {
+      if (!countLabel) return;
       var visibleCount = tableRows.filter(function (row) {
         return row.style.display !== "none";
       }).length;
