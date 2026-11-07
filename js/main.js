@@ -911,50 +911,76 @@
 
   function initTrainingModulesFilter() {
     var filterInput = document.getElementById("training-module-filter");
-    var resetButton = document.getElementById("training-module-reset");
-    var countLabel = document.getElementById("training-filter-count");
+    var categoryPills = Array.prototype.slice.call(document.querySelectorAll(".training-category-pill"));
+    var downloadBtn = document.getElementById("btn-download-catalog");
     var tableRows = Array.prototype.slice.call(document.querySelectorAll(".training-table tbody tr"));
-    if (!filterInput || !tableRows.length) return;
+    if (!tableRows.length) return;
 
-    function updateCount() {
-      if (!countLabel) return;
-      var visibleCount = tableRows.filter(function (row) {
-        return row.style.display !== "none";
-      }).length;
-      var lang = (document.documentElement.getAttribute("lang") || "fr").toLowerCase();
-      if (lang === "en") countLabel.textContent = visibleCount === 0 ? "0 results" : visibleCount + " module(s) shown";
-      else if (lang === "ar") countLabel.textContent = visibleCount === 0 ? "0 نتيجة" : visibleCount + " وحدة ظاهرة";
-      else countLabel.textContent = visibleCount === 0 ? "0 resultats" : visibleCount + " module(s) affiche(s)";
-    }
+    var activeCategory = "all";
 
     function applyFilter() {
-      var query = (filterInput.value || "").toLowerCase().trim();
+      var query = (filterInput && filterInput.value ? filterInput.value : "").toLowerCase().trim();
       tableRows.forEach(function (row) {
+        var rowCat = (row.getAttribute("data-category") || "").toLowerCase();
+        var catMatch = (activeCategory === "all") || (rowCat.indexOf(activeCategory) !== -1);
         var searchableText = (row.textContent || "").replace(/\s+/g, " ").toLowerCase();
-        row.style.display = !query || searchableText.indexOf(query) !== -1 ? "" : "none";
+        var textMatch = !query || (searchableText.indexOf(query) !== -1);
+        row.style.display = (catMatch && textMatch) ? "" : "none";
       });
-      updateCount();
     }
 
-    filterInput.addEventListener("input", applyFilter);
-    filterInput.addEventListener("search", applyFilter);
-    filterInput.addEventListener("change", applyFilter);
-    filterInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
+    if (filterInput) {
+      filterInput.addEventListener("input", applyFilter);
+      filterInput.addEventListener("search", applyFilter);
+      filterInput.addEventListener("change", applyFilter);
+      filterInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          applyFilter();
+        }
+      });
+    }
+
+    categoryPills.forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        categoryPills.forEach(function (p) {
+          p.classList.remove("is-active");
+          p.setAttribute("aria-selected", "false");
+        });
+        pill.classList.add("is-active");
+        pill.setAttribute("aria-selected", "true");
+        activeCategory = pill.getAttribute("data-category") || "all";
         applyFilter();
-      }
+      });
     });
 
-    if (resetButton) {
-      resetButton.addEventListener("click", function () {
-        filterInput.value = "";
-        applyFilter();
-        filterInput.focus();
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", function () {
+        window.print();
       });
     }
 
-    updateCount();
+    applyFilter();
+  }
+
+  function initPreFilledSubject() {
+    var subjectInput = document.getElementById("contact-subject");
+    if (!subjectInput) return;
+    try {
+      var urlParams = new URLSearchParams(window.location.search);
+      var formation = urlParams.get("formation");
+      if (formation) {
+        var lang = (document.documentElement.getAttribute("lang") || "fr").toLowerCase();
+        var prefix = "Demande de programme : ";
+        if (lang === "en") prefix = "Training programme inquiry: ";
+        else if (lang === "ar") prefix = "طلب برنامج تكوين: ";
+        subjectInput.value = prefix + decodeURIComponent(formation);
+        setTimeout(function () {
+          subjectInput.scrollIntoView({ behavior: "smooth", block: "center" });
+          subjectInput.focus();
+        }, 300);
+      }
+    } catch (e) {}
   }
 
   function initAccompagnementEnhancements() {
@@ -1219,6 +1245,7 @@
   initFastPageNavigation();
   initServiceCardSliders();
   initSmoothServiceFaq();
+  initPreFilledSubject();
 })();
 
 var FICHE_FORM_LABELS = {

@@ -66,11 +66,6 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   position: relative;
   overflow: hidden;
   background-color: #0c1826;
-  /* Même visuel pour toutes les diapos : l’image reste fixe sur le conteneur pendant que le contenu glisse */
-  background-image: url("../images/hero-home-carousel-bg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .home-hero-swiper .swiper-slide {
@@ -78,23 +73,79 @@ html[dir="rtl"] body.page-home .header-topbar-inner {
   min-height: min(72vh, 640px);
   display: flex;
   align-items: stretch;
-  background: transparent;
-  background-image: none;
+  overflow: hidden;
+  background-color: #0c1826;
 }
 
-.home-hero-swiper .swiper-slide::before {
+/* Image d’arrière-plan attachée à chaque diapositive : elle bouge avec la glissade */
+.home-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transform: scale(1);
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Effet Ken Burns : zoom cinématique fluide sur la diapositive active */
+.home-hero-swiper .swiper-slide-active .home-hero-bg {
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-bg,
+  .home-hero-swiper .swiper-slide-active .home-hero-bg {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Visuel distinct par diapositive */
+.home-hero-bg--1,
+.home-hero-slide--1 .home-hero-bg {
+  background-image: url("../images/hero-home-carousel-bg.png");
+}
+
+.home-hero-bg--2,
+.home-hero-slide--2 .home-hero-bg {
+  background-image: url("../static/images/services/accompagnement.jpg");
+}
+
+.home-hero-bg--3,
+.home-hero-slide--3 .home-hero-bg {
+  background-image: url("../static/images/services/audit.jpg");
+}
+
+/* Voile dégradé sombre sur chaque diapositive pour garantir un contraste et une lisibilité parfaits du texte */
+.home-hero-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 90% 70% at 100% 20%, rgba(112, 32, 60, 0.28), transparent 52%),
+    radial-gradient(ellipse 90% 70% at 100% 20%, rgba(112, 32, 60, 0.35), transparent 55%),
     linear-gradient(
       105deg,
       rgba(10, 22, 38, 0.93) 0%,
-      rgba(20, 42, 69, 0.82) 40%,
-      rgba(60, 28, 45, 0.52) 100%
+      rgba(20, 42, 69, 0.83) 42%,
+      rgba(60, 28, 45, 0.55) 100%
     );
-  z-index: 0;
+  z-index: 1;
+}
+
+[dir="rtl"] .home-hero-bg::after {
+  background:
+    radial-gradient(ellipse 90% 70% at 0% 20%, rgba(112, 32, 60, 0.35), transparent 55%),
+    linear-gradient(
+      255deg,
+      rgba(10, 22, 38, 0.93) 0%,
+      rgba(20, 42, 69, 0.83) 42%,
+      rgba(60, 28, 45, 0.55) 100%
+    );
 }
 
 .home-hero-slide-inner {
@@ -1127,7 +1178,7 @@ a.home-service-card:focus-visible {
 
 /* Newsletter band */
 .home-newsletter {
-  padding: clamp(2.25rem, 5vw, 3rem) 1.25rem;
+  padding: clamp(0.95rem, 2vw, 1.35rem) 1.25rem;
   background: linear-gradient(
     90deg,
     var(--color-logo-burgundy) 0%,
@@ -1144,24 +1195,26 @@ a.home-service-card:focus-visible {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .home-newsletter-text h2 {
-  margin: 0 0 0.35rem;
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  margin: 0 0 0.15rem;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
   font-weight: 800;
 }
 
 .home-newsletter-text p {
   margin: 0;
   opacity: 0.92;
-  font-size: 0.95rem;
-  max-width: 40ch;
+  font-size: 0.88rem;
+  max-width: 65ch;
 }
 
 .home-newsletter .btn-primary {
   flex-shrink: 0;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.86rem;
 }
 
 /* Clients — carrousel (page d’accueil) */
