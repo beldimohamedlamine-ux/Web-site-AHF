@@ -1,5 +1,5 @@
-# robots.txt for https://ahf-consulting.com/
+# robots.txt for https://beldimohamedlamine-ux.github.io/Web-site-AHF/
 User-agent: *
 Allow: /
 
-Sitemap: https://ahf-consulting.com/sitemap.xml
+Sitemap: https://beldimohamedlamine-ux.github.io/Web-site-AHF/sitemap.xml
