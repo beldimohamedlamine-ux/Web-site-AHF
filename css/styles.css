@@ -40,10 +40,10 @@
   /* Menu mobile `top` / max-height : valeurs stables par état (inclut la bande annonce ISO 2026 au-dessus de la topbar) */
   --header-offset-expanded-desktop: 114px;
   --header-offset-compact-desktop: 98px;
-  --header-offset-expanded-mobile: 112px;
+  --header-offset-expanded-mobile: 172px;
   --header-offset-compact-mobile: 98px;
   /* Décalage ancres / focus : stable, basé sur l’en-tête pleine hauteur (évite les à-coups si --header-offset varie au scroll) */
-  --header-scroll-padding: 128px;
+  --header-scroll-padding: 190px;
   /* Logo PNG vertical (globe + CONSULTING), fond transparent — tailles d’affichage */
   --header-logo-max-h: 62px;
   --header-logo-max-w: 180px;
@@ -84,7 +84,7 @@ body {
   background: var(--color-bg);
   background-image: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(112, 32, 60, 0.04), transparent 50%);
   /* Header global fixe: reserve space under top bars */
-  padding-top: var(--header-offset-expanded-desktop);
+  padding-top: var(--header-actual-height, var(--header-offset-expanded-desktop));
   /* Réduit les corrections d’ancrage du navigateur quand le sticky change de hauteur (Chrome) */
   overflow-anchor: none;
 }
@@ -215,7 +215,7 @@ a:hover {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   /* Hauteur logique pour descendants (.nav fixed) — pas de JS au scroll */
-  --header-offset: var(--header-offset-expanded-desktop);
+  --header-offset: var(--header-actual-height, var(--header-offset-expanded-desktop));
 }
 
 .site-header.is-compact {
@@ -3517,14 +3517,14 @@ table.data tbody tr:hover {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding-top: var(--header-offset-expanded-mobile);
+    padding-top: var(--header-actual-height, var(--header-offset-expanded-mobile));
   }
 
   .site-header {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    --header-offset: var(--header-offset-expanded-mobile);
+    --header-offset: var(--header-actual-height, var(--header-offset-expanded-mobile));
   }
 
   .site-header.is-compact {
@@ -3645,6 +3645,8 @@ table.data tbody tr:hover {
   .page-hero {
     padding-left: max(1rem, env(safe-area-inset-left, 0px));
     padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    padding-top: clamp(2rem, 6vw, 3rem);
+    padding-bottom: clamp(2rem, 6vw, 3rem);
   }
 
   .page-hero h1 {
@@ -4221,24 +4223,48 @@ html[dir="rtl"] .iso2026-modal-close {
 
 @media (max-width: 640px) {
   .iso2026-flash-bar-inner {
-    padding: 0.45rem 0.75rem;
-    gap: 0.35rem 0.55rem;
+    padding: 0.35rem 0.65rem;
+    gap: 0.3rem 0.5rem;
   }
 
   .iso2026-flash-badge {
-    font-size: 0.68rem;
-    padding: 0.16rem 0.55rem;
+    font-size: 0.66rem;
+    padding: 0.14rem 0.5rem;
   }
 
   .iso2026-flash-text {
-    font-size: 0.78rem;
-    gap: 0.2rem 0.4rem;
+    font-size: 0.76rem;
+    line-height: 1.3;
+    gap: 0.2rem 0.35rem;
   }
 
   .iso2026-flash-btn {
-    font-size: 0.74rem;
-    padding: 0.25rem 0.7rem;
+    font-size: 0.72rem;
+    padding: 0.22rem 0.65rem;
   }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-offset-expanded-mobile: 182px;
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    --header-offset-expanded-mobile: 196px;
+  }
+}
+
+html[lang="ar"] {
+  --header-offset-expanded-mobile: 182px;
+}
+
+@media (max-width: 480px) {
+  html[lang="ar"] {
+    --header-offset-expanded-mobile: 196px;
+  }
+}
 
   .iso2026-modal-backdrop {
     padding: max(0.5rem, env(safe-area-inset-top, 0px)) 0.5rem max(1rem, env(safe-area-inset-bottom, 0px));
@@ -4314,7 +4340,7 @@ html[dir="rtl"] .iso2026-modal-close {
     margin-inline-start: 0;
     text-align: center;
   }
-}
+
 
 @media (prefers-reduced-motion: reduce) {
   .iso2026-flash-dot {

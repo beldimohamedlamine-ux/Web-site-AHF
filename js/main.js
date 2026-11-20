@@ -156,15 +156,31 @@
       });
   }
 
-  /** Décalage ancres (scroll-padding / scroll-margin) : mesuré une seule fois en haut de page, pas lié au mode compact. */
+  /** Décalage ancres et espacement en-tête fixe (body padding-top, ancres, menu mobile) : mesuré en haut de page */
   function syncHeaderScrollPadding() {
     var header = document.querySelector(".site-header");
     if (!header) return;
-    if (window.scrollY > 48) return;
-    document.documentElement.style.setProperty(
-      "--header-scroll-padding",
-      Math.ceil(header.offsetHeight + 16) + "px"
-    );
+    var h = Math.ceil(header.offsetHeight);
+    if (h > 0) {
+      document.documentElement.style.setProperty("--header-actual-height", h + "px");
+      if (window.scrollY <= 48) {
+        document.documentElement.style.setProperty(
+          "--header-scroll-padding",
+          (h + 16) + "px"
+        );
+        if (window.innerWidth <= 900) {
+          document.documentElement.style.setProperty(
+            "--header-offset-expanded-mobile",
+            h + "px"
+          );
+        } else {
+          document.documentElement.style.setProperty(
+            "--header-offset-expanded-desktop",
+            h + "px"
+          );
+        }
+      }
+    }
   }
 
   function initLangDropdown() {
@@ -1364,6 +1380,9 @@
         "</div>";
       headerEl.insertBefore(bar, headerEl.firstChild);
       syncHeaderScrollPadding();
+      if (window.requestAnimationFrame) {
+        requestAnimationFrame(syncHeaderScrollPadding);
+      }
     }
 
     /* Construction de la fenêtre Spotlight Modal 2026 */
