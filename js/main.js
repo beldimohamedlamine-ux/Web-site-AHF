@@ -167,84 +167,6 @@
     );
   }
 
-  function applySitemapBreadcrumb() {
-    var crumbs = document.querySelectorAll(".site-map-crumb");
-    if (!crumbs.length) return;
-
-    var pathname = (window.location.pathname || "").replace(/\\/g, "/");
-    var parts = pathname.split("/").filter(Boolean);
-    var locale = "fr";
-    if (parts[0] === "en" || parts[0] === "ar") locale = parts[0];
-    var langMap = {
-      fr: {
-        labels: {
-          index: "Accueil",
-          contact: "Contact",
-        },
-      },
-      en: {
-        labels: {
-          index: "Home",
-          contact: "Contact",
-        },
-      },
-      ar: {
-        labels: {
-          index: "الرئيسية",
-          contact: "الاتصال",
-        },
-      },
-    };
-    var labels = (langMap[locale] || langMap.fr).labels;
-
-    var file = parts.length ? parts[parts.length - 1] : "index.html";
-    if (!/\.html$/i.test(file)) file = "index.html";
-    var slug = file.replace(/\.html$/i, "").toLowerCase();
-
-    var trail = [slug];
-
-    function hrefFor(key) {
-      return key === "index" ? "index.html" : key + ".html";
-    }
-
-    crumbs.forEach(function (crumb) {
-      var svg = crumb.querySelector("svg");
-      if (!svg) return;
-      Array.prototype.slice.call(crumb.children).forEach(function (node) {
-        if (node !== svg) crumb.removeChild(node);
-      });
-
-      var pathWrap = document.createElement("span");
-      pathWrap.className = "site-map-crumb-path";
-
-      trail.forEach(function (key, idx) {
-        var sep = document.createElement("span");
-        sep.className = "site-map-crumb-sep";
-        sep.textContent = "/";
-        pathWrap.appendChild(sep);
-
-        var label = labels[key] || key;
-        var isLast = idx === trail.length - 1;
-        var href = hrefFor(key);
-
-        if (!isLast && href) {
-          var link = document.createElement("a");
-          link.className = "site-map-crumb-link";
-          link.href = href;
-          link.textContent = label;
-          pathWrap.appendChild(link);
-        } else {
-          var current = document.createElement("span");
-          current.className = "site-map-crumb-current";
-          current.textContent = label;
-          pathWrap.appendChild(current);
-        }
-      });
-
-      crumb.appendChild(pathWrap);
-    });
-  }
-
   function initLangDropdown() {
     document.querySelectorAll(".lang-switch").forEach(function (switcher) {
       var links = Array.prototype.slice.call(switcher.querySelectorAll("a"));
@@ -425,7 +347,6 @@
   }
 
   syncHeaderScrollPadding();
-  applySitemapBreadcrumb();
   initLangDropdown();
   initHeaderNavActivePill();
   function normalizeHashScrollPosition() {

@@ -115,8 +115,6 @@ h1, h2, h3, h4, h5, h6,
 
 /* En-têtes secondaires de structure/navigation conservés en sans-serif */
 .site-footer h3,
-.site-map h3,
-.site-map-column h3,
 .footer-nav-col h3 {
   font-family: var(--font-sans);
 }
@@ -2068,158 +2066,6 @@ a.card:hover h3 {
   transform: translateY(-2px);
 }
 
-/* Sitemap block */
-.site-map {
-  background: linear-gradient(180deg, #0a1628 0%, #02050b 55%, #02050b 100%);
-  color: rgba(255, 255, 255, 0.9);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0;
-}
-
-.site-map-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-}
-
-.site-map-head {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.8rem;
-  min-height: 2rem;
-  padding: 0.45rem 0;
-  margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.site-map-title {
-  margin: 0;
-  margin-inline-start: auto;
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-#site-map-title {
-  scroll-margin-top: calc(var(--header-scroll-padding, 152px) + 0.75rem);
-}
-
-.site-map-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-  gap: 1rem 1.4rem;
-  padding: 1rem 0 1.25rem;
-}
-
-.site-map-column h3 {
-  margin: 0 0 0.35rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--color-white);
-}
-
-.site-map-column ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.site-map-column li {
-  margin: 0 0 0.22rem;
-}
-
-.site-map-column a {
-  color: rgba(255, 255, 255, 0.78);
-  text-decoration: none;
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-
-.site-map-column a:hover {
-  color: var(--color-white);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.site-map-dropdown {
-  margin: 0;
-}
-
-.site-map-dropdown > summary {
-  list-style: none;
-  cursor: pointer;
-}
-
-.site-map-dropdown > summary::-webkit-details-marker {
-  display: none;
-}
-
-.site-map-dropdown > summary::before {
-  content: "";
-  width: 0.42rem;
-  height: 0.42rem;
-  border-right: 2px solid rgba(255, 255, 255, 0.85);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.85);
-  transform: rotate(45deg);
-  margin-inline-start: 0.45rem;
-  margin-top: -0.15rem;
-  transition: transform 0.2s ease;
-  order: 3;
-}
-
-.site-map-dropdown[open] > summary::before {
-  transform: rotate(225deg) translate(-1px, -1px);
-}
-
-.site-map-dropdown:not([open]) .site-map-grid {
-  display: none;
-}
-
-.site-map-crumb {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.82rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.site-map-crumb svg {
-  width: 0.85rem;
-  height: 0.85rem;
-  flex-shrink: 0;
-}
-
-.site-map-crumb-path {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.28rem;
-  flex-wrap: wrap;
-}
-
-.site-map-crumb-sep {
-  opacity: 0.8;
-}
-
-.site-map-crumb-link {
-  color: rgba(255, 255, 255, 0.86);
-  text-decoration: none;
-}
-
-.site-map-crumb-link:hover {
-  color: var(--color-white);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.site-map-crumb-current {
-  color: rgba(255, 255, 255, 0.96);
-  font-weight: 600;
-}
-
 /* Footer */
 .site-footer {
   background: linear-gradient(
@@ -3894,27 +3740,6 @@ table.data tbody tr:hover {
     grid-template-columns: 1fr;
   }
 
-  .site-map {
-    padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
-    padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
-  }
-
-  .site-map-head {
-    justify-content: flex-start;
-  }
-
-  .site-map-dropdown > summary::before {
-    order: 3;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    margin-top: -0.15rem;
-  }
-
-  .site-map-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
-
   .footer-bottom {
     padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
     padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
@@ -3975,10 +3800,6 @@ table.data tbody tr:hover {
 }
 
 @media (max-width: 480px) {
-  .site-map-grid {
-    grid-template-columns: 1fr;
-  }
-
   .header-slot-brand {
     max-width: min(56vw, 220px);
   }
