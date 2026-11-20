@@ -1,0 +1,5 @@
+# robots.txt for https://ahf-consulting.com/
+User-agent: *
+Allow: /
+
+Sitemap: https://ahf-consulting.com/sitemap.xml

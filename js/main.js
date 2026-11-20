@@ -2,6 +2,73 @@
   /** Envoi vers la boîte cabinet via Formspree (https://formspree.io). */
   var AHF_FORM_SUBMIT_AJAX = "https://formspree.io/f/xwvwqbjn";
 
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;")
+      .replace(/\n/g, "<br>");
+  }
+
+  function showNotification(message, type, duration) {
+    if (!message) return;
+    type = type || "info";
+    duration = duration !== undefined ? duration : (type === "error" ? 6000 : 4500);
+
+    var container = document.getElementById("site-toast-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "site-toast-container";
+      container.className = "site-toast-container";
+      container.setAttribute("role", "region");
+      container.setAttribute("aria-label", "Notifications");
+      document.body.appendChild(container);
+    }
+
+    var toast = document.createElement("div");
+    toast.className = "site-toast site-toast--" + type;
+    toast.setAttribute("role", type === "error" ? "alert" : "status");
+    toast.setAttribute("aria-live", type === "error" ? "assertive" : "polite");
+
+    var iconSvg = "";
+    if (type === "success") {
+      iconSvg = '<svg class="site-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>';
+    } else if (type === "error") {
+      iconSvg = '<svg class="site-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    } else {
+      iconSvg = '<svg class="site-toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+    }
+
+    var bodyHtml = '<div class="site-toast-body">' + escapeHtml(message) + '</div>';
+    var closeBtn = '<button type="button" class="site-toast-close" aria-label="Fermer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>';
+
+    toast.innerHTML = iconSvg + bodyHtml + closeBtn;
+    container.appendChild(toast);
+
+    requestAnimationFrame(function () {
+      toast.classList.add("is-visible");
+    });
+
+    var timer = null;
+    function hideToast() {
+      if (timer) clearTimeout(timer);
+      toast.classList.remove("is-visible");
+      toast.classList.add("is-hiding");
+      setTimeout(function () {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 300);
+    }
+
+    var closeEl = toast.querySelector(".site-toast-close");
+    if (closeEl) closeEl.addEventListener("click", hideToast);
+
+    if (duration > 0) {
+      timer = setTimeout(hideToast, duration);
+    }
+  }
+
   function formSubmitMessages(lang) {
     var L = {
       fr: {
@@ -76,14 +143,14 @@
           submitBtn.textContent = prevText;
         }
         if (result.ok) {
-          window.alert(m.ok);
+          showNotification(m.ok, "success");
           return true;
         }
         if (result.data === null) {
-          window.alert(m.net);
+          showNotification(m.net, "error");
         } else {
           var apiMsg = result.data && result.data.message ? String(result.data.message).trim() : "";
-          window.alert(apiMsg ? m.err + "\n\n" + apiMsg : m.err);
+          showNotification(apiMsg ? m.err + " (" + apiMsg + ")" : m.err, "error");
         }
         return false;
       });
@@ -531,40 +598,44 @@
       if (!name) {
         var nameEl = document.getElementById("contact-name");
         if (nameEl) nameEl.focus();
-        window.alert(
-          lang === "en" ? "Please enter your name." : lang === "ar" ? "يرجى إدخال الاسم." : "Veuillez renseigner votre nom."
+        showNotification(
+          lang === "en" ? "Please enter your name." : lang === "ar" ? "يرجى إدخال الاسم." : "Veuillez renseigner votre nom.",
+          "error"
         );
         return;
       }
       if (!email) {
         var emailEl = document.getElementById("contact-email");
         if (emailEl) emailEl.focus();
-        window.alert(
-          lang === "en" ? "Please enter your email." : lang === "ar" ? "يرجى إدخال البريد." : "Veuillez renseigner votre e-mail."
+        showNotification(
+          lang === "en" ? "Please enter your email." : lang === "ar" ? "يرجى إدخال البريد." : "Veuillez renseigner votre e-mail.",
+          "error"
         );
         return;
       }
       if (!sub) {
         var subEl = document.getElementById("contact-subject");
         if (subEl) subEl.focus();
-        window.alert(
+        showNotification(
           lang === "en"
             ? "Please enter a subject."
             : lang === "ar"
               ? "يرجى إدخال الموضوع."
-              : "Veuillez renseigner l’objet."
+              : "Veuillez renseigner l’objet.",
+          "error"
         );
         return;
       }
       if (!msg) {
         var msgEl = document.getElementById("contact-body");
         if (msgEl) msgEl.focus();
-        window.alert(
+        showNotification(
           lang === "en"
             ? "Please enter a message."
             : lang === "ar"
               ? "يرجى إدخال الرسالة."
-              : "Veuillez saisir votre message."
+              : "Veuillez saisir votre message.",
+          "error"
         );
         return;
       }
@@ -675,12 +746,13 @@
       if (!repEmail) {
         var repMailInput = ficheForm.querySelector('[name="rep_email"]');
         if (repMailInput) repMailInput.focus();
-        window.alert(
+        showNotification(
           lang === "en"
             ? "Please enter the representative’s email address so we can reply."
             : lang === "ar"
               ? "يرجى إدخال بريد الممثل للردّ عليكم."
-              : "Veuillez renseigner l’e-mail du / de la représentant(e) pour que nous puissions répondre."
+              : "Veuillez renseigner l’e-mail du / de la représentant(e) pour que nous puissions répondre.",
+          "error"
         );
         return;
       }
@@ -1087,8 +1159,6 @@
 
   function initFastPageNavigation() {
     var prefetched = Object.create(null);
-    var navLock = false;
-    var NAV_LOCK_MS = 1200;
 
     function isPrefetchableLink(anchor) {
       if (!anchor || !anchor.href) return false;
@@ -1141,24 +1211,6 @@
         prefetchLink(a);
       },
       { passive: true, capture: true }
-    );
-
-    document.addEventListener(
-      "click",
-      function (e) {
-        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-        var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-        if (!a || !isPrefetchableLink(a)) return;
-        if (navLock) {
-          e.preventDefault();
-          return;
-        }
-        navLock = true;
-        window.setTimeout(function () {
-          navLock = false;
-        }, NAV_LOCK_MS);
-      },
-      true
     );
   }
 

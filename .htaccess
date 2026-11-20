@@ -21,6 +21,9 @@
 # Encodage par défaut pour les réponses texte (HTML, CSS, JS)
 AddDefaultCharset UTF-8
 
+# Page 404 personnalisée
+ErrorDocument 404 /404.html
+
 # Pas de listage des dossiers
 Options -Indexes
 
