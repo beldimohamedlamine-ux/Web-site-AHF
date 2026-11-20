@@ -228,6 +228,182 @@
       .training-print-brand {
         display: none;
       }
+
+      /* ==========================================================================
+         Transformation Responsive en Cartes Mobiles (Écrans <= 768px)
+         ========================================================================== */
+      @media (max-width: 768px) {
+        .training-catalog-shell {
+          padding: 0.85rem 0.65rem;
+          border-radius: 16px;
+        }
+
+        .training-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.65rem;
+        }
+
+        .training-filter-bar {
+          flex-direction: column;
+          align-items: stretch;
+          flex: 1 1 auto;
+        }
+
+        .training-filter-select {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .btn-download-catalog {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .training-categories {
+          overflow-x: auto;
+          flex-wrap: nowrap;
+          padding-bottom: 0.5rem;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+        }
+
+        .training-category-pill {
+          flex-shrink: 0;
+          white-space: nowrap;
+        }
+
+        .training-table-wrap {
+          overflow-x: visible;
+          border: none;
+          background: transparent;
+        }
+
+        .training-table {
+          min-width: 0 !important;
+          width: 100% !important;
+          display: block !important;
+        }
+
+        .training-table thead {
+          display: none !important;
+        }
+
+        .training-table tbody {
+          display: flex !important;
+          flex-direction: column;
+          gap: 0.85rem;
+          width: 100%;
+        }
+
+        .training-table tbody tr {
+          display: flex !important;
+          flex-direction: column;
+          background: #ffffff !important;
+          border: 1px solid #d8e2f0 !important;
+          border-radius: 14px;
+          padding: 1rem 0.95rem;
+          box-shadow: 0 4px 12px rgba(16, 52, 98, 0.05);
+          transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .training-table tbody tr:hover {
+          border-color: #a8c8f5 !important;
+          box-shadow: 0 6px 18px rgba(16, 52, 98, 0.1);
+        }
+
+        .training-table td {
+          display: block !important;
+          padding: 0.35rem 0 !important;
+          border: none !important;
+          text-align: start !important;
+        }
+
+        /* Titre du module (1ère td) */
+        .training-table td:nth-child(1) {
+          font-size: 1.02rem;
+          color: #103a6f;
+          padding-bottom: 0.45rem !important;
+          border-bottom: 1px solid #edf2f9 !important;
+          margin-bottom: 0.45rem;
+          line-height: 1.35;
+        }
+
+        /* Détails & contenu clé (2ème td) */
+        .training-table td:nth-child(2) {
+          font-size: 0.88rem;
+          color: #334155;
+          line-height: 1.45;
+          margin-bottom: 0.5rem;
+        }
+
+        /* Durée estimée (3ème td) */
+        .training-table td:nth-child(3) {
+          font-size: 0.84rem;
+          color: #1e293b;
+          margin-bottom: 0.25rem;
+          white-space: normal !important;
+          text-align: start !important;
+        }
+
+        .training-table td:nth-child(3)::before {
+          content: "⏱ Durée : ";
+          font-weight: 700;
+          color: #133f7b;
+        }
+
+        html[lang="ar"] .training-table td:nth-child(3)::before {
+          content: "⏱ المدة : ";
+        }
+
+        html[lang="en"] .training-table td:nth-child(3)::before {
+          content: "⏱ Duration: ";
+        }
+
+        /* Public cible (4ème td) */
+        .training-table td:nth-child(4) {
+          font-size: 0.84rem;
+          color: #475569;
+          margin-bottom: 0.65rem;
+          line-height: 1.4;
+        }
+
+        .training-table td:nth-child(4)::before {
+          content: "👥 Public : ";
+          font-weight: 700;
+          color: #133f7b;
+        }
+
+        html[lang="ar"] .training-table td:nth-child(4)::before {
+          content: "👥 الفئة المستهدفة : ";
+        }
+
+        html[lang="en"] .training-table td:nth-child(4)::before {
+          content: "👥 Target Audience: ";
+        }
+
+        /* Action Programmer (5ème td) */
+        .training-table td:nth-child(5) {
+          padding-top: 0.55rem !important;
+          border-top: 1px solid #edf2f9 !important;
+          text-align: start !important;
+        }
+
+        .training-table td:nth-child(5) .btn-module-action {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          padding: 0.65rem 1rem;
+          font-size: 0.88rem;
+          font-weight: 700;
+          border-radius: 8px;
+          background: #133f7b;
+          color: #ffffff;
+          box-shadow: 0 2px 8px rgba(19, 63, 123, 0.2);
+        }
+      }
+
       @page {
         size: A4 landscape;
         margin: 8mm 6mm;

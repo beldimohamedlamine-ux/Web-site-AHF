@@ -1522,21 +1522,14 @@
       try {
         sessionStorage.setItem(SEEN_KEY, "1");
       } catch (e) {}
-      try {
-        if ((window.name || "").indexOf(SEEN_KEY + "=1") === -1) {
-          window.name = (window.name ? window.name + ";" : "") + SEEN_KEY + "=1";
-        }
-      } catch (e) {}
     }
 
     function hasSeenModal() {
       try {
-        if (sessionStorage.getItem(SEEN_KEY) === "1") return true;
-      } catch (e) {}
-      try {
-        if ((window.name || "").indexOf(SEEN_KEY + "=1") !== -1) return true;
-      } catch (e) {}
-      return false;
+        return sessionStorage.getItem(SEEN_KEY) === "1";
+      } catch (e) {
+        return false;
+      }
     }
 
     function openModal() {
@@ -1545,6 +1538,9 @@
       backdrop.classList.add("is-open");
       backdrop.setAttribute("aria-hidden", "false");
       document.body.classList.add("iso2026-modal-open");
+      backdrop.scrollTop = 0;
+      var modalEl = backdrop.querySelector(".iso2026-modal");
+      if (modalEl) modalEl.scrollTop = 0;
       var closeBtn = backdrop.querySelector(".iso2026-modal-close");
       if (closeBtn) {
         setTimeout(function () {
