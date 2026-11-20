@@ -640,10 +640,10 @@
       line("employees_managers", fd.get("employees_managers"));
 
       var certs = [];
-      if (fd.get("cert_iso9001")) certs.push("ISO 9001:2015");
-      if (fd.get("cert_iso14001")) certs.push("ISO 14001:2015");
-      if (fd.get("cert_iso45001")) certs.push("ISO 45001:2018");
-      if (fd.get("cert_iso22000")) certs.push("ISO 22000:2018");
+      if (fd.get("cert_iso9001")) certs.push("ISO 9001");
+      if (fd.get("cert_iso14001")) certs.push("ISO 14001");
+      if (fd.get("cert_iso45001")) certs.push("ISO 45001");
+      if (fd.get("cert_iso22000")) certs.push("ISO 22000");
       if (fd.get("cert_other")) {
         var other = (fd.get("cert_other_detail") || "").trim();
         var otherLbl = lang === "en" ? "Other" : lang === "ar" ? "أخرى" : "Autre";
@@ -1236,6 +1236,320 @@
     });
   }
 
+  function initIso2026Spotlight() {
+    var langAttr = (document.documentElement.getAttribute("lang") || "fr").toLowerCase();
+    var lang = langAttr.indexOf("en") === 0 ? "en" : langAttr.indexOf("ar") === 0 ? "ar" : "fr";
+
+    var standardsOnlyHtml =
+      '<strong>ISO 9001 v2026</strong> <span class="iso2026-flash-sep" aria-hidden="true">•</span> <strong>ISO 14001 v2026</strong> <span class="iso2026-flash-sep" aria-hidden="true">•</span> <strong>ISO 19011 v2026</strong>';
+
+    var copy = {
+      fr: {
+        regionLabel: "Annonce spéciale révisions ISO 2026",
+        barBadge: "Nouvelles éditions 2026",
+        barText: standardsOnlyHtml,
+        barBtn: "Découvrir l’offre 2026",
+        modalEyebrow: "ACTUALITÉ NORMATIVE 2026 • TRANSITION &amp; AUDIT",
+        modalTitle: "Cap sur les nouvelles éditions ISO 2026",
+        cards: [
+          {
+            code: "ISO 9001",
+            ver: "v2026",
+            title: "Management de la Qualité",
+            desc: "Intégration des nouveaux enjeux de résilience, culture qualité, digitalisation et pilotage des risques &amp; opportunités.",
+            href: "contact.html?formation=Transition%20et%20Formation%20ISO%209001%20(v2026)",
+            cta: "Programmer",
+          },
+          {
+            code: "ISO 14001",
+            ver: "v2026",
+            title: "Management Environnemental",
+            desc: "Alignement climatique renforcé, perspective cycle de vie, biodiversité et maîtrise de la performance environnementale.",
+            href: "contact.html?formation=Transition%20et%20Formation%20ISO%2014001%20(v2026)",
+            cta: "Programmer",
+          },
+          {
+            code: "ISO 19011",
+            ver: "v2026",
+            title: "Lignes directrices d’Audit",
+            desc: "Nouvelles méthodes d’audit des systèmes de management, audits à distance/hybrides et évaluation de la valeur ajoutée.",
+            href: "contact.html?formation=Auditeur%20Interne%20QHSE%20ISO%2019011%20(v2026)",
+            cta: "Programmer",
+          },
+        ],
+        primaryBtn: "Planifier votre transition / formation",
+        primaryHref:
+          "contact.html?formation=Transition%20et%20Formation%20ISO%209001%20%2F%2014001%20%2F%2019011%20v2026",
+        secondaryBtn: "Consulter le catalogue des formations",
+        secondaryHref: "formation.html",
+        closeAria: "Fermer l’annonce ISO 2026",
+      },
+      en: {
+        regionLabel: "Special announcement: 2026 ISO updates",
+        barBadge: "New 2026 Editions",
+        barText: standardsOnlyHtml,
+        barBtn: "Explore 2026 program",
+        modalEyebrow: "2026 STANDARDS UPDATE • TRANSITION &amp; AUDIT",
+        modalTitle: "Step confidently into the 2026 ISO editions",
+        cards: [
+          {
+            code: "ISO 9001",
+            ver: "v2026",
+            title: "Quality Management",
+            desc: "Updated requirements on organizational resilience, quality culture, emerging technologies and risk-based steering.",
+            href: "contact.html?formation=Quality%20Management%20ISO%209001%20(v2026)",
+            cta: "Schedule",
+          },
+          {
+            code: "ISO 14001",
+            ver: "v2026",
+            title: "Environmental Management",
+            desc: "Stronger climate action integration, lifecycle accountability, resource circularity and environmental performance.",
+            href: "contact.html?formation=Environmental%20Management%20ISO%2014001%20(v2026)",
+            cta: "Schedule",
+          },
+          {
+            code: "ISO 19011",
+            ver: "v2026",
+            title: "Auditing Management Systems",
+            desc: "Modernized auditing guidelines covering integrated systems, remote/hybrid auditing methods and risk-focused evaluation.",
+            href: "contact.html?formation=Internal%20QHSE%20Auditor%20ISO%2019011%20(v2026)",
+            cta: "Schedule",
+          },
+        ],
+        primaryBtn: "Plan your 2026 transition / training",
+        primaryHref:
+          "contact.html?formation=ISO%209001%20%2F%2014001%20%2F%2019011%20v2026%20Transition%20%26%20Training",
+        secondaryBtn: "View training catalog",
+        secondaryHref: "formation.html",
+        closeAria: "Close 2026 ISO announcement",
+      },
+      ar: {
+        regionLabel: "إعلان خاص حول تحديثات ISO 2026",
+        barBadge: "إصدارات 2026 الجديدة",
+        barText: standardsOnlyHtml,
+        barBtn: "اكتشفوا برنامج 2026",
+        modalEyebrow: "مستجدات المعايير 2026 • الانتقال والتدقيق",
+        modalTitle: "استعدوا بثقة لإصدارات ISO الجديدة 2026",
+        cards: [
+          {
+            code: "ISO 9001",
+            ver: "v2026",
+            title: "نظام إدارة الجودة",
+            desc: "إدماج متطلبات المرونة المؤسسية، ثقافة الجودة، التحول الرقمي وتعزيز قيادة المخاطر والفرص.",
+            href: "contact.html?formation=ISO%209001%20(v2026)",
+            cta: "برمجة",
+          },
+          {
+            code: "ISO 14001",
+            ver: "v2026",
+            title: "نظام الإدارة البيئية",
+            desc: "تعزيز الالتزامات المناخية، مقاربة دورة الحياة، الاستدامة وتحسين الأداء البيئي الميداني.",
+            href: "contact.html?formation=ISO%2014001%20(v2026)",
+            cta: "برمجة",
+          },
+          {
+            code: "ISO 19011",
+            ver: "v2026",
+            title: "إرشادات تدقيق أنظمة الإدارة",
+            desc: "منهجيات التدقيق الحديثة، التدقيق المدمج وعن بُعد، وتقييم فعالية الأنظمة بقيمة مضافة عالية.",
+            href: "contact.html?formation=مدقق%20داخلي%20QHSE%20ISO%2019011%20(v2026)",
+            cta: "برمجة",
+          },
+        ],
+        primaryBtn: "برمجوا خطة الانتقال أو التكوين",
+        primaryHref:
+          "contact.html?formation=الانتقال%20والتكوين%20ISO%209001%20%2F%2014001%20%2F%2019011%20v2026",
+        secondaryBtn: "تصفحوا دليل التكوينات",
+        secondaryHref: "formation.html",
+        closeAria: "إغلاق إعلان ISO 2026",
+      },
+    };
+
+    var t = copy[lang] || copy.fr;
+
+    /* Si la page n'a pas encore la barre d'annonce au-dessus de la topbar (.site-header), on l'injecte tout en haut */
+    var headerEl = document.querySelector(".site-header");
+    if (headerEl && !document.querySelector(".iso2026-flash-bar")) {
+      var bar = document.createElement("div");
+      bar.className = "iso2026-flash-bar";
+      bar.setAttribute("role", "region");
+      bar.setAttribute("aria-label", t.regionLabel);
+      bar.innerHTML =
+        '<div class="iso2026-flash-bar-inner">' +
+        '<span class="iso2026-flash-badge"><span class="iso2026-flash-dot" aria-hidden="true"></span>' +
+        t.barBadge +
+        "</span>" +
+        '<p class="iso2026-flash-text">' +
+        t.barText +
+        "</p>" +
+        '<div class="iso2026-flash-actions">' +
+        '<button type="button" class="iso2026-flash-btn" data-open-iso2026-modal>' +
+        t.barBtn +
+        "</button>" +
+        "</div>" +
+        "</div>";
+      headerEl.insertBefore(bar, headerEl.firstChild);
+      syncHeaderScrollPadding();
+    }
+
+    /* Construction de la fenêtre Spotlight Modal 2026 */
+    if (document.getElementById("iso2026-spotlight-modal")) return;
+
+    var cardsHtml = t.cards
+      .map(function (c) {
+        return (
+          '<article class="iso2026-card">' +
+          '<div class="iso2026-card-top">' +
+          '<span class="iso2026-card-code">' +
+          c.code +
+          "</span>" +
+          '<span class="iso2026-card-ver">' +
+          c.ver +
+          "</span>" +
+          "</div>" +
+          '<h3 class="iso2026-card-title">' +
+          c.title +
+          "</h3>" +
+          '<p class="iso2026-card-desc">' +
+          c.desc +
+          "</p>" +
+          '<a class="iso2026-card-link" href="' +
+          c.href +
+          '">' +
+          c.cta +
+          "</a>" +
+          "</article>"
+        );
+      })
+      .join("");
+
+    var backdrop = document.createElement("div");
+    backdrop.id = "iso2026-spotlight-modal";
+    backdrop.className = "iso2026-modal-backdrop";
+    backdrop.setAttribute("role", "dialog");
+    backdrop.setAttribute("aria-modal", "true");
+    backdrop.setAttribute("aria-labelledby", "iso2026-modal-title");
+    backdrop.setAttribute("aria-hidden", "true");
+
+    backdrop.innerHTML =
+      '<div class="iso2026-modal" role="document">' +
+      '<button type="button" class="iso2026-modal-close" data-close-iso2026-modal aria-label="' +
+      t.closeAria +
+      '">' +
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>' +
+      "</button>" +
+      '<div class="iso2026-modal-header">' +
+      '<h2 id="iso2026-modal-title" class="iso2026-modal-title">' +
+      t.modalTitle +
+      "</h2>" +
+      "</div>" +
+      '<div class="iso2026-cards-grid">' +
+      cardsHtml +
+      "</div>" +
+      '<div class="iso2026-modal-footer">' +
+      '<a class="btn btn-primary iso2026-btn-primary" href="' +
+      t.primaryHref +
+      '">' +
+      t.primaryBtn +
+      "</a>" +
+      '<a class="btn btn-outline iso2026-btn-secondary" href="' +
+      t.secondaryHref +
+      '">' +
+      t.secondaryBtn +
+      "</a>" +
+      "</div>" +
+      "</div>";
+
+    document.body.appendChild(backdrop);
+
+    var lastFocused = null;
+    var SEEN_KEY = "ahf_iso2026_seen";
+
+    function markModalSeen() {
+      try {
+        sessionStorage.setItem(SEEN_KEY, "1");
+      } catch (e) {}
+      try {
+        if ((window.name || "").indexOf(SEEN_KEY + "=1") === -1) {
+          window.name = (window.name ? window.name + ";" : "") + SEEN_KEY + "=1";
+        }
+      } catch (e) {}
+    }
+
+    function hasSeenModal() {
+      try {
+        if (sessionStorage.getItem(SEEN_KEY) === "1") return true;
+      } catch (e) {}
+      try {
+        if ((window.name || "").indexOf(SEEN_KEY + "=1") !== -1) return true;
+      } catch (e) {}
+      return false;
+    }
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      markModalSeen();
+      backdrop.classList.add("is-open");
+      backdrop.setAttribute("aria-hidden", "false");
+      document.body.classList.add("iso2026-modal-open");
+      var closeBtn = backdrop.querySelector(".iso2026-modal-close");
+      if (closeBtn) {
+        setTimeout(function () {
+          closeBtn.focus();
+        }, 60);
+      }
+    }
+
+    function closeModal() {
+      backdrop.classList.remove("is-open");
+      backdrop.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("iso2026-modal-open");
+      markModalSeen();
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+    document.querySelectorAll("[data-open-iso2026-modal]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    backdrop.querySelectorAll("[data-close-iso2026-modal]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        closeModal();
+      });
+    });
+
+    backdrop.querySelectorAll("a[href]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        markModalSeen();
+      });
+    });
+
+    backdrop.addEventListener("click", function (e) {
+      if (e.target === backdrop) closeModal();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+
+    /* Affichage automatique uniquement une seule fois à la toute première ouverture du site (accueil) */
+    var isHomePage = document.body && document.body.classList.contains("page-home");
+
+    if (isHomePage && !hasSeenModal()) {
+      setTimeout(function () {
+        openModal();
+      }, 380);
+    }
+  }
+
   initHomeHeroSwiper();
   initClientsCarousel();
   initRevealOnScroll();
@@ -1246,6 +1560,7 @@
   initServiceCardSliders();
   initSmoothServiceFaq();
   initPreFilledSubject();
+  initIso2026Spotlight();
 })();
 
 var FICHE_FORM_LABELS = {
