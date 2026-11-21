@@ -233,9 +233,9 @@
       }
 
       /* ==========================================================================
-         Transformation Responsive en Cartes Mobiles (Écrans <= 768px)
+         Transformation Responsive en Cartes Mobiles (Écrans <= 768px uniquement)
          ========================================================================== */
-      @media (max-width: 768px) {
+      @media screen and (max-width: 768px) {
         .training-catalog-shell {
           padding: 0.85rem 0.65rem;
           border-radius: 16px;
@@ -425,9 +425,11 @@
           text-shadow: none !important;
           filter: none !important;
         }
-        html, body {
+        html, body, body.iso2026-modal-open {
           width: 100% !important;
           max-width: 100% !important;
+          height: auto !important;
+          overflow: visible !important;
           margin: 0 !important;
           padding: 0 !important;
           background: #ffffff !important;
@@ -440,6 +442,9 @@
         }
         .site-header,
         .site-footer,
+        .iso2026-flash-bar,
+        .iso2026-modal-backdrop,
+        #iso2026-spotlight-modal,
         .training-toolbar,
         .training-categories,
         .skip,
@@ -513,6 +518,10 @@
           color: #123154 !important;
           white-space: nowrap !important;
         }
+        html[dir="rtl"] .training-print-contact,
+        html[lang="ar"] .training-print-contact {
+          text-align: left !important;
+        }
         main,
         main#contenu,
         section,
@@ -547,6 +556,7 @@
           display: none !important;
         }
         .training-table {
+          display: table !important;
           width: 100% !important;
           min-width: 0 !important;
           max-width: 100% !important;
@@ -558,19 +568,33 @@
         .training-table thead {
           display: table-header-group !important;
         }
-        .training-table tr {
+        .training-table tbody {
+          display: table-row-group !important;
+        }
+        .training-table tr,
+        .training-table tbody tr {
+          display: table-row !important;
           page-break-inside: avoid !important;
           break-inside: avoid !important;
+          border-radius: 0 !important;
+          padding: 0 !important;
+          box-shadow: none !important;
         }
         .training-table th,
         .training-table td {
-          border: 1px solid #778899 !important;
-          color: #000000 !important;
-          padding: 4px 6px !important;
-          vertical-align: top !important;
+          display: table-cell !important;
+          border: 1px solid #8a9bb2 !important;
+          color: #0f1e36 !important;
+          padding: 4.5px 7px !important;
+          vertical-align: middle !important;
           word-break: break-word !important;
           overflow-wrap: break-word !important;
           white-space: normal !important;
+          margin: 0 !important;
+        }
+        .training-table td::before {
+          content: none !important;
+          display: none !important;
         }
         .training-table thead th {
           background: #133f7b !important;
@@ -593,11 +617,11 @@
         }
         .training-table th:nth-child(2),
         .training-table td:nth-child(2) {
-          width: 43% !important;
+          width: 41% !important;
         }
         .training-table th:nth-child(3),
         .training-table td:nth-child(3) {
-          width: 11% !important;
+          width: 13% !important;
           text-align: center !important;
           vertical-align: middle !important;
           white-space: nowrap !important;

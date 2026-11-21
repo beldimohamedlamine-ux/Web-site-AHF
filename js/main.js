@@ -964,8 +964,39 @@
     });
 
     if (downloadBtn) {
-      downloadBtn.addEventListener("click", function () {
-        window.print();
+      downloadBtn.addEventListener("click", function (e) {
+        var href = downloadBtn.getAttribute("href");
+        var filename = downloadBtn.getAttribute("download") || "Catalogue-Formations-AHF-Consulting.pdf";
+        if (!href) return;
+        if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+          e.preventDefault();
+          fetch(href)
+            .then(function (res) {
+              if (!res.ok) throw new Error("HTTP " + res.status);
+              return res.blob();
+            })
+            .then(function (blob) {
+              var blobUrl = URL.createObjectURL(blob);
+              var tempLink = document.createElement("a");
+              tempLink.href = blobUrl;
+              tempLink.setAttribute("download", filename);
+              tempLink.style.display = "none";
+              document.body.appendChild(tempLink);
+              tempLink.click();
+              setTimeout(function () {
+                document.body.removeChild(tempLink);
+                URL.revokeObjectURL(blobUrl);
+              }, 200);
+            })
+            .catch(function () {
+              var fallbackLink = document.createElement("a");
+              fallbackLink.href = href;
+              fallbackLink.setAttribute("download", filename);
+              document.body.appendChild(fallbackLink);
+              fallbackLink.click();
+              document.body.removeChild(fallbackLink);
+            });
+        }
       });
     }
 
