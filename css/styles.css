@@ -3846,16 +3846,38 @@ table.data tbody tr:hover {
   align-items: center;
   justify-content: center;
   margin-inline-start: 0.35rem;
-  padding: 0.14rem 0.5rem;
+  padding: 0.14rem 0.52rem;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #ffffff;
-  background: linear-gradient(135deg, #9e2a50 0%, #70203c 60%, #1e3f66 100%);
+  background: linear-gradient(135deg, #f05a28 0%, #d42248 55%, #8e1030 100%);
   border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(112, 32, 60, 0.28);
+  box-shadow: 0 2px 8px rgba(212, 34, 72, 0.35);
   vertical-align: middle;
+  animation: isoPillBlink 1.2s ease-in-out infinite;
+  will-change: opacity, transform, box-shadow;
+}
+
+.iso-v2026-pill:hover {
+  animation-play-state: paused;
+  opacity: 1;
+  box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.4), 0 4px 12px rgba(212, 34, 72, 0.5);
+}
+
+@keyframes isoPillBlink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(240, 90, 40, 0.75), 0 2px 10px rgba(212, 34, 72, 0.45);
+  }
+  50% {
+    opacity: 0.22;
+    transform: scale(0.95);
+    box-shadow: 0 0 0 6px rgba(240, 90, 40, 0), 0 1px 3px rgba(212, 34, 72, 0.1);
+  }
 }
 
 .iso2026-flash-bar {
@@ -4136,6 +4158,9 @@ html[dir="rtl"] .iso2026-modal-close {
 }
 
 .iso2026-card-ver {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.16rem 0.56rem;
   border-radius: 999px;
   font-size: 0.72rem;
@@ -4145,6 +4170,14 @@ html[dir="rtl"] .iso2026-modal-close {
   background: linear-gradient(135deg, #e85d04 0%, #b52b52 100%);
   color: #ffffff;
   box-shadow: 0 2px 10px rgba(232, 93, 4, 0.35);
+  animation: isoPillBlink 1.2s ease-in-out infinite;
+  will-change: opacity, transform, box-shadow;
+}
+
+.iso2026-card-ver:hover {
+  animation-play-state: paused;
+  opacity: 1;
+  box-shadow: 0 0 0 3px rgba(240, 90, 40, 0.4), 0 4px 12px rgba(212, 34, 72, 0.5);
 }
 
 .iso2026-card-title {
@@ -4366,8 +4399,11 @@ html[lang="ar"] {
 
 
 @media (prefers-reduced-motion: reduce) {
-  .iso2026-flash-dot {
+  .iso2026-flash-dot,
+  .iso-v2026-pill,
+  .iso2026-card-ver {
     animation: none !important;
+    opacity: 1 !important;
   }
   .iso2026-modal-backdrop,
   .iso2026-modal,

@@ -30,6 +30,10 @@ Options -Indexes
 # Bloquer lâ€™accÃ¨s aux chemins cachÃ©s type /.git/ (sauf /.well-known/ pour SSL / Letâ€™s Encrypt)
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Redirections rétro-compatibles des anciennes URLs vers le dossier pages/
+  RewriteRule ^(audit|accompagnement|formation|conseils|contact)(\.html)?$ pages/$1.html [R=301,L]
+  RewriteRule ^(en|ar)/(audit|accompagnement|formation|conseils|contact)(\.html)?$ $1/pages/$2.html [R=301,L]
+
   # Permet les URLs sans extension (.html), ex: /ar/contact -> /ar/contact.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

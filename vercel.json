@@ -1,4 +1,10 @@
 {
+  "redirects": [
+    { "source": "/(audit|accompagnement|formation|conseils|contact)", "destination": "/pages/$1", "permanent": true },
+    { "source": "/(audit|accompagnement|formation|conseils|contact).html", "destination": "/pages/$1.html", "permanent": true },
+    { "source": "/(en|ar)/(audit|accompagnement|formation|conseils|contact)", "destination": "/$1/pages/$2", "permanent": true },
+    { "source": "/(en|ar)/(audit|accompagnement|formation|conseils|contact).html", "destination": "/$1/pages/$2.html", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

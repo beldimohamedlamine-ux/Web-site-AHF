@@ -1419,6 +1419,14 @@
     /* Construction de la fenêtre Spotlight Modal 2026 */
     if (document.getElementById("iso2026-spotlight-modal")) return;
 
+    var isInPagesDir = /(^|\/)pages\//i.test(window.location.pathname);
+    var pagePrefix = isInPagesDir ? "" : "pages/";
+    function resolvePageLink(href) {
+      if (!href) return href;
+      if (href.indexOf(":") !== -1 || href.indexOf("//") !== -1 || href.indexOf("#") === 0) return href;
+      return pagePrefix + href;
+    }
+
     var cardsHtml = t.cards
       .map(function (c) {
         return (
@@ -1438,7 +1446,7 @@
           c.desc +
           "</p>" +
           '<a class="iso2026-card-link" href="' +
-          c.href +
+          resolvePageLink(c.href) +
           '">' +
           c.cta +
           "</a>" +
@@ -1472,12 +1480,12 @@
       "</div>" +
       '<div class="iso2026-modal-footer">' +
       '<a class="btn btn-primary iso2026-btn-primary" href="' +
-      t.primaryHref +
+      resolvePageLink(t.primaryHref) +
       '">' +
       t.primaryBtn +
       "</a>" +
       '<a class="btn btn-outline iso2026-btn-secondary" href="' +
-      t.secondaryHref +
+      resolvePageLink(t.secondaryHref) +
       '">' +
       t.secondaryBtn +
       "</a>" +
